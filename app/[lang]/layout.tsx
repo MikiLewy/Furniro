@@ -1,10 +1,12 @@
+import Navbar from '@components/organisms/navbar/navbar';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
 import { Locale, i18n } from '@/i18n.config';
-import './styles/globals.css';
 
-const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'] });
+import '@assets/styles/globals.css';
+
+const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], display: 'swap' });
 
 export const metadata: Metadata = {
   title: 'Furniro',
@@ -19,7 +21,10 @@ export async function generateStaticParams() {
 export default function RootLayout({ children, params: { lang } }: { children: React.ReactNode; params: { lang: Locale } }) {
   return (
     <html lang={lang}>
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <Navbar lang={lang} />
+        {children}
+      </body>
     </html>
   );
 }
