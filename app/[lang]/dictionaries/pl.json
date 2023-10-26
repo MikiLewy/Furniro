@@ -1,5 +1,11 @@
 {
   "home": {
     "title": "Strona główna"
+  },
+  "navbar": {
+    "home": "Strona główna",
+    "products": "Produkty",
+    "blog": "Blog",
+    "contact": "Kontakt"
   }
 }

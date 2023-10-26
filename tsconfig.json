@@ -20,7 +20,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@app*": ["./app/[lang]*"],
+      "@components/*": ["./app/[lang]/components/*"],
+      "@assets/*": ["./app/[lang]/assets/*"]
     }
   },
   "include": ["next-env.d.ts", "commitlint.config.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
