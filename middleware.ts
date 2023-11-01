@@ -20,6 +20,9 @@ function getLocale(request: NextRequest): string | undefined {
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  if (['/manifest.json', '/favicon.ico'].includes(pathname)) return;
+
   const pathnameIsMissingLocale = i18n.locales.every(locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`);
 
   // Redirect if there is no locale
@@ -32,5 +35,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|robots.txt|.*\\.).*)'],
 };

@@ -23,7 +23,7 @@
       "@/*": ["./*"],
       "@app*": ["./app/[lang]*"],
       "@components/*": ["./app/[lang]/components/*"],
-      "@assets/*": ["./app/[lang]/assets/*"]
+      "@assets/*": ["./public/assets/*"]
     }
   },
   "include": ["next-env.d.ts", "commitlint.config.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

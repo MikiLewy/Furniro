@@ -1,6 +1,9 @@
 {
-  "home": {
-    "title": "Home"
+  "hero": {
+    "title": "Discover Our New Collection",
+    "description": "Explore our latest furniture collection and discover the perfect pieces for your home.",
+    "newArrival": "New arrival",
+    "buyNow": "Buy now"
   },
   "navbar": {
     "home": "Home",
