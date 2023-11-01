@@ -1,5 +1,6 @@
-import { getDictionary } from '@/app/[lang]/lib/get-dictionary';
 import { Locale } from '@/i18n.config';
+
+import Hero from './components/organisms/Home/hero';
 
 interface Params {
   params: {
@@ -8,11 +9,9 @@ interface Params {
 }
 
 export default async function Home({ params: { lang } }: Params) {
-  const { home } = await getDictionary(lang);
-
   return (
     <div>
-      <h1>{home.title}</h1>
+      <Hero lang={lang} />
     </div>
   );
 }

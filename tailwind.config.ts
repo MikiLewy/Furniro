@@ -5,7 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#B88E2F',
+        primary: {
+          DEFAULT: '#B88E2F',
+          hover: '#CEA23B',
+          focus: '#DEC17C',
+        },
         primary2: '#F9F1E7',
         gray: {
           50: '#E8E8E8',

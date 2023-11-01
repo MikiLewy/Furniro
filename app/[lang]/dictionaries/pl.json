@@ -1,6 +1,9 @@
 {
-  "home": {
-    "title": "Strona główna"
+  "hero": {
+    "title": "Odkryj naszą nową kolekcję",
+    "description": "Zobacz naszą najnowszą kolekcję mebli i znajdź idealne elementy do swojego domu.",
+    "newArrival": "Nowość",
+    "buyNow": "Kup teraz"
   },
   "navbar": {
     "home": "Strona główna",

@@ -1,10 +1,10 @@
-import Navbar from '@components/organisms/navbar/navbar';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
+import Navbar from '@/app/[lang]/components/organisms/navbar';
 import { Locale, i18n } from '@/i18n.config';
 
-import '@assets/styles/globals.css';
+import '../../styles/globals.css';
 
 const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], display: 'swap' });
 

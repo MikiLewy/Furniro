@@ -12,7 +12,7 @@ interface Props {
   };
 }
 
-const MobileMenu = ({ dictionary }: Props) => {
+const ClientNavbar = ({ dictionary }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -107,4 +107,4 @@ const MobileMenu = ({ dictionary }: Props) => {
   );
 };
 
-export default MobileMenu;
+export default ClientNavbar;
