@@ -1,14 +1,25 @@
 {
-  "hero": {
-    "title": "Odkryj naszą nową kolekcję",
-    "description": "Zobacz naszą najnowszą kolekcję mebli i znajdź idealne elementy do swojego domu.",
-    "newArrival": "Nowość",
-    "buyNow": "Kup teraz"
-  },
   "navbar": {
     "home": "Strona główna",
     "products": "Produkty",
     "blog": "Blog",
     "contact": "Kontakt"
+  },
+  "home": {
+    "hero": {
+      "title": "Odkryj naszą nową kolekcję",
+      "description": "Zobacz naszą najnowszą kolekcję mebli i znajdź idealne elementy do swojego domu.",
+      "newArrival": "Nowość",
+      "buyNow": "Kup teraz"
+    },
+    "browseTheRange": {
+      "title": "Browse the range",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "categories": {
+        "dining": "Dining",
+        "living": "Living",
+        "bedroom": "Bedroom"
+      }
+    }
   }
 }

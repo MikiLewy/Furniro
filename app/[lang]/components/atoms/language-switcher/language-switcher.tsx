@@ -1,12 +1,12 @@
 'use client';
 
-import arrowDown from '@assets/icons/arrow-down.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { i18n } from '@/i18n.config';
+import arrowDown from '@assets/icons/arrow-down.svg';
 
 export default function LanguageSwitcher() {
   const pathName = usePathname();

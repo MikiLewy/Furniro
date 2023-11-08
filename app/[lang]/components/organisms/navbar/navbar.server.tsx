@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
 import { Locale } from '@/i18n.config';
-import { getDictionary } from '@app/lib/get-dictionary';
 import cart from '@assets/icons/cart.svg';
 import logo from '@assets/icons/logo.svg';
 import LanguageSwitcher from '@components/atoms/language-switcher/language-switcher';
+import { getDictionary } from '@lib/get-dictionary';
 
 import ClientNavbar from './navbar.client';
 
