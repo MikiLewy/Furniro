@@ -6,13 +6,18 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#B88E2F',
-          hover: '#CEA23B',
-          focus: '#DEC17C',
+          DEFAULT: '#c9553e',
+          hover: '#A6422E',
+          outlinedHover: '#F1D9D4',
+          focus: '#7E3223',
         },
         primary2: '#F9F1E7',
+        secondary: {
+          DEFAULT: '#393939',
+          focus: '#CCCCCC',
+        },
         gray: {
-          50: '#E8E8E8',
+          50: '#E6E6E6',
           100: '#D8D8D8',
           200: '#B0B0B0',
           300: '#9F9F9F',

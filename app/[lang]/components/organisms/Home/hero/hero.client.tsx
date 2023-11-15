@@ -19,7 +19,7 @@ const ClientHero = ({ content }: Props) => {
   };
 
   return (
-    <Button onClick={onClick} variant="contained" size={isMobile ? 'md' : 'xl'} className="mt-2 md:mt-4 lg:mt-6 self-start">
+    <Button onClick={onClick} variant="contained" size={isMobile ? 'md' : 'lg'} className="mt-2 md:mt-4 lg:mt-6 self-start">
       {content}
     </Button>
   );
