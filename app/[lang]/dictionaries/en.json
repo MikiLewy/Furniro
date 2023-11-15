@@ -20,6 +20,9 @@
         "living": "Living",
         "bedroom": "Bedroom"
       }
+    },
+    "recommendedProducts": {
+      "title": "Recommended products"
     }
   }
 }

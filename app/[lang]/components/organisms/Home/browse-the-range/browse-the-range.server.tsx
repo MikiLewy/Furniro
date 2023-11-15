@@ -2,6 +2,8 @@ import { Locale } from '@/i18n.config';
 import { getDictionary } from '@lib/get-dictionary';
 import { PRODUCTS_CATEGORIES } from '@mocks/products-categories';
 
+import SectionTitle from '../../../atoms/section-title/section-title';
+
 import ClientBrowseTheRange from './browse-the-range.client';
 
 interface Props {
@@ -14,12 +16,9 @@ const ServerBrowseTheRange = async ({ lang }: Props) => {
   } = await getDictionary(lang);
 
   return (
-    <section className="my-12 px-4">
-      <header className="flex flex-col gap-2 items-start md:items-center justify-center mb-4 md:mb-12">
-        <h2 className="font-bold text-2xl md:text-4xl text-gray-800">{browseTheRange.title}</h2>
-        <p className="text-500 text-base md:text-xl">{browseTheRange.description}</p>
-      </header>
-      <div className="flex flex-col md:flex-row items-center justify-between w-full gap-5 ">
+    <section className="px-4 my-12 xl:px-16">
+      <SectionTitle title={browseTheRange.title} subtitle={browseTheRange.description} />
+      <div className="flex flex-col md:flex-row items-center justify-between w-full gap-5 mt-4 md:mt-12 ">
         {PRODUCTS_CATEGORIES?.map(({ id, category, img }) => <ClientBrowseTheRange key={id} category={category} img={img} />)}
       </div>
     </section>
