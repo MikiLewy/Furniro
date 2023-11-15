@@ -25,6 +25,8 @@
       "@components/*": ["./app/[lang]/components/*"],
       "@assets/*": ["./public/assets/*"],
       "@lib/*": ["./app/[lang]/lib/*"],
+      "@types/*": ["./app/[lang]/types/*"],
+      "@icons/*": ["./app/[lang]/icons/*"],
       "@mocks/*": ["./app/[lang]/mocks/*"]
     }
   },

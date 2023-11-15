@@ -1,14 +1,12 @@
 'use client';
 
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
-import { ProductCategories } from '@/app/[lang]/types/responses/ProductCategory';
+import { ImagePayload } from '@types/interfaces/Image';
+import { ProductCategories } from '@types/responses/ProductCategory';
 
 interface Props {
-  img: {
-    src: StaticImageData;
-    alt: string;
-  };
+  img: ImagePayload;
   category: ProductCategories;
 }
 

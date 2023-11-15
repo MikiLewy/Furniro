@@ -1,12 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import { Arrow } from '@/app/[lang]/icons/arrow';
 import { i18n } from '@/i18n.config';
-import arrowDown from '@assets/icons/arrow-down.svg';
 
 export default function LanguageSwitcher() {
   const pathName = usePathname();
@@ -34,7 +33,7 @@ export default function LanguageSwitcher() {
           className=" px-3 lg:px-4 py-2  text-black  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center"
           onClick={toggleDropdown}>
           {currentLocale ?? ''}
-          <Image src={arrowDown} alt="arrow-down" className="w-3 h-3 ml-1.5 " />
+          <Arrow className="w-3 h-3 ml-1.5 " />
         </button>
         {isOpen ? (
           <div className="origin-top-right absolute z-50 right-0 mt-2 overflow-hidden  rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5">

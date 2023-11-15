@@ -1,12 +1,9 @@
-import { StaticImageData } from 'next/image';
+import { ImagePayload } from '../interfaces/Image';
 
 export type ProductCategories = 'dining' | 'living' | 'bedroom';
 
 export interface ProductCategory {
   id: number;
   category: ProductCategories;
-  img: {
-    src: StaticImageData;
-    alt: string;
-  };
+  img: ImagePayload;
 }
