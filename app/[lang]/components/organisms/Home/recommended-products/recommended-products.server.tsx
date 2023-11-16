@@ -15,7 +15,7 @@ const ServerRecommendedProducts = async ({ lang }: Props) => {
   } = await getDictionary(lang);
 
   return (
-    <section className="horizontal-spacing py-10">
+    <section className="horizontal-spacing">
       <SectionTitle title={recommendedProducts.title} />
       <div className="mt-5">
         <ClientRecommendedProducts />
