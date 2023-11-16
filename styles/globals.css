@@ -31,7 +31,7 @@ li {
 }
 
 .btn {
-  @apply flex items-center gap-2 text-black rounded-3xl font-medium transition-colors focus:bg-primary-focus focus:outline-none;
+  @apply flex items-center justify-center gap-2  text-black rounded-3xl font-medium transition-colors focus:bg-primary-focus focus:outline-none;
 }
 
 .btn-contained {
@@ -73,7 +73,7 @@ li {
 }
 
 .btn-lg {
-  @apply text-base py-3 px-7;
+  @apply text-sm py-2.5 px-5 lg:text-base lg:py-3 lg:px-7;
   & svg {
     @apply w-3.5 h-3.5;
   }

@@ -16,6 +16,7 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
   disabled?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  fullWidth?: boolean;
   loading?: boolean;
 }
 
@@ -54,10 +55,11 @@ const Button = ({
   children,
   variant = 'contained',
   color = 'primary',
+  fullWidth,
   size = 'md',
   ...rest
 }: Props) => {
-  const merged = clsx('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', className);
+  const merged = clsx('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', fullWidth && 'w-full', className);
 
   return (
     <button className={merged} {...rest}>
