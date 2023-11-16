@@ -14,7 +14,7 @@ export default async function Home({ params: { lang } }: Params) {
   return (
     <div>
       <Hero lang={lang} />
-      <main className="flex flex-col gap-5 py-10 lg:py-20 lg:gap-10">
+      <main className="flex flex-col gap-5 py-10 lg:py-20 lg:gap-20">
         <OurProducts lang={lang} />
         <AboutUs lang={lang} />
       </main>
