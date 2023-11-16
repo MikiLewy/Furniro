@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { ImagePayload } from '@/app/[lang]/types/interfaces/Image';
-import { formatPrice } from '@/app/[lang]/utils/formatPrice';
+import { formatPrice } from '@/app/[lang]/utils/format-price';
 import { Heart } from '@icons/heart';
 
 interface Props {

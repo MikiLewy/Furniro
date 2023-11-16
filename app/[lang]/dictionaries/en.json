@@ -1,25 +1,17 @@
 {
   "navbar": {
-    "home": "Home",
+    "bestsellers": "Bestsellers",
     "products": "Products",
-    "blog": "Blog",
-    "contact": "Contact"
+    "sale": "Sale",
+    "newArrivals": "New arrivals",
+    "getInspired": "Get inspired"
   },
   "home": {
     "hero": {
       "title": "Discover Our New Collection",
       "description": "Explore our latest furniture collection and discover the perfect pieces for your home.",
-      "newArrival": "New arrival",
-      "buyNow": "Buy now"
-    },
-    "browseTheRange": {
-      "title": "Browse the range",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "categories": {
-        "dining": "Dining",
-        "living": "Living",
-        "bedroom": "Bedroom"
-      }
+      "buyFurniture": "Shop furniture",
+      "buyAccessories": "Shop accessories"
     },
     "recommendedProducts": {
       "title": "Recommended products"

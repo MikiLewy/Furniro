@@ -24,6 +24,12 @@ li {
   }
 }
 
+@layer utilities {
+  .horizontal-spacing {
+    @apply px-4 md:px-8 xl:px-16;
+  }
+}
+
 .btn {
   @apply flex items-center gap-2 text-black rounded-3xl font-medium transition-colors focus:bg-primary-focus focus:outline-none;
 }
@@ -41,7 +47,7 @@ li {
 }
 
 .btn-outlined-white {
-  @apply border-[1px] border-white text-white bg-opacity-25 bg-black  hover:bg-opacity-40 focus:bg-opacity-50 focus:bg-black;
+  @apply border border-white text-white bg-opacity-25 bg-black  hover:bg-opacity-40 focus:bg-opacity-50 focus:bg-black;
 }
 
 .btn-text {
