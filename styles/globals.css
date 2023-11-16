@@ -10,20 +10,48 @@
   padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+li {
+  &::selection {
+    @apply bg-primary text-white;
+  }
+}
+
+@layer utilities {
+  .horizontal-spacing {
+    @apply px-4 md:px-8 xl:px-16;
+  }
+}
+
 .btn {
-  @apply flex items-center gap-2 text-black rounded-lg font-medium transition-colors focus:ring-4 focus:ring-primary-focus focus:outline-none;
+  @apply flex items-center gap-2 text-black rounded-3xl font-medium transition-colors focus:bg-primary-focus focus:outline-none;
 }
 
 .btn-contained {
-  @apply bg-primary text-white focus:bg-primary hover:bg-primary-hover;
+  @apply bg-primary text-white  hover:bg-primary-hover;
 }
 
 .btn-outlined {
-  @apply border-2 border-primary text-primary bg-opacity-0 hover:border-primary-hover hover:text-primary-hover;
+  @apply border-[1px] border-primary text-primary  hover:bg-primary-outlinedHover;
+}
+
+.btn-contained-white {
+  @apply bg-white text-secondary  hover:bg-gray-50 focus:bg-secondary-focus;
+}
+
+.btn-outlined-white {
+  @apply border border-white text-white bg-opacity-25 bg-black  hover:bg-opacity-40 focus:bg-opacity-50 focus:bg-black;
 }
 
 .btn-text {
-  @apply hover:text-opacity-60;
+  @apply text-primary focus:text-primary-focus focus:bg-transparent;
 }
 
 .btn-disabled {
@@ -38,21 +66,14 @@
 }
 
 .btn-md {
-  @apply text-base py-2.5 px-5;
+  @apply text-sm py-2.5 px-5;
   & svg {
     @apply w-3.5 h-3.5;
   }
 }
 
 .btn-lg {
-  @apply text-lg py-3 px-5;
-  & svg {
-    @apply w-3.5 h-3.5;
-  }
-}
-
-.btn-xl {
-  @apply text-xl py-3.5 px-6;
+  @apply text-base py-3 px-7;
   & svg {
     @apply w-3.5 h-3.5;
   }

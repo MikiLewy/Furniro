@@ -1,6 +1,7 @@
 import { Locale } from '@/i18n.config';
 import LanguageSwitcher from '@components/atoms/language-switcher/language-switcher';
 import { Cart } from '@icons/cart';
+import { Heart } from '@icons/heart';
 import { getDictionary } from '@lib/get-dictionary';
 
 import ClientNavbar from './navbar.client';
@@ -13,21 +14,22 @@ const ServerNavbar = async ({ lang }: Props) => {
   const { navbar } = await getDictionary(lang);
 
   return (
-    <nav className="flex relative z-50 items-center md:justify-between  py-7 px-4 max-w-7xl mx-auto">
-      <div className="flex gap-1 relative  z-10">
-        <h2 className="text-2xl lg:text-3xl font-bold">Furniro</h2>
+    <nav
+      className="sticky top-0 z-30 bg-white flex items-center md:justify-between py-4 horizontal-spacing 
+      ">
+      <div className="flex gap-3 md:gap-8 items-center ">
+        <ClientNavbar dictionary={navbar} />
+        <h2 className="text-2xl font-bold relative z-30">Furniro</h2>
+        <ul className="hidden md:flex  gap-4 relative z-30">
+          <li className="text-base font-medium cursor-pointer hover:text-primary">{navbar.products}</li>
+          <li className="text-base text-primary font-medium cursor-pointer">{navbar.sale}</li>
+        </ul>
       </div>
-      <ul className="hidden md:flex md:gap-8 lg:gap-16">
-        <li className="text-base font-medium cursor-pointer">{navbar.home}</li>
-        <li className="text-base font-medium cursor-pointer">{navbar.products}</li>
-        <li className="text-base font-medium cursor-pointer">{navbar.blog}</li>
-        <li className="text-base font-medium cursor-pointer">{navbar.contact}</li>
-      </ul>
-      <div className="flex ml-auto  mr-5 items-center relative z-50 gap-5 md:mx-0 lg:gap-5">
+      <div className="ml-auto flex items-center gap-5 ">
+        <Heart className={`w-6 h-6 fill-none cursor-pointer `} />
+        <Cart className={`w-6 h-6 cursor-pointer`} />
         <LanguageSwitcher />
-        <Cart className={`w-6 h-auto cursor-pointer`} />
       </div>
-      <ClientNavbar dictionary={navbar} />
     </nav>
   );
 };

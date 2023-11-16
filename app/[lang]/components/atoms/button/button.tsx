@@ -5,10 +5,13 @@ import { ReactNode } from 'react';
 
 type ButtonVariant = 'contained' | 'outlined' | 'text';
 
-type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
+type ButtonColor = 'primary' | 'white';
+
+type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant?: ButtonVariant;
+  color?: ButtonColor;
   size?: ButtonSize;
   disabled?: boolean;
   startIcon?: ReactNode;
@@ -16,16 +19,16 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
   loading?: boolean;
 }
 
-const getVariant = (variant: ButtonVariant) => {
+const getVariant = (variant: ButtonVariant, color: ButtonColor) => {
   switch (variant) {
     case 'contained':
-      return 'btn-contained';
+      return `btn-contained${color === 'white' ? '-white' : ''}`;
     case 'outlined':
-      return 'btn-outlined';
+      return `btn-outlined${color === 'white' ? '-white' : ''}`;
     case 'text':
       return 'btn-text';
     default:
-      return 'btn-outlined';
+      return 'btn-contained';
   }
 };
 
@@ -37,15 +40,24 @@ const getSize = (size: ButtonSize) => {
       return 'btn-md';
     case 'lg':
       return 'btn-lg';
-    case 'xl':
-      return 'btn-xl';
     default:
       return 'btn-md';
   }
 };
 
-const Button = ({ className, startIcon, endIcon, loading, disabled, children, variant = 'contained', size = 'md', ...rest }: Props) => {
-  const merged = clsx('btn', getVariant(variant), getSize(size), disabled && 'btn-disabled', className);
+const Button = ({
+  className,
+  startIcon,
+  endIcon,
+  loading,
+  disabled,
+  children,
+  variant = 'contained',
+  color = 'primary',
+  size = 'md',
+  ...rest
+}: Props) => {
+  const merged = clsx('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', className);
 
   return (
     <button className={merged} {...rest}>
