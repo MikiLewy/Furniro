@@ -78,3 +78,19 @@ li {
     @apply w-3.5 h-3.5;
   }
 }
+
+.badge {
+  @apply py-[3px] px-[10px] text-xs flex items-center justify-center gap-1 rounded-full font-medium;
+}
+
+.badge-gray {
+  @apply bg-white bg-opacity-80  text-gray-600 border-gray-25;
+}
+
+.badge-success {
+  @apply bg-success bg-opacity-75  text-success-darker;
+}
+
+.badge-info {
+  @apply bg-info bg-opacity-75  text-info-darker;
+}

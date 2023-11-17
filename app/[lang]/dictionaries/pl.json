@@ -28,6 +28,10 @@
       },
       "aboutUsImgAlt": "Żółta sofa w salonie",
       "moreAbout": "Więcej o Furniro"
+    },
+    "creatorTopPicks": {
+      "title": "Zobacz, co wybierają Instagramowi twórcy",
+      "subtitle": "INSTAGRAMOWE HITY"
     }
   }
 }

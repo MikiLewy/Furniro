@@ -25,14 +25,13 @@ const ServerAboutUs = async ({ lang }: Props) => {
   return (
     <section className="horizontal-spacing flex flex-col gap-5 lg:flex-row lg:justify-end lg:items-center lg:gap-10">
       <div className="flex flex-col lg:basis-3/4 xl:basis-1/2 ">
-        <span className="text-primary text-xs uppercase font-semibold mb-1">{aboutUs.moreAbout}</span>
-        <SectionTitle title={aboutUs.title} />
+        <SectionTitle title={aboutUs.title} subtitle={aboutUs.moreAbout} subtitleClassName="text-primary" />
         <p className="text-base text-secondary max-w-[90%] leading-loose xl:mt-4">{aboutUs.description}</p>
         <div className="flex flex-col gap-3 my-5 xl:flex-row xl:flex-wrap xl:gap-6 xl:my-8">
           <IconAnnotation wrapperClassName="xl:basis-[45%]" icon={<Wardrobe />} annotation={aboutUs.stats.originalDesigns} />
           <IconAnnotation
             wrapperClassName="xl:basis-[45%]"
-            icon={<Heart className="fill-transparent stroke-primary" />}
+            icon={<Heart className="fill-transparent stroke-primary " />}
             annotation={aboutUs.stats.happyCustomers}
           />
           <IconAnnotation wrapperClassName="xl:basis-[45%]" icon={<Globe />} annotation={aboutUs.stats.materialSourced} />

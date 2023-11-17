@@ -1,7 +1,7 @@
 'use client';
 
-import clsx from 'clsx';
 import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type ButtonVariant = 'contained' | 'outlined' | 'text';
 
@@ -59,7 +59,7 @@ const Button = ({
   size = 'md',
   ...rest
 }: Props) => {
-  const merged = clsx('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', fullWidth && 'w-full', className);
+  const merged = twMerge('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', fullWidth && 'w-full', className);
 
   return (
     <button className={merged} {...rest}>
