@@ -1,4 +1,11 @@
-import creatorPicture1 from '@/public/assets/images/creators/creator-alex.webp';
+import creatorPicture1 from '@/public/assets/images/creators/creator-1.webp';
+import creatorPicture2 from '@/public/assets/images/creators/creator-2.webp';
+import creatorPicture3 from '@/public/assets/images/creators/creator-3.webp';
+import creatorPicture4 from '@/public/assets/images/creators/creator-4.webp';
+import creatorPicture5 from '@/public/assets/images/creators/creator-5.webp';
+import creatorPicture6 from '@/public/assets/images/creators/creator-6.webp';
+import creatorPicture7 from '@/public/assets/images/creators/creator-7.webp';
+import creatorPicture8 from '@/public/assets/images/creators/creator-8.webp';
 
 import { CreatorsTopPicks } from '../types/responses/CreatorsTopPicks';
 
@@ -13,57 +20,57 @@ export const CREATORS_TOP_PICKS: CreatorsTopPicks[] = [
   },
   {
     id: 2,
-    creator: 'Alex',
+    creator: 'Bolo',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture2,
       alt: 'get inspired image',
     },
   },
   {
     id: 3,
-    creator: 'Alex',
+    creator: 'im__7',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture3,
       alt: 'get inspired image',
     },
   },
   {
     id: 4,
-    creator: 'Alex',
+    creator: 'moon.15',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture4,
       alt: 'get inspired image',
     },
   },
   {
     id: 5,
-    creator: 'Alex',
+    creator: 'neveeer.6',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture5,
       alt: 'get inspired image',
     },
   },
   {
     id: 6,
-    creator: 'Alex',
+    creator: 'w._2',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture6,
       alt: 'get inspired image',
     },
   },
   {
     id: 7,
-    creator: 'Alex',
+    creator: 'los.3',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture7,
       alt: 'get inspired image',
     },
   },
   {
     id: 8,
-    creator: 'Alex',
+    creator: 'dr.12',
     img: {
-      src: creatorPicture1,
+      src: creatorPicture8,
       alt: 'get inspired image',
     },
   },

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ImageCard = ({ className, children }: Props) => {
-  const mergedClassName = twMerge('overflow-hidden rounded-3xl bg-gray-100 h-[450px] md:h-[500px] lg:h-[600px] w-full', className);
+  const mergedClassName = twMerge('overflow-hidden rounded-3xl bg-gray-100  w-full', className);
 
   return <div className={mergedClassName}>{children}</div>;
 };
