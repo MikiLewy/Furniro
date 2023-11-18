@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface Props {
   icon: ReactNode;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const IconAnnotation = ({ icon, annotation, wrapperClassName }: Props) => {
-  const mergedClassName = clsx('flex items-center gap-3', wrapperClassName);
+  const mergedClassName = twMerge('flex items-center gap-3', wrapperClassName);
 
   return (
     <div className={mergedClassName}>

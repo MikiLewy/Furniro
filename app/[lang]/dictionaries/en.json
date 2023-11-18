@@ -28,6 +28,11 @@
       },
       "aboutUsImgAlt": "Yellow sofa in salon",
       "moreAbout": "More about Furniro"
+    },
+    "creatorTopPicks": {
+      "title": "Explore the creators’ top picks",
+      "subtitle": "Instagram’s most favorites",
+      "moreProducts": "More products"
     }
   }
 }

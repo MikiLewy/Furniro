@@ -1,13 +1,19 @@
+import { twMerge } from 'tailwind-merge';
 interface Props {
   title: string;
   subtitle?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
 }
 
-const SectionTitle = ({ title, subtitle }: Props) => {
+const SectionTitle = ({ title, subtitle, titleClassName, subtitleClassName }: Props) => {
+  const mergedTitleClassName = twMerge('font-medium text-2xl md:text-3xl text-gray-800', titleClassName);
+  const mergedSubtitleClassName = twMerge('text-secondary-lighter text-xs uppercase font-semibold', subtitleClassName);
+
   return (
     <header className="flex flex-col gap-2 items-start ">
-      <h2 className="font-medium text-2xl md:text-3xl text-gray-800">{title}</h2>
-      <p className="text-500 text-base md:text-xl">{subtitle}</p>
+      <span className={mergedSubtitleClassName}>{subtitle}</span>
+      <h2 className={mergedTitleClassName}>{title}</h2>
     </header>
   );
 };
