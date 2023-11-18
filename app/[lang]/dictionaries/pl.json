@@ -1,11 +1,38 @@
 {
-  "home": {
-    "title": "Strona główna"
-  },
   "navbar": {
-    "home": "Strona główna",
+    "bestsellers": "Bestsellery",
     "products": "Produkty",
-    "blog": "Blog",
-    "contact": "Kontakt"
+    "sale": "Sale",
+    "newArrivals": "Nowości",
+    "getInspired": "Zainspiruj się"
+  },
+  "home": {
+    "hero": {
+      "title": "Odkryj naszą nową kolekcję",
+      "description": "Zobacz naszą najnowszą kolekcję mebli i znajdź idealne elementy do swojego domu.",
+      "buyFurniture": "Kup meble",
+      "buyAccessories": "Kup akcesoria"
+    },
+    "recommendedProducts": {
+      "title": "Polecane produkty"
+    },
+    "aboutUs": {
+      "aboutTheBrand": "O marce",
+      "title": "Poznajmy się!",
+      "description": "Furniro to nowoczesna marka projektowa z różnorodną kolekcją znakomitych komód, puf, łóżek i stołów, dostarczanych już do ponad 10 000 klientów w 10 krajach. To miejsce odważnych pomysłów i ponadczasowego designu, które pozostawia mnóstwo miejsca dla Twojej osobowości. Odkryj barwny świat produktów furniro, stworzonych z myślą o wnętrzach w różnych stylach, i daj się zainspirować.",
+      "stats": {
+        "originalDesigns": "150+ oryginalnych projektów",
+        "happyCustomers": "10 000+ zadowolonych klientów",
+        "materialSourced": "Materiały wyłącznie z UE",
+        "producedLocally": "Produkowane lokalnie w Polsce"
+      },
+      "aboutUsImgAlt": "Żółta sofa w salonie",
+      "moreAbout": "Więcej o Furniro"
+    },
+    "creatorTopPicks": {
+      "title": "Zobacz, co wybierają Instagramowi twórcy",
+      "subtitle": "Instagramowe hity",
+      "moreProducts": "Więcej produktów"
+    }
   }
 }
