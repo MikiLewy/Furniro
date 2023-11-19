@@ -6,6 +6,19 @@
     "newArrivals": "New arrivals",
     "getInspired": "Get inspired"
   },
+  "footer": {
+    "hotline": "Hotline",
+    "hotlineAvailable": "Hotline available in English and Polish",
+    "customerService": "Customer service",
+    "contactUs": "Contact us",
+    "faq": "FAQ",
+    "termsAndPolicies": "Terms & policies",
+    "termsOfService": "Terms of service",
+    "refundPolicy": "Refund policy",
+    "privacyPolicy": "Privacy policy",
+    "shippingPolicy": "Shipping policy",
+    "stayInTouch": "Stay in touch"
+  },
   "home": {
     "hero": {
       "title": "Discover Our New Collection",

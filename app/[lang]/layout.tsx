@@ -5,6 +5,7 @@ import Navbar from '@/app/[lang]/components/organisms/navbar';
 import { Locale, i18n } from '@/i18n.config';
 
 import '../../styles/globals.css';
+import Footer from './components/organisms/footer/footer';
 
 const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], display: 'swap' });
 
@@ -24,6 +25,7 @@ export default function RootLayout({ children, params: { lang } }: { children: R
       <body className={poppins.className}>
         <Navbar lang={lang} />
         {children}
+        <Footer lang={lang} />
       </body>
     </html>
   );

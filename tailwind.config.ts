@@ -16,6 +16,7 @@ const config: Config = {
           DEFAULT: '#393939',
           lighter: '#9e9e9e',
           focus: '#CCCCCC',
+          darker: '#7a7a7a',
         },
         gray: {
           25: '#e3e3e3',

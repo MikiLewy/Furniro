@@ -17,7 +17,7 @@ const ProductCard = ({ title, contextualImg, whiteBgImg, price }: Props) => {
   return (
     <div className="mb-10 basis-1/4 min-w-[300px]">
       <ImageCard className="relative group cursor-pointer h-[450px] md:h-[500px] lg:h-[600px]  w-full">
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 z-20">
           <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 transition duration-300 " />
         </div>
         <Image
