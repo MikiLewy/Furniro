@@ -89,7 +89,7 @@ const ClientNavbar = ({ dictionary }: Props) => {
               initial="hide"
               animate="show"
               exit="hide"
-              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px]  xl:px-8  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
+              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1  xl:px-8  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
               <motion.ul
                 variants={{
                   hide: {
