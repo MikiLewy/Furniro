@@ -21,7 +21,7 @@ const CreatorsTopPicks = async ({ lang }: Props) => {
   } = await getDictionary(lang);
 
   return (
-    <section className="horizontal-spacing flex justify-center flex-wrap">
+    <section className="horizontal-spacing flex justify-center flex-wrap mb-10">
       <SectionTitle title={creatorTopPicks.title} subtitle={creatorTopPicks.subtitle} titleClassName="text-center" subtitleClassName="self-center" />
       <div className="grid w-full relative grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 grid-rows-[repeat(minmax(300px,_400px))]  gap-3 items-center justify-between mt-10">
         {CREATORS_TOP_PICKS.map(({ id, creator, img }) => (

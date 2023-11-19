@@ -6,6 +6,19 @@
     "newArrivals": "Nowości",
     "getInspired": "Zainspiruj się"
   },
+  "footer": {
+    "hotline": "Infolinia",
+    "hotlineAvailable": "Infolinia dostępna w języku angielskim i polskim.",
+    "customerService": "Obsługa klienta",
+    "contactUs": "Kontakt",
+    "faq": "FAQ",
+    "termsAndPolicies": "Regulaminy i zasady",
+    "termsOfService": "Regulamin świadczenia usług",
+    "refundPolicy": "Polityka zwrotów",
+    "privacyPolicy": "Polityka prywatności",
+    "shippingPolicy": "Wysyłka",
+    "stayInTouch": "Pozostań w kontakcie"
+  },
   "home": {
     "hero": {
       "title": "Odkryj naszą nową kolekcję",
