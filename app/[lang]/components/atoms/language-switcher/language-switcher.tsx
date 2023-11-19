@@ -42,8 +42,8 @@ export default function LanguageSwitcher() {
                 <li
                   key={locale}
                   className={`flex ${
-                    currentLocale.toLowerCase() === locale.toLowerCase() ? 'bg-gray-50' : 'bg-white'
-                  } hover:bg-gray-25 py-2 px-4 rounded-l ${i === 0 ? `rounded-b-none` : `rounded-t-none`} `}>
+                    currentLocale.toLowerCase() === locale.toLowerCase() ? 'bg-gray-25' : 'bg-white'
+                  } hover:bg-gray-100 py-2 px-4 rounded-l ${i === 0 ? `rounded-b-none` : `rounded-t-none`} `}>
                   <Link className="flex-1 w-full" href={redirectedPathName(locale)}>
                     {locale.toUpperCase()}
                   </Link>

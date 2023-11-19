@@ -24,6 +24,7 @@ const Footer = async ({ lang }: Props) => {
           <OutlinedPhone className="w-4 h-4" />
           <p className="text-sm text-secondary-lighter">
             {footer.hotline}
+            {': '}
             <strong>
               <Link href={`tel:${hotlineNumber}`}>{hotlineNumber}</Link>
             </strong>
