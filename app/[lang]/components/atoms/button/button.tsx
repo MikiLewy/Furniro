@@ -62,7 +62,7 @@ const Button = ({
   const merged = twMerge('btn', getVariant(variant, color), getSize(size), disabled && 'btn-disabled', fullWidth && 'w-full', className);
 
   return (
-    <button className={merged} {...rest}>
+    <button className={merged} disabled={disabled} {...rest}>
       {loading ? (
         <>
           <svg
