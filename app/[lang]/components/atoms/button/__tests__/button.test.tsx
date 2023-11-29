@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+
 import Button from '../button';
 
 describe('Button', () => {
@@ -37,7 +38,7 @@ describe('Button', () => {
     const button = screen.getByRole('button');
 
     expect(button).toBeDisabled();
-    expect(button).toHaveAttribute('disabled');
+    expect(button).toBeDisabled();
   });
 
   it('should render a different variant when provided', () => {
