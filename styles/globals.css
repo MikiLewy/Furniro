@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+li {
+  &::selection {
+    @apply bg-primary text-white;
+  }
+}
+
+@layer utilities {
+  .horizontal-spacing {
+    @apply px-4 md:px-8 xl:px-16;
+  }
+}
+
+.btn {
+  @apply flex items-center justify-center gap-2  text-black rounded-3xl font-medium transition-colors focus:bg-primary-focus focus:outline-none;
+}
+
+.btn-contained {
+  @apply bg-primary text-white  hover:bg-primary-hover;
+}
+
+.btn-outlined {
+  @apply border-[1px] border-primary text-primary  hover:bg-primary-outlinedHover;
+}
+
+.btn-contained-white {
+  @apply bg-white text-secondary  hover:bg-gray-50 focus:bg-secondary-focus;
+}
+
+.btn-outlined-white {
+  @apply border border-white text-white bg-opacity-25 bg-black  hover:bg-opacity-40 focus:bg-opacity-50 focus:bg-black;
+}
+
+.btn-text {
+  @apply text-primary focus:text-primary-focus focus:bg-transparent;
+}
+
+.btn-disabled {
+  @apply cursor-not-allowed opacity-60 focus:ring-0;
+}
+
+.btn-sm {
+  @apply text-sm py-2 px-3;
+  & svg {
+    @apply w-3 h-3;
+  }
+}
+
+.btn-md {
+  @apply text-sm py-2.5 px-5;
+  & svg {
+    @apply w-3.5 h-3.5;
+  }
+}
+
+.btn-lg {
+  @apply text-sm py-2.5 px-5 lg:text-base lg:py-3 lg:px-7;
+  & svg {
+    @apply w-3.5 h-3.5;
+  }
+}
+
+.badge {
+  @apply py-[3px] px-[10px] text-xs flex items-center justify-center gap-1 rounded-full font-medium;
+}
+
+.badge-gray {
+  @apply bg-white bg-opacity-80  text-gray-600 border-gray-25;
+}
+
+.badge-success {
+  @apply bg-success bg-opacity-75  text-success-darker;
+}
+
+.badge-info {
+  @apply bg-info bg-opacity-75  text-info-darker;
+}
