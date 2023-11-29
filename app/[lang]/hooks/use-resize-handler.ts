@@ -9,5 +9,6 @@ export const useResizeHandler = (maxPixels: number, callback: Dispatch<SetStateA
     window.innerWidth >= maxPixels ? callback(false) : callback(true);
     window.addEventListener('resize', resizeHandler);
     return () => window.removeEventListener('resize', resizeHandler);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maxPixels]);
 };
