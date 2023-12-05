@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Locale } from '@/i18n.config';
 import LanguageSwitcher from '@components/atoms/language-switcher/language-switcher';
 import { Cart } from '@icons/cart';
@@ -18,10 +20,14 @@ const ServerNavbar = async ({ lang }: Props) => {
       className="sticky top-0 z-30 bg-white flex items-center md:justify-between py-4 horizontal-spacing border-b border-b-[#eeeeec]
       ">
       <div className="flex gap-3 md:gap-8 items-center ">
-        <ClientNavbar dictionary={navbar} />
-        <h2 className="text-2xl font-bold text-secondary relative z-30">Furniro</h2>
+        <ClientNavbar dictionary={navbar} lang={lang} />
+        <Link href={`/${lang}/`} className="text-2xl font-bold text-secondary relative z-30">
+          Furniro
+        </Link>
         <ul className="hidden md:flex  gap-4 relative z-30">
-          <li className="text-base font-medium cursor-pointer hover:text-primary">{navbar.products}</li>
+          <Link href={`/${lang}/products`} className="text-base font-medium cursor-pointer hover:text-primary">
+            {navbar.products}
+          </Link>
           <li className="text-base text-primary font-medium cursor-pointer">{navbar.sale}</li>
         </ul>
       </div>

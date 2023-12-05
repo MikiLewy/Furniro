@@ -1,25 +1,23 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { Crown } from '@icons/navigation/crown';
-import GetInspired from '@icons/navigation/get-inspired';
-import NewArrivals from '@icons/navigation/new-arrivals';
-import Sale from '@icons/navigation/sale';
+import { routes } from '@/app/[lang]/constants/routes';
+import { NavbarDictionaryKeys } from '@/app/[lang]/types/interfaces/NavbarDictionaryKeys';
+import { Locale } from '@/i18n.config';
 
 interface Props {
-  dictionary: {
-    bestsellers: string;
-    products: string;
-    sale: string;
-    newArrivals: string;
-    getInspired: string;
-  };
+  dictionary: NavbarDictionaryKeys;
+  lang: Locale;
 }
 
-const ClientNavbar = ({ dictionary }: Props) => {
+const ClientNavbar = ({ dictionary, lang }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const pathname = usePathname();
 
   const handleToggle = () => {
     setIsOpen(prev => !prev);
@@ -98,19 +96,23 @@ const ClientNavbar = ({ dictionary }: Props) => {
                   show: {
                     opacity: 1,
                   },
-                }}>
-                <li className="flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl text-primary font-medium cursor-pointer hover:bg-primary-outlinedHover transition-colors duration-500">
-                  <Sale className="w-5 h-5 stroke-gray-300" /> {dictionary.sale}
-                </li>
-                <li className="flex items-center gap-2  text-base px-4 md:px-8 py-4 rounded-3xl text-secondary  font-medium cursor-pointer hover:bg-gray-50 transition-colors duration-500">
-                  <Crown className="w-5 h-5 stroke-gray-300" /> {dictionary.bestsellers}
-                </li>
-                <li className="flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl text-secondary font-medium cursor-pointer hover:bg-gray-50 transition-colors duration-500">
-                  <NewArrivals className="w-5 h-5 stroke-gray-300" /> {dictionary.newArrivals}
-                </li>
-                <li className="flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl text-secondary font-medium cursor-pointer hover:bg-gray-50 transition-colors duration-500">
-                  <GetInspired className="w-5 h-5 stroke-gray-300" /> {dictionary.getInspired}
-                </li>
+                }}
+                className="flex flex-col gap-1">
+                {routes.map(({ titleKey, href, icon: RouteIcon, primary }) => (
+                  <Link
+                    key={href}
+                    href={`/${lang}${href}`}
+                    className={`flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl ${
+                      primary ? 'text-primary' : 'text-secondary'
+                    } font-medium cursor-pointer ${
+                      pathname === `/${lang}${href}` ? (primary ? 'bg-primary-outlinedHover' : 'bg-gray-50') : 'bg-transparent'
+                    } ${primary ? 'hover:bg-primary-outlinedHover' : 'hover:bg-gray-50'}  transition-colors duration-500`}>
+                    <div className="w-5 h-5 stroke-gray-300">
+                      <RouteIcon />
+                    </div>
+                    {dictionary[titleKey as keyof NavbarDictionaryKeys]}
+                  </Link>
+                ))}
               </motion.ul>
             </motion.div>
           </MotionConfig>

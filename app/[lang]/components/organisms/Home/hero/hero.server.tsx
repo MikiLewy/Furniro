@@ -19,7 +19,7 @@ const ServerHero = async ({ lang }: Props) => {
       <div className="bg-transparent pt-16 pb-10 horizontal-spacing flex flex-col sm:max-w-lg md:max-w-xl lg:max-w-3xl  relative z-2 ">
         <h1 className="text-3xl md:text-4xl lg:text-6xl text-white font-medium mt-1">{hero.title}</h1>
         <p className="text-base text-white max-w-[400px] sm:max-w-none md:text-lg  leading-6 mt-4">{hero.description}</p>
-        <ClientHero dictionary={{ buyFurniture: hero.buyFurniture, buyAccessories: hero.buyAccessories }} />
+        <ClientHero dictionary={{ buyFurniture: hero.buyFurniture, buyAccessories: hero.buyAccessories }} lang={lang} />
       </div>
     </header>
   );
