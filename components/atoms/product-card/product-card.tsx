@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { imageBucketUrl } from '@/constants/image-bucket-url';
-import { ImagePayload } from '@/types/interfaces/Image';
 import { formatPrice } from '@/utils/format-price';
 import { Heart } from '@icons/heart';
 
@@ -10,11 +9,11 @@ import ImageCard from '../image-card/image-card';
 interface Props {
   title: string;
   price: number;
-  contextualImg: ImagePayload;
-  whiteBgImg: ImagePayload;
+  contextualImgSrc: string;
+  transparentImgSrc: string;
 }
 
-const ProductCard = ({ title, contextualImg, whiteBgImg, price }: Props) => {
+const ProductCard = ({ title, contextualImgSrc, transparentImgSrc, price }: Props) => {
   return (
     <div className="mb-10 basis-1/4 min-w-[300px]">
       <ImageCard className="relative group cursor-pointer h-[450px] md:h-[500px] lg:h-[600px]  w-full">
@@ -22,14 +21,14 @@ const ProductCard = ({ title, contextualImg, whiteBgImg, price }: Props) => {
           <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 transition duration-300 " />
         </div>
         <Image
-          src={`${imageBucketUrl}/products/${contextualImg}`}
+          src={`${imageBucketUrl}/products/${contextualImgSrc}`}
           alt={title}
           fill
           className="block absolute h-full w-full object-cover object-bottom group-hover:hidden"
           draggable="false"
         />
         <Image
-          src={`${imageBucketUrl}/products/${whiteBgImg}`}
+          src={`${imageBucketUrl}/products/${transparentImgSrc}`}
           alt={title}
           fill
           className="opacity-0 absolute h-full w-full object-contain object-center group-hover:opacity-100  transition duration-300"

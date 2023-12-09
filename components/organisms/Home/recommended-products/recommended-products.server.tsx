@@ -15,7 +15,7 @@ const ServerRecommendedProducts = async ({ lang }: Props) => {
     home: { recommendedProducts },
   } = await getDictionary(lang);
 
-  const { data: products, error } = await supabase.from('products').select('*');
+  const { data: products } = await supabase.from('products').select('*');
 
   return (
     <section className="horizontal-spacing">

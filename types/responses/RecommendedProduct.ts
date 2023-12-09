@@ -2,14 +2,7 @@ export interface RecommendedProduct {
   id: number;
   title: string;
   price: number;
-  images: {
-    contextual: {
-      src: string;
-      alt: string;
-    };
-    whiteBg: {
-      src: string;
-      alt: string;
-    };
-  };
+  image: string;
+  transparentImg: string;
+  created_at: Date;
 }

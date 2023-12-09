@@ -5,6 +5,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { RecommendedProduct } from '@/types/responses/RecommendedProduct';
 import { Arrow } from '@icons/arrow';
 
 import ProductCard from '../../../atoms/product-card/product-card';
@@ -12,7 +13,7 @@ import ProductCard from '../../../atoms/product-card/product-card';
 import 'swiper/css';
 
 interface Props {
-  products: any[] | null;
+  products: RecommendedProduct[] | null;
 }
 
 const ClientRecommendedProducts = ({ products }: Props) => {
@@ -45,7 +46,7 @@ const ClientRecommendedProducts = ({ products }: Props) => {
       className="relative">
       {products?.map(product => (
         <SwiperSlide key={product.id}>
-          <ProductCard title={product.title} contextualImg={product.image} whiteBgImg={product.transparentImg} price={product.price} />
+          <ProductCard title={product.title} contextualImgSrc={product.image} transparentImgSrc={product.transparentImg} price={product.price} />
         </SwiperSlide>
       ))}
       <div

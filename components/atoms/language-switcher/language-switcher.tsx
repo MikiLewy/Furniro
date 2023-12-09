@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { Arrow } from '@/icons/arrow';
 import { i18n } from '@/i18n.config';
+import { Arrow } from '@/icons/arrow';
 
 export default function LanguageSwitcher() {
   const pathName = usePathname();

@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { routes } from '@/constants/routes';
-import { NavbarDictionaryKeys } from '@/types/interfaces/NavbarDictionaryKeys';
 import { Locale } from '@/i18n.config';
+import { NavbarDictionaryKeys } from '@/types/interfaces/NavbarDictionaryKeys';
 
 interface Props {
   dictionary: NavbarDictionaryKeys;
