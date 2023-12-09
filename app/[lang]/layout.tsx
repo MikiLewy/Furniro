@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
-import Navbar from '@/app/[lang]/components/organisms/navbar';
 import { Locale, i18n } from '@/i18n.config';
-
 import '../../styles/globals.css';
-import Footer from './components/organisms/footer/footer';
+import Providers from '@/providers/providers';
+import Footer from '@components/organisms/footer/footer';
+import Navbar from '@components/organisms/navbar';
 
 const poppins = Poppins({ subsets: ['latin-ext'], weight: ['400', '500', '600', '700'], display: 'swap' });
 
@@ -23,9 +23,11 @@ export default function RootLayout({ children, params: { lang } }: { children: R
   return (
     <html lang={lang}>
       <body className={poppins.className}>
-        <Navbar lang={lang} />
-        {children}
-        <Footer lang={lang} />
+        <Providers>
+          <Navbar lang={lang} />
+          {children}
+          <Footer lang={lang} />
+        </Providers>
       </body>
     </html>
   );

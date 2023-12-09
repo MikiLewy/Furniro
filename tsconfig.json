@@ -22,12 +22,12 @@
     "paths": {
       "@/*": ["./*"],
       "@app*": ["./app/[lang]*"],
-      "@components/*": ["./app/[lang]/components/*"],
+      "@components/*": ["./components/*"],
       "@assets/*": ["./public/assets/*"],
-      "@lib/*": ["./app/[lang]/lib/*"],
-      "@types/*": ["./app/[lang]/types/*"],
-      "@icons/*": ["./app/[lang]/icons/*"],
-      "@mocks/*": ["./app/[lang]/mocks/*"]
+      "@lib/*": ["./lib/*"],
+      "@types/*": ["./types/*"],
+      "@icons/*": ["./icons/*"],
+      "@mocks/*": ["./mocks/*"]
     }
   },
   "include": ["next-env.d.ts", "commitlint.config.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "jest.setup.js", "jest.config.js"],
