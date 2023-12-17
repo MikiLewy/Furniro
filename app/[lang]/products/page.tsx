@@ -1,6 +1,6 @@
-import Header from '@/components/organisms/products/header/header';
-import ProductsList from '@/components/organisms/products/products-list';
 import { Locale } from '@/i18n.config';
+import Header from '@components/organisms/products/header/header';
+import ProductsList from '@components/organisms/products/products-list';
 
 interface Params {
   params: {
