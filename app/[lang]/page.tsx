@@ -1,8 +1,8 @@
 import { Locale } from '@/i18n.config';
-import AboutUs from '@components/organisms/Home/about-us';
-import CreatorsTopPicks from '@components/organisms/Home/creators-top-picks/creators-top-picks';
-import Hero from '@components/organisms/Home/hero';
-import OurProducts from '@components/organisms/Home/recommended-products';
+import AboutUs from '@components/organisms/home/about-us';
+import CreatorsTopPicks from '@components/organisms/home/creators-top-picks/creators-top-picks';
+import Hero from '@components/organisms/home/hero';
+import OurProducts from '@components/organisms/home/recommended-products';
 
 interface Params {
   params: {
