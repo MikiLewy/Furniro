@@ -1,5 +1,7 @@
+import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+
+import { usePrefetchRecommendedProducts } from '@/hooks/api/products/usePrefetchRecommendedProducts';
 import { Locale } from '@/i18n.config';
-import { supabase } from '@/lib/init-supabase';
 import { getDictionary } from '@lib/get-dictionary';
 
 import SectionTitle from '../../../atoms/section-title/section-title';
@@ -15,13 +17,17 @@ const ServerRecommendedProducts = async ({ lang }: Props) => {
     home: { recommendedProducts },
   } = await getDictionary(lang);
 
-  const { data: products } = await supabase.from('products').select('*');
+  const queryClient = new QueryClient();
+
+  await usePrefetchRecommendedProducts(queryClient);
 
   return (
     <section className="horizontal-spacing">
       <SectionTitle title={recommendedProducts.title} />
       <div className="mt-5">
-        <ClientRecommendedProducts products={products} />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <ClientRecommendedProducts locale={lang} />
+        </HydrationBoundary>
       </div>
     </section>
   );

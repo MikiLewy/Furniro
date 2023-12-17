@@ -11,7 +11,15 @@ export interface Database {
           image: string;
           transparentImage: string | null;
           isBestseller: boolean;
-          created_at: string;
+          created_at: Date;
+        };
+      };
+      creators: {
+        Row: {
+          id: number;
+          creator_name: string;
+          image: string;
+          created_at: Date;
         };
       };
     };

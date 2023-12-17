@@ -1,66 +1,34 @@
 'use client';
 
-import { useRef } from 'react';
-import { Swiper as SwiperType } from 'swiper';
-import { Navigation } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 
-import { RecommendedProduct } from '@/types/responses/RecommendedProduct';
-import { Arrow } from '@icons/arrow';
+import Slider from '@/components/atoms/slider/slider';
+import { useRecommendedProducts } from '@/hooks/api/products/useRecommendedProducts';
+import { Locale } from '@/i18n.config';
+import { Language } from '@/types/enum/Language';
 
 import ProductCard from '../../../atoms/product-card/product-card';
 
-import 'swiper/css';
-
 interface Props {
-  products: RecommendedProduct[] | null;
+  locale: Locale;
 }
 
-const ClientRecommendedProducts = ({ products }: Props) => {
-  const swiperRef = useRef<SwiperType>();
+const ClientRecommendedProducts = ({ locale }: Props) => {
+  const { data } = useRecommendedProducts();
 
   return (
-    <Swiper
-      spaceBetween={10}
-      slidesPerView={1}
-      breakpoints={{
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        1200: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1600: {
-          slidesPerView: 4,
-          spaceBetween: 40,
-        },
-      }}
-      modules={[Navigation]}
-      scrollbar={{ draggable: true }}
-      onBeforeInit={swiper => {
-        swiperRef.current = swiper;
-      }}
-      direction="horizontal"
-      className="relative">
-      {products?.map(product => (
+    <Slider>
+      {data?.map(product => (
         <SwiperSlide key={product.id}>
-          <ProductCard title={product.title} contextualImgSrc={product.image} transparentImgSrc={product.transparentImg} price={product.price} />
+          <ProductCard
+            title={locale === Language.EN ? product.title_en : product.title_pl}
+            imageSrc={product.image}
+            transparentImageSrc={product.transparentImg}
+            price={product.price}
+          />
         </SwiperSlide>
       ))}
-      <div
-        onClick={() => swiperRef.current?.slidePrev()}
-        className="w-16 h-16 hidden cursor-pointer rounded-full md:flex items-center justify-center backdrop-blur-md bg-opacity-60 bg-white top-[40%] absolute z-50 
-          ">
-        <Arrow className=" w-5 h-5 rotate-90 stroke-[1.5px] stroke-[#393939] " />
-      </div>
-      <div
-        onClick={() => swiperRef.current?.slideNext()}
-        className="w-16 h-16 hidden cursor-pointer rounded-full  md:flex items-center justify-center backdrop-blur-md bg-white  bg-opacity-60 top-[40%] right-0 absolute z-50 ">
-        <Arrow className="w-5 h-5 -rotate-90 stroke-[1.5px] stroke-[#393939] " />
-      </div>
-    </Swiper>
+    </Slider>
   );
 };
 
