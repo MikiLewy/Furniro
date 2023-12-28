@@ -13,9 +13,9 @@
     "next",
     "prettier"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "parser": "@typescript-eslint/parser",
+    "project": "./tsconfig.json"
   },
   "settings": {
     "import/resolver": {

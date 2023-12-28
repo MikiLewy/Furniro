@@ -1,0 +1,56 @@
+{
+  "navbar": {
+    "bestsellers": "Bestsellers",
+    "products": "Products",
+    "sale": "Sale",
+    "newArrivals": "New arrivals",
+    "getInspired": "Get inspired"
+  },
+  "footer": {
+    "hotline": "Hotline",
+    "hotlineAvailable": "Hotline available in English and Polish",
+    "customerService": "Customer service",
+    "contactUs": "Contact us",
+    "faq": "FAQ",
+    "termsAndPolicies": "Terms & policies",
+    "termsOfService": "Terms of service",
+    "refundPolicy": "Refund policy",
+    "privacyPolicy": "Privacy policy",
+    "shippingPolicy": "Shipping policy",
+    "stayInTouch": "Stay in touch"
+  },
+  "home": {
+    "hero": {
+      "title": "Discover Our New Collection",
+      "description": "Explore our latest furniture collection and discover the perfect pieces for your home.",
+      "buyFurniture": "Shop furniture",
+      "buyAccessories": "Shop accessories"
+    },
+    "recommendedProducts": {
+      "title": "Recommended products"
+    },
+    "aboutUs": {
+      "aboutTheBrand": "About the brand",
+      "title": "Hi, we're Furniture!",
+      "description": "Furniro is a new-generation design brand offering a versatile range of top-notch sideboards, poufs, beds, and tables, already delivered to over 10,000 customers across 10 countries. The home of bold ideas and timeless designs, leaving plenty of room for your personality. Already feeling at home?",
+      "stats": {
+        "originalDesigns": "150+ original furniro designs",
+        "happyCustomers": "10 000+ happy customers",
+        "materialSourced": "Materials sourced only from the EU",
+        "producedLocally": "Produced locally in Poland"
+      },
+      "aboutUsImgAlt": "Yellow sofa in salon",
+      "moreAbout": "More about Furniro"
+    },
+    "creatorTopPicks": {
+      "title": "Explore the creators’ top picks",
+      "subtitle": "Instagram’s most favorites",
+      "moreProducts": "More products"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "description": "Explore Our Exquisite Collection of Furniture: Elevate your space with our handpicked selection of quality furniture pieces. Discover timeless designs crafted for comfort, functionality, and style. From modern accents to classic essentials, find the perfect match for your home.",
+    "headerImgAlt": "Room interior"
+  }
+}

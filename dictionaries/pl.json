@@ -1,0 +1,56 @@
+{
+  "navbar": {
+    "bestsellers": "Bestsellery",
+    "products": "Produkty",
+    "sale": "Sale",
+    "newArrivals": "Nowości",
+    "getInspired": "Zainspiruj się"
+  },
+  "footer": {
+    "hotline": "Infolinia",
+    "hotlineAvailable": "Infolinia dostępna w języku angielskim i polskim.",
+    "customerService": "Obsługa klienta",
+    "contactUs": "Kontakt",
+    "faq": "FAQ",
+    "termsAndPolicies": "Regulaminy i zasady",
+    "termsOfService": "Regulamin świadczenia usług",
+    "refundPolicy": "Polityka zwrotów",
+    "privacyPolicy": "Polityka prywatności",
+    "shippingPolicy": "Wysyłka",
+    "stayInTouch": "Pozostań w kontakcie"
+  },
+  "home": {
+    "hero": {
+      "title": "Odkryj naszą nową kolekcję",
+      "description": "Zobacz naszą najnowszą kolekcję mebli i znajdź idealne elementy do swojego domu.",
+      "buyFurniture": "Kup meble",
+      "buyAccessories": "Kup akcesoria"
+    },
+    "recommendedProducts": {
+      "title": "Polecane produkty"
+    },
+    "aboutUs": {
+      "aboutTheBrand": "O marce",
+      "title": "Poznajmy się!",
+      "description": "Furniro to nowoczesna marka projektowa z różnorodną kolekcją znakomitych komód, puf, łóżek i stołów, dostarczanych już do ponad 10 000 klientów w 10 krajach. To miejsce odważnych pomysłów i ponadczasowego designu, które pozostawia mnóstwo miejsca dla Twojej osobowości. Odkryj barwny świat produktów furniro, stworzonych z myślą o wnętrzach w różnych stylach, i daj się zainspirować.",
+      "stats": {
+        "originalDesigns": "150+ oryginalnych projektów",
+        "happyCustomers": "10 000+ zadowolonych klientów",
+        "materialSourced": "Materiały wyłącznie z UE",
+        "producedLocally": "Produkowane lokalnie w Polsce"
+      },
+      "aboutUsImgAlt": "Żółta sofa w salonie",
+      "moreAbout": "Więcej o Furniro"
+    },
+    "creatorTopPicks": {
+      "title": "Zobacz, co wybierają Instagramowi twórcy",
+      "subtitle": "Instagramowe hity",
+      "moreProducts": "Więcej produktów"
+    }
+  },
+  "products": {
+    "title": "Produkty",
+    "description": "Odkryj naszą wyjątkową kolekcję mebli. Ulepsz swoją przestrzeń dzięki naszej starannie dobranej kolekcji wysokiej jakości mebli. Odkryj ponadczasowe projekty stworzone z myślą o komforcie, funkcjonalności i stylu. Od nowoczesnych akcentów po klasyczne elementy, znajdź idealne dopasowanie do swojego domu.",
+    "headerImgAlt": "Wnętrze pokoju"
+  }
+}
