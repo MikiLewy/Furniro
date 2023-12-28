@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { Locale } from '@/i18n.config';
 import { getDictionary } from '@/lib/get-dictionary';
 import productsHeaderImg from '@/public/assets/images/products-page.webp';
-
-import SectionTitle from '../../../atoms/section-title/section-title';
+import SectionTitle from '@components/atoms/section-title/section-title';
 
 interface Props {
   lang: Locale;
