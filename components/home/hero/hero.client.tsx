@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 import { useResizeHandler } from '@/hooks/use-resize-handler';
 import { Locale } from '@/i18n.config';
-
-import Button from '../../../atoms/button/button';
+import Button from '@components/atoms/button/button';
 
 interface Props {
   dictionary: { buyFurniture: string; buyAccessories: string };

@@ -1,13 +1,12 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
-import CreatorsTopPicksListItem from '@/components/molecules/home/creators-top-picks-list-item';
 import { usePrefetchCreatorsTopPicks } from '@/hooks/api/creators/usePrefetchCreatorsTopPicks';
 import { Locale } from '@/i18n.config';
+import Button from '@components/atoms/button/button';
+import SectionTitle from '@components/atoms/section-title/section-title';
+import CreatorsTopPicksListItem from '@components/home/creators-top-picks-list-item';
 import Plus from '@icons/plus';
 import { getDictionary } from '@lib/get-dictionary';
-
-import Button from '../../../atoms/button/button';
-import SectionTitle from '../../../atoms/section-title/section-title';
 
 interface Props {
   lang: Locale;

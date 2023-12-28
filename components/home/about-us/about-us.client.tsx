@@ -1,4 +1,4 @@
-import Button from '../../../atoms/button/button';
+import Button from '@components/atoms/button/button';
 
 interface Props {
   btnContentTranslation: string;

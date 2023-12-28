@@ -2,14 +2,13 @@ import Image from 'next/image';
 
 import { Locale } from '@/i18n.config';
 import aboutUsImg from '@/public/assets/images/about-us.webp';
+import IconAnnotation from '@components/atoms/icon-annotation/icon-annotation';
+import SectionTitle from '@components/atoms/section-title/section-title';
 import Globe from '@icons/globe';
 import { Heart } from '@icons/heart';
 import LocationPin from '@icons/location-pin';
 import Wardrobe from '@icons/wardrobe';
 import { getDictionary } from '@lib/get-dictionary';
-
-import IconAnnotation from '../../../atoms/icon-annotation/icon-annotation';
-import SectionTitle from '../../../atoms/section-title/section-title';
 
 import ClientAboutUs from './about-us.client';
 

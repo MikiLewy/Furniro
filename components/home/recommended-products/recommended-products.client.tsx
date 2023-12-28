@@ -2,12 +2,11 @@
 
 import { SwiperSlide } from 'swiper/react';
 
-import Slider from '@/components/atoms/slider/slider';
 import { useRecommendedProducts } from '@/hooks/api/products/useRecommendedProducts';
 import { Locale } from '@/i18n.config';
 import { Language } from '@/types/enum/Language';
-
-import ProductCard from '../../../atoms/product-card/product-card';
+import ProductCard from '@components/atoms/product-card/product-card';
+import Slider from '@components/atoms/slider/slider';
 
 interface Props {
   locale: Locale;
