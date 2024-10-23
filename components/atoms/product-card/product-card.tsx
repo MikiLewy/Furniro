@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import { imageBucketUrl } from '@/constants/image-bucket-url';
+import { Locale } from '@/i18n.config';
 import { formatPrice } from '@/utils/format-price';
 import { Heart } from '@icons/heart';
 
@@ -11,9 +12,10 @@ interface Props {
   price: number;
   imageSrc: string;
   transparentImageSrc: string;
+  locale: Locale;
 }
 
-const ProductCard = ({ title, imageSrc, transparentImageSrc, price }: Props) => {
+const ProductCard = ({ title, imageSrc, transparentImageSrc, price, locale }: Props) => {
   return (
     <div className="mb-10 min-w-[300px]">
       <ImageCard className="relative group cursor-pointer h-[450px] md:h-[500px] lg:h-[550px]  w-full">
@@ -37,7 +39,7 @@ const ProductCard = ({ title, imageSrc, transparentImageSrc, price }: Props) => 
       </ImageCard>
       <div className="flex flex-col items-start gap-2 pt-4 ">
         <h5 className="text-lg font-semibold cursor-pointer">{title}</h5>
-        <p className="text-base font-medium text-gray-400">{formatPrice({ amount: price })}</p>
+        <p className="text-base font-medium text-gray-400">{formatPrice({ amount: price, language: locale })}</p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query';
 
-import { fetchProducts } from '@/actions/products';
 import { productsKeys } from '@/api/query-keys/products';
+import { fetchProducts } from '@/api/services/supabase/products';
 
 export const usePrefetchProducts = (queryClient: QueryClient) => {
   return queryClient.prefetchQuery({

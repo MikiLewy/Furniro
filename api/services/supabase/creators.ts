@@ -1,5 +1,3 @@
-'use server';
-
 import { supabase } from '@/lib/init-supabase';
 import { CreatorsTopPicks } from '@/types/responses/CreatorsTopPicks';
 

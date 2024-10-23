@@ -1,6 +1,6 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { usePrefetchRecommendedProducts } from '@/hooks/api/products/usePrefetchRecommendedProducts';
+import { usePrefetchRecommendedProducts } from '@/hooks/api/products/use-prefetch-recommended-products';
 import { Locale } from '@/i18n.config';
 import SectionTitle from '@components/atoms/section-title/section-title';
 import { getDictionary } from '@lib/get-dictionary';

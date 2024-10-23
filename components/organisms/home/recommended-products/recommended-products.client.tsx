@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { SwiperSlide } from 'swiper/react';
 
-import { useRecommendedProducts } from '@/hooks/api/products/useRecommendedProducts';
+import { useRecommendedProducts } from '@/hooks/api/products/use-recommended-products';
 import { Locale } from '@/i18n.config';
 import { Language } from '@/types/enum/Language';
 import ProductCard from '@components/atoms/product-card/product-card';
@@ -19,12 +20,15 @@ const ClientRecommendedProducts = ({ locale }: Props) => {
     <Slider>
       {data?.map(product => (
         <SwiperSlide key={product.id}>
-          <ProductCard
-            title={locale === Language.EN ? product.title_en : product.title_pl}
-            imageSrc={product.image}
-            transparentImageSrc={product.transparentImg}
-            price={product.price}
-          />
+          <Link href={`/products/${product.id}`}>
+            <ProductCard
+              title={locale === Language.EN ? product.title_en : product.title_pl}
+              imageSrc={product.image}
+              transparentImageSrc={product.transparentImg}
+              price={product.price}
+              locale={locale}
+            />
+          </Link>
         </SwiperSlide>
       ))}
     </Slider>

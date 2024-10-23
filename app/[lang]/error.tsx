@@ -5,7 +5,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   return (
     <div className="flex flex-col  items-center justify-center gap-4 h-screen">
       <h2 className="text-5xl">Something went wrong!</h2>
-      <Button variant="contained" onClick={() => reset()}>
+      <Button variant="contained" className="mt-3" onClick={() => reset()}>
         Try again
       </Button>
     </div>

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchCreatorsTopPicks } from '@/actions/creators';
+import { fetchCreatorsTopPicks } from '@/api/services/supabase/creators';
 import { creatorsTopPicksKeys } from '@/api/query-keys/creators-top-picks';
 import { CreatorsTopPicks } from '@/types/responses/CreatorsTopPicks';
 

@@ -1,6 +1,6 @@
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
 
-import { usePrefetchProducts } from '@/hooks/api/products/usePrefetchProducts';
+import { usePrefetchProducts } from '@/hooks/api/products/use-prefetch-products';
 import { Locale } from '@/i18n.config';
 
 import ClientProductsList from './products-list.client';

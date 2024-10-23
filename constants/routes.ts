@@ -19,17 +19,17 @@ export const routes: Route[] = [
   },
   {
     titleKey: 'bestsellers',
-    href: '/navbar/products/bestsellers',
+    href: '/products/bestsellers',
     icon: Crown,
   },
   {
     titleKey: 'newArrivals',
-    href: '/navbar/new-arrivals',
+    href: '/new-arrivals',
     icon: NewArrivals,
   },
   {
     titleKey: 'getInspired',
-    href: '/navbar/get-inspired',
+    href: '/get-inspired',
     icon: GetInspired,
   },
 ];
