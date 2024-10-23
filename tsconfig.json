@@ -14,22 +14,35 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"],
+      "@/*": ["./src"],
       "@app*": ["./app/[lang]*"],
-      "@components/*": ["./components/*"],
+      "@components/*": ["./src/components/*"],
       "@assets/*": ["./public/assets/*"],
-      "@lib/*": ["./lib/*"],
-      "@types/*": ["./types/*"],
-      "@icons/*": ["./icons/*"],
-      "@mocks/*": ["./mocks/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@types/*": ["./src/types/*"],
+      "@icons/*": ["./src/icons/*"],
+      "@mocks/*": ["./mocks/*"],
+      "@features/*": ["./src/features/*"],
+      "@styles/*": ["./public/styles/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@providers/*": ["./src/providers/*"]
     }
   },
-  "include": ["next-env.d.ts", "commitlint.config.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "jest.setup.js", "jest.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "commitlint.config.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "jest.setup.js",
+    "jest.config.js"
+  ],
   "exclude": ["node_modules"]
 }
