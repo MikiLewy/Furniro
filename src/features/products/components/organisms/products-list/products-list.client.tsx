@@ -1,8 +1,10 @@
 'use client';
-import ProductCard from '@/src/components/atoms/product-card/product-card';
-import { useProducts } from '@/src/hooks/api/products/useProducts';
-import { Locale } from '../../../src/i18n.config';
-import { Language } from '@/src/types/enum/Language';
+
+import ProductCard from '@components/atoms/product-card';
+import { useProducts } from '@features/products/hooks/query/use-products';
+import { Language } from '@types/enum/language';
+
+import { Locale } from '../../../../../i18n.config';
 
 interface Props {
   locale: Locale;
