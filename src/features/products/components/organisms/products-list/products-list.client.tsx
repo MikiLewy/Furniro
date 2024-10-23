@@ -3,14 +3,7 @@
 import ProductCard from '@components/atoms/product-card';
 import { useProducts } from '@features/products/hooks/query/use-products';
 
-import { Locale } from '../../../../../i18n.config';
-import { Language } from '../../../../../types/enum/language';
-
-interface Props {
-  locale: Locale;
-}
-
-const ClientProductsList = ({ locale }: Props) => {
+const ClientProductsList = () => {
   const { data } = useProducts();
 
   return (
@@ -18,7 +11,7 @@ const ClientProductsList = ({ locale }: Props) => {
       {data?.map(product => (
         <div key={product.id} className="col-span-1">
           <ProductCard
-            title={locale === Language.EN ? product.title_en : product.title_pl}
+            title={product.title_en}
             imageSrc={product.image}
             price={product.price}
             transparentImageSrc={product.transparentImg}

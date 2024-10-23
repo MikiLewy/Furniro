@@ -1,33 +1,22 @@
 import Link from 'next/link';
 
 import { hotlineNumber } from '@constants/hotline-number';
-import { getDictionary } from '@lib/get-dictionary';
 
-import { Locale } from '../../../src/i18n.config';
 import Facebook from '../../icons/facebook';
 import Globe from '../../icons/globe';
 import Instagram from '../../icons/instagram';
 import OutlinedPhone from '../../icons/outlined-phone';
 import Pinterest from '../../icons/pinterest';
 
-interface Props {
-  lang: Locale;
-}
-
-const Footer = async ({ lang }: Props) => {
-  const { footer } = await getDictionary(lang);
-
+const Footer = async () => {
   return (
     <footer className="py-10  horizontal-spacing border-t bg-[#f6f6f5] border-t-[#eeeeec] grid grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col gap-2">
-        <h5 className="text-xl text-secondary font-medium mb-1">
-          {footer.hotline}
-        </h5>
+        <h5 className="text-xl text-secondary font-medium mb-1">Hotline</h5>
         <div className="flex items-center gap-1">
           <OutlinedPhone className="w-4 h-4" />
           <p className="text-sm text-secondary-lighter">
-            {footer.hotline}
-            {': '}
+            Hotline :
             <strong>
               <Link href={`tel:${hotlineNumber}`}>{hotlineNumber}</Link>
             </strong>
@@ -36,43 +25,43 @@ const Footer = async ({ lang }: Props) => {
         <div className="flex items-center gap-1">
           <Globe className="w-4 h-4" />
           <p className="text-sm text-secondary-lighter">
-            {footer.hotlineAvailable}
+            Hotline available in English
           </p>
         </div>
       </div>
       <div className="grid grid-cols-2 mt-10 lg:mt-0">
         <div className="flex flex-col gap-2 items-start">
           <h6 className="text-primary text-xs uppercase font-semibold mb-1">
-            {footer.customerService}
+            Customer service
           </h6>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.contactUs}
+            Contact us
           </Link>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.faq}
+            FAQ
           </Link>
         </div>
         <div className="flex flex-col gap-2 items-start">
           <h6 className="text-primary text-xs uppercase font-semibold mb-1">
-            {footer.termsAndPolicies}
+            Terms & policies
           </h6>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.shippingPolicy}
+            Shipping policy
           </Link>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.termsOfService}
+            Terms of service
           </Link>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.refundPolicy}
+            Refund policy
           </Link>
           <Link href={'#'} className="font-medium text-sm hover:text-primary">
-            {footer.privacyPolicy}
+            Privacy policy
           </Link>
         </div>
       </div>
       <div className="flex gap-3 mt-10 items-center">
         <p className="text-xs uppercase font-semibold tracking-wide text-secondary-darker">
-          {footer.stayInTouch}:
+          Stay in touch:
         </p>
         <Link href={'#'} className="group">
           <Facebook className="w-4 h-4 fill-secondary-darker group-hover:fill-primary" />
