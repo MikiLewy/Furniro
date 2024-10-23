@@ -3,7 +3,7 @@ import CreatorsTopPicks from '@features/home/components/organisms/creators-top-p
 import Hero from '@features/home/components/organisms/hero';
 import RecommendedProducts from '@features/home/components/organisms/recommended-products';
 
-import { Locale } from '../../src/i18n.config';
+import { Locale } from '../../i18n.config';
 
 interface Params {
   params: {

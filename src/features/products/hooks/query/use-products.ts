@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchProducts } from '@/src/actions/products';
-import { productsKeys } from '@/api/query-keys/products';
-import { Product } from '@/src/types/responses/Product';
+import { fetchProducts } from '@features/products/api/lib/products';
+import { productsKeys } from '@features/products/api/query-keys/products';
+import { Product } from '@features/products/api/types/product';
 
 export const useProducts = () => {
   return useQuery<Product[] | null>({

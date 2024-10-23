@@ -1,13 +1,13 @@
 'use client';
 
-import { useRecommendedProducts } from '@features/home/hooks/query/use-recommended-products';
 import { SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@components/atoms/product-card';
 import Slider from '@components/atoms/slider';
-import { Language } from '@types/enum/language';
+import { useRecommendedProducts } from '@features/home/hooks/query/use-recommended-products';
 
 import { Locale } from '../../../../../i18n.config';
+import { Language } from '../../../../../types/enum/language';
 
 interface Props {
   locale: Locale;

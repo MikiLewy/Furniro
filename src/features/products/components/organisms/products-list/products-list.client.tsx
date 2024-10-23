@@ -2,9 +2,9 @@
 
 import ProductCard from '@components/atoms/product-card';
 import { useProducts } from '@features/products/hooks/query/use-products';
-import { Language } from '@types/enum/language';
 
 import { Locale } from '../../../../../i18n.config';
+import { Language } from '../../../../../types/enum/language';
 
 interface Props {
   locale: Locale;

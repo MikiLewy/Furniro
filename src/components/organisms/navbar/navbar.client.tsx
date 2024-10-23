@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { NavbarDictionaryKeys } from '@types/interfaces/navbar-dictionary-keys';
+import { routes } from '@constants/routes';
 
+import { NavbarDictionaryKeys } from '.././../../types/interfaces/navbar-dictionary-keys';
 import { Locale } from '../../../i18n.config';
 
 interface Props {
@@ -25,7 +26,11 @@ const ClientNavbar = ({ dictionary, lang }: Props) => {
 
   return (
     <div>
-      <motion.button initial="hide" animate={isOpen ? 'show' : 'hide'} onClick={handleToggle} className="flex flex-col space-y-1 relative z-10">
+      <motion.button
+        initial="hide"
+        animate={isOpen ? 'show' : 'hide'}
+        onClick={handleToggle}
+        className="flex flex-col space-y-1 relative z-10">
         <motion.span
           variants={{
             hide: {
@@ -105,8 +110,16 @@ const ClientNavbar = ({ dictionary, lang }: Props) => {
                     className={`flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl ${
                       primary ? 'text-primary' : 'text-secondary'
                     } font-medium cursor-pointer ${
-                      pathname === `/${lang}${href}` ? (primary ? 'bg-primary-outlinedHover' : 'bg-gray-50') : 'bg-transparent'
-                    } ${primary ? 'hover:bg-primary-outlinedHover' : 'hover:bg-gray-50'}  transition-colors duration-500`}>
+                      pathname === `/${lang}${href}`
+                        ? primary
+                          ? 'bg-primary-outlinedHover'
+                          : 'bg-gray-50'
+                        : 'bg-transparent'
+                    } ${
+                      primary
+                        ? 'hover:bg-primary-outlinedHover'
+                        : 'hover:bg-gray-50'
+                    }  transition-colors duration-500`}>
                     <div className="w-5 h-5 stroke-gray-300">
                       <RouteIcon />
                     </div>
