@@ -35,13 +35,22 @@
     "no-unused-vars": "off",
     "no-extra-semi": "warn",
     "no-console": "warn",
+    "no-unused-expressions": "warn",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-inferrable-types": "off",
     "@next/next/no-image-element": "off",
     "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": ["warn", { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }],
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
     "padding-line-between-statements": [
       "error",
       { "blankLine": "always", "prev": "const", "next": "return" },
@@ -69,7 +78,13 @@
     "import/order": [
       "warn",
       {
-        "groups": [["builtin", "external"], "internal", "parent", ["sibling", "index"], "object"],
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          ["sibling", "index"],
+          "object"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc",
