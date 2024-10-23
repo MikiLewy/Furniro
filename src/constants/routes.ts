@@ -7,28 +7,33 @@ import { Route } from '../types/interfaces/route';
 
 export const routes: Route[] = [
   {
-    titleKey: 'sale',
+    key: 'sale',
+    title: 'Sale',
     href: '/products/sale',
     primary: true,
     icon: Sale,
   },
   {
-    titleKey: 'products',
+    key: 'products',
+    title: 'Products',
     href: '/products',
     icon: Products,
   },
   {
-    titleKey: 'bestsellers',
+    key: 'bestsellers',
+    title: 'Bestsellers',
     href: '/navbar/products/bestsellers',
     icon: Crown,
   },
   {
-    titleKey: 'newArrivals',
+    key: 'newArrivals',
+    title: 'New Arrivals',
     href: '/navbar/new-arrivals',
     icon: NewArrivals,
   },
   {
-    titleKey: 'getInspired',
+    key: 'getInspired',
+    title: 'Get Inspired',
     href: '/navbar/get-inspired',
     icon: GetInspired,
   },

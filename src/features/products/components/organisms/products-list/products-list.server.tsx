@@ -1,19 +1,15 @@
 import { prefetchProducts } from '@features/products/api/lib/products.prefetch';
 
-import { Locale } from '../../../../../i18n.config';
 import HydrationBoundaryProvider from '../../../../../providers/hydration-boundary-provider';
 
 import ClientProductsList from './products-list.client';
 
-interface Props {
-  lang: Locale;
-}
-
-const ServerProductsList = async ({ lang }: Props) => {
+const ServerProductsList = async () => {
   return (
     <main>
-      <HydrationBoundaryProvider prefetchDataFunctions={[queryClient => prefetchProducts(queryClient)]}>
-        <ClientProductsList locale={lang} />
+      <HydrationBoundaryProvider
+        prefetchDataFunctions={[queryClient => prefetchProducts(queryClient)]}>
+        <ClientProductsList />
       </HydrationBoundaryProvider>
     </main>
   );
