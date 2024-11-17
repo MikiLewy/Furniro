@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2023",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -32,7 +32,8 @@
       "@features/*": ["./src/features/*"],
       "@styles/*": ["./public/styles/*"],
       "@constants/*": ["./src/constants/*"],
-      "@providers/*": ["./src/providers/*"]
+      "@providers/*": ["./src/providers/*"],
+      "@db/*": ["./db/*"]
     }
   },
   "include": [
