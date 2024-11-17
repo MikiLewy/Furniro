@@ -1,0 +1,14 @@
+import { loadEnvConfig } from '@next/env';
+import { defineConfig } from 'drizzle-kit';
+
+loadEnvConfig(process.cwd(), true);
+
+export default defineConfig({
+  out: './migrations',
+  dialect: 'postgresql',
+  schema: './src/db/schema',
+
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
