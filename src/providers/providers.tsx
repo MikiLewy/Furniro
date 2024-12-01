@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SessionProvider } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
 
 interface Props {
@@ -22,8 +23,13 @@ const Providers = ({ children }: Props) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
+      <SessionProvider>
+        {children}
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          buttonPosition="bottom-left"
+        />
+      </SessionProvider>
     </QueryClientProvider>
   );
 };

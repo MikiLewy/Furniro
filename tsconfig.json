@@ -21,19 +21,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./src"],
-      "@app*": ["./app/[lang]*"],
+      "@/*": ["./src/*"],
+      "@app*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./public/assets/*"],
       "@lib/*": ["./src/lib/*"],
       "@types/*": ["./src/types/*"],
       "@icons/*": ["./src/icons/*"],
-      "@mocks/*": ["./mocks/*"],
       "@features/*": ["./src/features/*"],
-      "@styles/*": ["./public/styles/*"],
       "@constants/*": ["./src/constants/*"],
       "@providers/*": ["./src/providers/*"],
-      "@db/*": ["./db/*"]
+      "@db/*": ["./src/db/*"]
     }
   },
   "include": [
@@ -41,9 +39,7 @@
     "commitlint.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "jest.setup.js",
-    "jest.config.js"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

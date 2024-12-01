@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
-import '@styles/globals.css';
+import '@app/globals.css';
 import Footer from '@components/organisms/footer';
 import Navbar from '@components/organisms/navbar';
 import Providers from '@providers/providers';
@@ -28,8 +28,10 @@ export default function RootLayout({
       <body className={poppins.className}>
         <Providers>
           <Navbar />
-          {children}
-          <Footer />
+          <main className="max-w-[1440px] mx-auto flex flex-col">
+            {children}
+            <Footer />
+          </main>
         </Providers>
       </body>
     </html>
