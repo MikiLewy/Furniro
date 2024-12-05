@@ -4,6 +4,7 @@ import ClientNavbar from './navbar.client';
 import AccountPopover from '@/components/molecules/account-popover';
 import { Heart, ShoppingCart, User } from 'lucide-react';
 import { auth } from '@/auth';
+import Logo from '@/components/atoms/logo';
 
 const ServerNavbar = async () => {
   const session = await auth();
@@ -14,14 +15,10 @@ const ServerNavbar = async () => {
     <nav
       className="sticky top-0 z-30 bg-white  py-4 horizontal-spacing border-b border-b-[#eeeeec]
       ">
-      <div className="max-w-[1440px] mx-auto flex items-center md:justify-between">
+      <div className="max-w-7xl 2xl:max-w-[1440px] mx-auto flex items-center md:justify-between">
         <div className="flex gap-3 md:gap-8 items-center ">
           <ClientNavbar />
-          <Link
-            href="/"
-            className="text-2xl font-bold text-primary relative z-30">
-            Furniro
-          </Link>
+          <Logo />
           <ul className="hidden md:flex  gap-4 relative z-30">
             <Link
               href="/products"

@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import UserAvatar from '../atoms/user-avatar';
 import { LogOut } from 'lucide-react';
 
@@ -32,7 +32,10 @@ const AccountPopover = () => {
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Billing</DropdownMenuItem>
           <DropdownMenuItem>Team</DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              signOut();
+            }}>
             <LogOut /> Log out
           </DropdownMenuItem>
         </DropdownMenuContent>

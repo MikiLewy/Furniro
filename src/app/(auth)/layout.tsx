@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
 import '@app/globals.css';
-import Providers from '@providers/providers';
+
+import Logo from '@/components/atoms/logo';
+import AuthBackgroundImage from '@/features/auth/components/atoms/auth-background-image';
 
 const poppins = Poppins({
   subsets: ['latin-ext'],
@@ -16,16 +18,18 @@ export const metadata: Metadata = {
     'Discover Timeless Elegance and Functional Design at Our Furniture Shop. Explore a Wide Range of High-Quality Furniture Pieces for Your Home. Shop Now for the Perfect Blend of Style and Comfort.',
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>
-        <Providers>{children}</Providers>
-      </body>
-    </html>
+    <main className="  mx-auto flex flex-col lg:flex-row h-screen ">
+      <div className="flex-1 flex max-w-7xl 2xl:max-w-[1440px] flex-col justify-center gap-4 px-8 lg:px-12 lg:min-w-[450px] mt-8">
+        <Logo />
+        {children}
+      </div>
+      <AuthBackgroundImage />
+    </main>
   );
 }

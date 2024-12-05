@@ -14,41 +14,70 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signInSchema } from '@/server/types/sign-in-schema';
 import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
+import { signUpSchema } from '@/server/types/sign-up-schema';
+import { signUpAction } from '@/server/actions/sign-up';
 
-type FormValues = z.infer<typeof signInSchema>;
+import { useAction } from 'next-safe-action/hooks';
+
+type FormValues = z.infer<typeof signUpSchema>;
 
 const defaultValues: FormValues = {
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
 };
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const form = useForm({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signUpSchema),
     defaultValues,
     mode: 'onBlur',
   });
 
+  const { execute } = useAction(signUpAction);
+
   const onSubmit = (values: FormValues) => {
-    console.log(values);
+    execute(values);
   };
 
   return (
     <div>
-      <AuthFormHeader
-        title="Sign in to your account"
-        description="Find information about your current and previous orders, or edit your
-        account details."
-      />
+      <AuthFormHeader title="Create Account" />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4">
+          className="flex flex-col gap-2">
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Joe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="email"
@@ -75,18 +104,15 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className="mt-2">
+            Submit
+          </Button>
         </form>
         <SignUpWithGoogleButton />
         <div className="flex flex-col my-5 items-start">
           <Button variant="link" asChild>
-            <Link href="/sign-up" className="px-0 text-gray-500">
-              Don't have an account? Sign up
-            </Link>
-          </Button>
-          <Button variant="link" asChild>
-            <Link href="/forgot-password" className="px-0 text-gray-500">
-              Forgot password?
+            <Link href="/login" className="px-0 text-gray-500">
+              Already have an account? Login
             </Link>
           </Button>
         </div>
@@ -95,4 +121,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

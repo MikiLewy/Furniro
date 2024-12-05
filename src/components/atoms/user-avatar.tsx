@@ -7,7 +7,7 @@ interface Props {
 
 const UserAvatar = ({ image, name }: Props) => {
   return (
-    <Avatar>
+    <Avatar className="w-8 h-8">
       <AvatarImage src={image || ''} alt="User avatar" />
       <AvatarFallback>{name?.slice(0, 1)?.toUpperCase()}</AvatarFallback>
     </Avatar>
