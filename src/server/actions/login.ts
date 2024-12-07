@@ -6,43 +6,44 @@ import { signIn } from '@/auth';
 import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import bcrypt from 'bcrypt';
 import { sendVerificationEmail } from '../emails/email-verification';
+import { generateVerificationEmailToken } from './tokens/generate-verification-email-token';
 
-export const actionClient = createSafeActionClient();
+const actionClient = createSafeActionClient();
 
 export const loginInAction = actionClient
   .schema(signInSchema)
   .action(async ({ parsedInput: { email, password } }) => {
-    try {
-      if (!email || !password) {
-        throw new Error('Invalid credentials.');
-      }
+    if (!email || !password) {
+      return { error: 'Invalid credentials.' };
+    }
 
-      const user = await getUserFromDbByEmail(email);
+    const user = await getUserFromDbByEmail(email);
 
-      if (!user) {
-        throw new Error('Invalid credentials.');
-      }
+    if (!user) {
+      return { error: 'User not found.' };
+    }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+    const isPasswordValid = await bcrypt.compare(password, user.password || '');
 
-      const isPasswordValid = await bcrypt.compare(
-        hashedPassword,
-        user.password || '',
+    if (!isPasswordValid) {
+      return { error: 'Invalid password' };
+    }
+
+    if (!user.emailVerified) {
+      const verificationToken = await generateVerificationEmailToken(
+        user.email || '',
       );
 
-      if (!isPasswordValid) {
-        throw new Error('Invalid credentials.');
-      }
+      sendVerificationEmail(user.email || '', verificationToken?.[0]?.token);
 
-      if (!user.emailVerified) {
-        sendVerificationEmail(user.email || '');
-      }
-
-      await signIn('credentials', {
-        email,
-        password,
-      });
-    } catch (error) {
-      throw new Error('Invalid credentials.');
+      return { error: 'Email not verified. Verification email sent.' };
     }
+
+    await signIn('credentials', {
+      email,
+      password,
+      redirectTo: '/',
+    });
+
+    return { success: 'User logged in successfully' };
   });

@@ -19,6 +19,10 @@ import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
+import { loginInAction } from '@/server/actions/login';
+import { useAction } from 'next-safe-action/hooks';
+import { useState } from 'react';
+import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 
 type FormValues = z.infer<typeof signInSchema>;
 
@@ -34,8 +38,26 @@ const LoginForm = () => {
     mode: 'onBlur',
   });
 
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const [error, setError] = useState<string | null>(null);
+
+  const { execute } = useAction(loginInAction, {
+    onSuccess: ({ data }) => {
+      if (data?.success) {
+        setSuccess(data.success);
+      }
+
+      if (data?.error) {
+        setError(data.error);
+      }
+    },
+  });
+
   const onSubmit = (values: FormValues) => {
-    console.log(values);
+    setSuccess(null);
+    setError(null);
+    execute(values);
   };
 
   return (
@@ -75,6 +97,12 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
+          {success ? (
+            <SubmittedFormMessage message={success} variant="success" />
+          ) : null}
+          {error ? (
+            <SubmittedFormMessage message={error} variant="error" />
+          ) : null}
           <Button type="submit">Submit</Button>
         </form>
         <SignUpWithGoogleButton />

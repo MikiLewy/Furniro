@@ -38,7 +38,7 @@ export const signUpAction = actionClient
         password: hashedPassword,
       });
 
-      return { success: 'User created successfully' };
+      return { success: 'Verification email send' };
     } catch (error) {
       return { error: 'Invalid credentials.' };
     }
