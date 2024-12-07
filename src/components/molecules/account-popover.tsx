@@ -18,13 +18,16 @@ const AccountPopover = () => {
 
   const user = session?.user;
 
-  console.log({ user });
-
   return (
     <div className="flex">
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <UserAvatar name={user?.name || ''} image={user?.image || ''} />
+          <UserAvatar
+            name={
+              user?.name ? user?.name : `${user?.firstName} ${user?.lastName}`
+            }
+            image={user?.image || ''}
+          />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
