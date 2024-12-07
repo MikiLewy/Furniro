@@ -25,7 +25,7 @@ export default function AuthLayout({
 }) {
   return (
     <main className="  mx-auto flex flex-col lg:flex-row h-screen ">
-      <div className="flex-1 flex max-w-7xl 2xl:max-w-[1440px] flex-col justify-center gap-4 px-8 lg:px-12 lg:min-w-[450px] mt-8">
+      <div className="flex-1 flex max-w-7xl 2xl:max-w-[1440px] flex-col justify-center gap-4 px-8 lg:px-12 lg:min-w-[450px] xl:min-w-[600px] mt-8">
         <Logo />
         {children}
       </div>

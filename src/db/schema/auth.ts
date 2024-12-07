@@ -56,13 +56,16 @@ export const sessions = pgTable('session', {
 export const verificationTokens = pgTable(
   'verificationToken',
   {
-    identifier: text('identifier').notNull(),
+    id: text('identifier')
+      .notNull()
+      .$defaultFn(() => crypto.randomUUID()),
     token: text('token').notNull(),
+    email: text('email').notNull(),
     expires: timestamp('expires', { mode: 'date' }).notNull(),
   },
   verificationToken => ({
     compositePk: primaryKey({
-      columns: [verificationToken.identifier, verificationToken.token],
+      columns: [verificationToken.id, verificationToken.token],
     }),
   }),
 );
