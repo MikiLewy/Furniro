@@ -19,8 +19,8 @@ import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 
-import { setPasswordSchema } from '@/server/types/set-password-schema';
-import { setPasswordAction } from '@/server/actions/set-password';
+import { setPasswordSchema } from '@/features/auth/server/validation-schemas/set-password-schema';
+import { setPasswordAction } from '@/features/auth/server/actions/set-password';
 import { PasswordInput } from '@/components/atoms/password-input';
 import { useSearchParams } from 'next/navigation';
 

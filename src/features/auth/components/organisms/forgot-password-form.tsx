@@ -19,8 +19,9 @@ import AuthFormHeader from '../atoms/auth-form-header';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { resetPasswordAction } from '@/server/actions/reset-password';
-import { resetPasswordSchema } from '@/server/types/reset-password-schema';
+import { resetPasswordAction } from '@/features/auth/server/actions/reset-password';
+import { resetPasswordSchema } from '@/features/auth/server/validation-schemas/reset-password-schema';
+import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 
 type FormValues = z.infer<typeof resetPasswordSchema>;
 
@@ -57,6 +58,14 @@ const ForgotPasswordForm = () => {
     execute(values);
   };
 
+  const actionsLinks = [
+    {
+      key: 'login',
+      label: 'Remember your password? Back to login',
+      href: '/login',
+    },
+  ];
+
   return (
     <div>
       <AuthFormHeader
@@ -88,13 +97,7 @@ const ForgotPasswordForm = () => {
           ) : null}
           <Button type="submit">Recover</Button>
         </form>
-        <div className="flex flex-col my-5 items-start">
-          <Button variant="link" asChild>
-            <Link href="/login" className="px-0 text-gray-500">
-              Remember your password? Back to login
-            </Link>
-          </Button>
-        </div>
+        <AuthActionsLinksContainer links={actionsLinks} />
       </Form>
     </div>
   );

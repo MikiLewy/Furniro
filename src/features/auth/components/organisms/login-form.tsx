@@ -14,15 +14,16 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signInSchema } from '@/server/types/sign-in-schema';
+import { signInSchema } from '@/features/auth/server/validation-schemas/sign-in-schema';
 import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
-import { loginInAction } from '@/server/actions/login';
+import { loginInAction } from '@/features/auth/server/actions/login';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
+import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 
 type FormValues = z.infer<typeof signInSchema>;
 
@@ -44,10 +45,6 @@ const LoginForm = () => {
 
   const { execute } = useAction(loginInAction, {
     onSuccess: ({ data }) => {
-      if (data?.success) {
-        setSuccess(data.success);
-      }
-
       if (data?.error) {
         setError(data.error);
       }
@@ -59,6 +56,19 @@ const LoginForm = () => {
     setError(null);
     execute(values);
   };
+
+  const actionsLinks = [
+    {
+      key: 'sign-up',
+      label: "Don't have an account? Sign up",
+      href: '/sign-up',
+    },
+    {
+      key: 'forgot-password',
+      label: 'Forgot password?',
+      href: '/forgot-password',
+    },
+  ];
 
   return (
     <div>
@@ -106,18 +116,7 @@ const LoginForm = () => {
           <Button type="submit">Login</Button>
         </form>
         <SignUpWithGoogleButton />
-        <div className="flex flex-col my-5 items-start">
-          <Button variant="link" asChild>
-            <Link href="/sign-up" className="px-0 text-gray-500">
-              Don't have an account? Sign up
-            </Link>
-          </Button>
-          <Button variant="link" asChild>
-            <Link href="/forgot-password" className="px-0 text-gray-500">
-              Forgot password?
-            </Link>
-          </Button>
-        </div>
+        <AuthActionsLinksContainer links={actionsLinks} />
       </Form>
     </div>
   );

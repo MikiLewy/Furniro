@@ -1,8 +1,8 @@
 'use server';
 
 import { createSafeActionClient } from 'next-safe-action';
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
-import { setPasswordSchema } from '../types/set-password-schema';
+import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
+import { setPasswordSchema } from '../validation-schemas/set-password-schema';
 import { db } from '@/db';
 import { eq } from 'drizzle-orm';
 import { resetPasswordTokens, users } from '@/db/schema';

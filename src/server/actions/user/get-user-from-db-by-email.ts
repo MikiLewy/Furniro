@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { users } from '@/db/schema/auth';
+import { users } from '@/features/auth/schema/auth';
 import { eq } from 'drizzle-orm';
 
 export const getUserFromDbByEmail = async (email: string) => {

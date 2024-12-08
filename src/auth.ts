@@ -6,15 +6,17 @@ import { db } from '@/db';
 import { getUserFromDbByEmail } from './server/actions/user/get-user-from-db-by-email';
 import bcrypt from 'bcrypt';
 import { ZodError } from 'zod';
-import { signInSchema } from './server/types/sign-in-schema';
+import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
 import { accounts, users } from './db/schema';
 import { eq } from 'drizzle-orm';
+import { encode, decode } from 'next-auth/jwt';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   session: {
     strategy: 'jwt',
   },
+  jwt: { encode, decode },
   callbacks: {
     session: async ({ session, token }) => {
       if (session && token.sub) {
@@ -45,6 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       });
 
       token.isOAuth = !!existingAccount;
+      token.name = existingUser.name;
       token.firstName = existingUser.firstName;
       token.lastName = existingUser.lastName;
       token.image = existingUser.image;

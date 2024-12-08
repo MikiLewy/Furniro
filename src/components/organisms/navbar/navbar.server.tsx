@@ -34,7 +34,7 @@ const ServerNavbar = async () => {
           <Heart className={`w-6 h-6 cursor-pointer`} />
           <ShoppingCart className={`w-6 h-6 cursor-pointer`} />
           {user ? (
-            <AccountPopover />
+            <AccountPopover user={user} />
           ) : (
             <Link href="/login">
               <User className="w-6 h-6 cursor-pointer" />

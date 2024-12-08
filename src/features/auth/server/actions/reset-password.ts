@@ -1,8 +1,8 @@
 'use server';
 
 import { createSafeActionClient } from 'next-safe-action';
-import { resetPasswordSchema } from '../types/reset-password-schema';
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
+import { resetPasswordSchema } from '../validation-schemas/reset-password-schema';
+import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import { generateResetPasswordToken } from './tokens/generate-reset-password-token';
 import { sendForgotPasswordEmail } from '../emails/forgot-password';
 

@@ -1,9 +1,9 @@
 'use server';
 
 import { createSafeActionClient } from 'next-safe-action';
-import { signInSchema } from '../types/sign-in-schema';
+import { signInSchema } from '../validation-schemas/sign-in-schema';
 import { signIn } from '@/auth';
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import bcrypt from 'bcrypt';
 import { sendVerificationEmail } from '../emails/email-verification';
 import { generateVerificationEmailToken } from './tokens/generate-verification-email-token';
@@ -43,6 +43,7 @@ export const loginInAction = actionClient
       email,
       password,
       redirectTo: '/',
+      redirect: true,
     });
 
     return { success: 'User logged in successfully' };

@@ -18,12 +18,13 @@ import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
-import { signUpSchema } from '@/server/types/sign-up-schema';
-import { signUpAction } from '@/server/actions/sign-up';
+import { signUpSchema } from '@/features/auth/server/validation-schemas/sign-up-schema';
+import { signUpAction } from '@/features/auth/server/actions/sign-up';
 
 import { useAction } from 'next-safe-action/hooks';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { useState } from 'react';
+import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 
 type FormValues = z.infer<typeof signUpSchema>;
 
@@ -63,6 +64,14 @@ const SignUpForm = () => {
     setSuccess(null);
     execute(values);
   };
+
+  const actionsLinks = [
+    {
+      key: 'login',
+      label: 'Already have an account? Login',
+      href: '/login',
+    },
+  ];
 
   return (
     <div>
@@ -134,13 +143,7 @@ const SignUpForm = () => {
           </Button>
         </form>
         <SignUpWithGoogleButton />
-        <div className="flex flex-col my-5 items-start">
-          <Button variant="link" asChild>
-            <Link href="/login" className="px-0 text-gray-500">
-              Already have an account? Login
-            </Link>
-          </Button>
-        </div>
+        <AuthActionsLinksContainer links={actionsLinks} />
       </Form>
     </div>
   );

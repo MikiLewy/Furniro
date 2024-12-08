@@ -9,15 +9,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import UserAvatar from '../atoms/user-avatar';
 import { LogOut } from 'lucide-react';
 
-const AccountPopover = () => {
-  const { data: session } = useSession();
+import { ExtendUser } from '@/next-auth';
 
-  const user = session?.user;
+interface Props {
+  user: ExtendUser;
+}
 
+const AccountPopover = ({ user }: Props) => {
   return (
     <div className="flex">
       <DropdownMenu>

@@ -1,8 +1,8 @@
 'use server';
 
 import { createSafeActionClient } from 'next-safe-action';
-import { signUpSchema } from '../types/sign-up-schema';
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
+import { signUpSchema } from '../validation-schemas/sign-up-schema';
+import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import bcrypt from 'bcrypt';
 import { db } from '@/db';
 import { users } from '@/db/schema';
