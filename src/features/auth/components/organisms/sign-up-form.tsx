@@ -130,7 +130,7 @@ const SignUpForm = () => {
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
           <Button type="submit" className="mt-2">
-            Submit
+            Sign up
           </Button>
         </form>
         <SignUpWithGoogleButton />

@@ -71,6 +71,23 @@ export const verificationTokens = pgTable(
   }),
 );
 
+export const resetPasswordTokens = pgTable(
+  'resetPasswordToken',
+  {
+    id: text('identifier')
+      .notNull()
+      .$defaultFn(() => crypto.randomUUID()),
+    token: text('token').notNull(),
+    email: text('email').notNull(),
+    expires: timestamp('expires', { mode: 'date' }).notNull(),
+  },
+  resetPasswordToken => ({
+    compositePk: primaryKey({
+      columns: [resetPasswordToken.id, resetPasswordToken.token],
+    }),
+  }),
+);
+
 export const authenticators = pgTable(
   'authenticator',
   {

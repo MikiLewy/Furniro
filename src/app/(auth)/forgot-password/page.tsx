@@ -1,9 +1,7 @@
+import ForgotPasswordForm from '@/features/auth/components/organisms/forgot-password-form';
+
 const ForgotPasswordPage = () => {
-  return (
-    <div>
-      <h1>Forgot Password</h1>
-    </div>
-  );
+  return <ForgotPasswordForm />;
 };
 
 export default ForgotPasswordPage;

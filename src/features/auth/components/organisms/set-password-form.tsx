@@ -13,27 +13,29 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { signInSchema } from '@/server/types/sign-in-schema';
-import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
-import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
-import { loginInAction } from '@/server/actions/login';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 
-type FormValues = z.infer<typeof signInSchema>;
+import { setPasswordSchema } from '@/server/types/set-password-schema';
+import { setPasswordAction } from '@/server/actions/set-password';
+import { PasswordInput } from '@/components/atoms/password-input';
+import { useSearchParams } from 'next/navigation';
+
+type FormValues = z.infer<typeof setPasswordSchema>;
 
 const defaultValues: FormValues = {
-  email: '',
   password: '',
+  confirmPassword: '',
 };
 
-const LoginForm = () => {
+const SetPasswordForm = () => {
+  const token = useSearchParams().get('token');
+
   const form = useForm({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(setPasswordSchema),
     defaultValues,
     mode: 'onBlur',
   });
@@ -42,7 +44,7 @@ const LoginForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useAction(loginInAction, {
+  const { execute } = useAction(setPasswordAction, {
     onSuccess: ({ data }) => {
       if (data?.success) {
         setSuccess(data.success);
@@ -57,33 +59,19 @@ const LoginForm = () => {
   const onSubmit = (values: FormValues) => {
     setSuccess(null);
     setError(null);
-    execute(values);
+    execute({ ...values, token });
   };
 
   return (
     <div>
       <AuthFormHeader
-        title="Sign in to your account"
-        description="Find information about your current and previous orders, or edit your
-        account details."
+        title="Set password "
+        description="Enter your new password below."
       />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="joedoe@gmail.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="password"
@@ -97,30 +85,30 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm password</FormLabel>
+                <FormControl>
+                  <PasswordInput placeholder="********" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           {success ? (
             <SubmittedFormMessage message={success} variant="success" />
           ) : null}
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit">Login</Button>
+          <Button type="submit">Reset</Button>
         </form>
-        <SignUpWithGoogleButton />
-        <div className="flex flex-col my-5 items-start">
-          <Button variant="link" asChild>
-            <Link href="/sign-up" className="px-0 text-gray-500">
-              Don't have an account? Sign up
-            </Link>
-          </Button>
-          <Button variant="link" asChild>
-            <Link href="/forgot-password" className="px-0 text-gray-500">
-              Forgot password?
-            </Link>
-          </Button>
-        </div>
       </Form>
     </div>
   );
 };
 
-export default LoginForm;
+export default SetPasswordForm;

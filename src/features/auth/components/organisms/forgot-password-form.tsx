@@ -14,26 +14,23 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signInSchema } from '@/server/types/sign-in-schema';
-import { PasswordInput } from '@/components/atoms/password-input';
 import Link from 'next/link';
-import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 import AuthFormHeader from '../atoms/auth-form-header';
-import { loginInAction } from '@/server/actions/login';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
+import { resetPasswordAction } from '@/server/actions/reset-password';
+import { resetPasswordSchema } from '@/server/types/reset-password-schema';
 
-type FormValues = z.infer<typeof signInSchema>;
+type FormValues = z.infer<typeof resetPasswordSchema>;
 
 const defaultValues: FormValues = {
   email: '',
-  password: '',
 };
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   const form = useForm({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(resetPasswordSchema),
     defaultValues,
     mode: 'onBlur',
   });
@@ -42,7 +39,7 @@ const LoginForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useAction(loginInAction, {
+  const { execute } = useAction(resetPasswordAction, {
     onSuccess: ({ data }) => {
       if (data?.success) {
         setSuccess(data.success);
@@ -63,9 +60,8 @@ const LoginForm = () => {
   return (
     <div>
       <AuthFormHeader
-        title="Sign in to your account"
-        description="Find information about your current and previous orders, or edit your
-        account details."
+        title="Reset your password"
+        description="We will send you an email to reset your password."
       />
       <Form {...form}>
         <form
@@ -84,37 +80,18 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <PasswordInput placeholder="********" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           {success ? (
             <SubmittedFormMessage message={success} variant="success" />
           ) : null}
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit">Login</Button>
+          <Button type="submit">Recover</Button>
         </form>
-        <SignUpWithGoogleButton />
         <div className="flex flex-col my-5 items-start">
           <Button variant="link" asChild>
-            <Link href="/sign-up" className="px-0 text-gray-500">
-              Don't have an account? Sign up
-            </Link>
-          </Button>
-          <Button variant="link" asChild>
-            <Link href="/forgot-password" className="px-0 text-gray-500">
-              Forgot password?
+            <Link href="/login" className="px-0 text-gray-500">
+              Remember your password? Back to login
             </Link>
           </Button>
         </div>
@@ -123,4 +100,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
