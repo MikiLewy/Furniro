@@ -31,13 +31,12 @@ const ServerNavbar = async () => {
           </ul>
         </div>
         <div className="ml-auto flex items-center gap-5 ">
-          <Heart className={`w-6 h-6 cursor-pointer`} />
-          <ShoppingCart className={`w-6 h-6 cursor-pointer`} />
+          <ShoppingCart className={`w-5 h-5 cursor-pointer`} />
           {user ? (
             <AccountPopover user={user} />
           ) : (
             <Link href="/login">
-              <User className="w-6 h-6 cursor-pointer" />
+              <User className="w-5 h-5 cursor-pointer" />
             </Link>
           )}
         </div>
