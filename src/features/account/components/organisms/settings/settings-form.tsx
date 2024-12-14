@@ -288,6 +288,8 @@ const SettingsForm = ({ user }: Props) => {
                   <Switch
                     disabled={status === 'executing' || user?.isOAuth}
                     onCheckedChange={field.onChange}
+                    onBlur={field.onBlur}
+                    onChange={field.onChange}
                     checked={field.value}
                   />
                 </FormControl>
@@ -295,7 +297,6 @@ const SettingsForm = ({ user }: Props) => {
               </FormItem>
             )}
           />
-
           <Button
             type="submit"
             disabled={isSubmitButtonDisabled}

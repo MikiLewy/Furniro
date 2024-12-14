@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/auth';
+import BottomTabsNavigator from '@components/organisms/bottom-tabs-navigator';
 import Sidebar from '@components/organisms/sidebar';
 
 export default async function AccountLayout({
@@ -15,9 +16,10 @@ export default async function AccountLayout({
   }
 
   return (
-    <div className="flex gap-4 h-full w-full">
+    <div className="flex gap-4 h-full w-full ">
       <Sidebar />
-      <main className="flex-1 px-4 py-4">{children}</main>
+      <main className="flex-1 md:px-4 py-4">{children}</main>
+      <BottomTabsNavigator />
     </div>
   );
 }

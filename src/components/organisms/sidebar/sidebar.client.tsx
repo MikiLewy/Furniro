@@ -13,7 +13,7 @@ const ClientSidebar = () => {
   const router = useRouter();
 
   return (
-    <ul className="flex flex-col gap-2 py-2">
+    <ul className="flex flex-col gap-2 py-2 ">
       {accountRoutes.map(({ title, key, href, icon: Icon, primary }) => (
         <SidebarItem
           key={key}

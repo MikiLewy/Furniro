@@ -1,5 +1,10 @@
 'use client';
 
+import { Heart, LogOut, Settings, Truck } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import { Fragment } from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,15 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
-import { signOut } from 'next-auth/react';
-import UserAvatar from '../atoms/user-avatar';
-import { Heart, LogOut, Settings, Truck } from 'lucide-react';
-
-import { ExtendUser } from '@/next-auth';
 import { cn } from '@/lib/utils';
-import { Fragment } from 'react';
-import { useRouter } from 'next/navigation';
+import { ExtendUser } from '@/next-auth';
+import { getUserNameBasedOnLoginType } from '@/utils/get-user-name-based-on-login-type';
+
+import UserAvatar from '../atoms/user-avatar';
 
 interface Props {
   user: ExtendUser;
@@ -24,9 +25,12 @@ interface Props {
 const AccountPopover = ({ user }: Props) => {
   const router = useRouter();
 
-  const userName = user?.name
-    ? user?.name
-    : `${user?.firstName} ${user?.lastName}`;
+  const userName = getUserNameBasedOnLoginType(
+    user?.isOAuth,
+    user?.name,
+    user?.firstName,
+    user?.lastName,
+  );
 
   const dropdownItems = [
     {
