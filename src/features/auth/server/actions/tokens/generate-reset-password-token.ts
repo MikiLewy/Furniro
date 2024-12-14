@@ -1,8 +1,9 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
+
 import { db } from '@/db';
 import { resetPasswordTokens } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 export const generateResetPasswordToken = async (email: string) => {
   const token = crypto.randomUUID();

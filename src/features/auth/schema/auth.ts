@@ -6,7 +6,6 @@ import {
   primaryKey,
   integer,
 } from 'drizzle-orm/pg-core';
-
 import type { AdapterAccountType } from 'next-auth/adapters';
 
 export const users = pgTable('user', {
@@ -18,6 +17,7 @@ export const users = pgTable('user', {
   lastName: text('lastName'),
   email: text('email').unique(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
+  twoFactorEnabled: boolean('twoFactorEnabled').default(false),
   image: text('image'),
   password: text('password'),
 });
@@ -55,7 +55,7 @@ export const sessions = pgTable('session', {
 });
 
 export const verificationTokens = pgTable(
-  'verificationToken',
+  'verificationTokens',
   {
     id: text('identifier')
       .notNull()
@@ -72,7 +72,7 @@ export const verificationTokens = pgTable(
 );
 
 export const resetPasswordTokens = pgTable(
-  'resetPasswordToken',
+  'resetPasswordTokens',
   {
     id: text('identifier')
       .notNull()
@@ -84,6 +84,23 @@ export const resetPasswordTokens = pgTable(
   resetPasswordToken => ({
     compositePk: primaryKey({
       columns: [resetPasswordToken.id, resetPasswordToken.token],
+    }),
+  }),
+);
+
+export const twoFactorTokens = pgTable(
+  'twoFactorTokens',
+  {
+    id: text('identifier')
+      .notNull()
+      .$defaultFn(() => crypto.randomUUID()),
+    token: text('token').notNull(),
+    email: text('email').notNull(),
+    expires: timestamp('expires', { mode: 'date' }).notNull(),
+  },
+  twoFactorTokens => ({
+    compositePk: primaryKey({
+      columns: [twoFactorTokens.id, twoFactorTokens.token],
     }),
   }),
 );

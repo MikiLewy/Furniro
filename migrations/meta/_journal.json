@@ -29,6 +29,20 @@
       "when": 1733349164791,
       "tag": "0003_jazzy_sleepwalker",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1734040709555,
+      "tag": "0004_secret_thanos",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1734040857378,
+      "tag": "0005_tired_metal_master",
+      "breakpoints": true
     }
   ]
 }

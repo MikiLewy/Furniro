@@ -1,9 +1,10 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
+
 import { db } from '@/db';
 import { users, verificationTokens } from '@/db/schema';
-import { eq } from 'drizzle-orm';
-import { getUserFromDbByEmail } from '../user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from '@/server/actions/user/get-user-from-db-by-email';
 
 export const verifyEmailToken = async (token: string) => {
   const existingToken = await db.query.verificationTokens.findFirst({

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 interface Props {
   children: ReactNode;
@@ -29,6 +30,7 @@ const Providers = ({ children }: Props) => {
           initialIsOpen={false}
           buttonPosition="bottom-left"
         />
+        <Toaster position="top-center" />
       </SessionProvider>
     </QueryClientProvider>
   );

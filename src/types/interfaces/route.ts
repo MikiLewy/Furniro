@@ -3,8 +3,7 @@ import { ElementType } from 'react';
 export interface Route {
   key: string;
   title: string;
-  href?: string;
-  onClick?: () => void;
+  href: string;
   icon: ElementType;
   primary?: boolean;
 }

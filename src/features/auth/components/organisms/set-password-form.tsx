@@ -1,9 +1,14 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSearchParams } from 'next/navigation';
+import { useAction } from 'next-safe-action/hooks';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { PasswordInput } from '@/components/atoms/password-input';
+import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -13,16 +18,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import Link from 'next/link';
-import AuthFormHeader from '../atoms/auth-form-header';
-import { useAction } from 'next-safe-action/hooks';
-import { useState } from 'react';
-import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-
-import { setPasswordSchema } from '@/features/auth/server/validation-schemas/set-password-schema';
 import { setPasswordAction } from '@/features/auth/server/actions/set-password';
-import { PasswordInput } from '@/components/atoms/password-input';
-import { useSearchParams } from 'next/navigation';
+import { setPasswordSchema } from '@/features/auth/server/validation-schemas/set-password-schema';
+
+import AuthFormHeader from '../atoms/auth-form-header';
 
 type FormValues = z.infer<typeof setPasswordSchema>;
 

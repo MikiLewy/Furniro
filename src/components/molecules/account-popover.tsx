@@ -62,7 +62,7 @@ const AccountPopover = ({ user }: Props) => {
         <DropdownMenuTrigger>
           <UserAvatar name={userName} image={user?.image || ''} />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="py-3 px-2" align="end">
+        <DropdownMenuContent className="py-3 px-2 lg:min-w-52" align="end">
           <div className="flex flex-col text-sm text-center bg-primary/5 rounded-lg py-2 px-3">
             <p>Hello!</p>
             <p className="text-sm">{userName}</p>

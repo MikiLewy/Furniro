@@ -1,8 +1,9 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
+
 import { db } from '@/db';
 import { verificationTokens } from '@/db/schema';
-import { eq } from 'drizzle-orm';
 
 export const generateVerificationEmailToken = async (email: string) => {
   const token = crypto.randomUUID();

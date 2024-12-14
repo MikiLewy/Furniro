@@ -1,6 +1,8 @@
 import { auth } from '@/auth';
-import ClientSidebar from './sidebar.client';
 import UserAvatar from '@/components/atoms/user-avatar';
+import { Separator } from '@/components/ui/separator';
+
+import ClientSidebar from './sidebar.client';
 
 const ServerSidebar = async () => {
   const session = await auth();
@@ -20,7 +22,7 @@ const ServerSidebar = async () => {
           <p className="text-xs">{user?.email}</p>
         </div>
       </div>
-      <div className="h-px bg-border w-full mt-4" />
+      <Separator className="mt-4" />
       <ClientSidebar />
     </aside>
   );
