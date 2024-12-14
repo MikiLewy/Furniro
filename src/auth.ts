@@ -1,15 +1,17 @@
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import bcrypt from 'bcrypt';
+import { eq } from 'drizzle-orm';
 import NextAuth from 'next-auth';
+import { encode, decode } from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
-import { DrizzleAdapter } from '@auth/drizzle-adapter';
-import { db } from '@/db';
-import { getUserFromDbByEmail } from './server/actions/user/get-user-from-db-by-email';
-import bcrypt from 'bcrypt';
 import { ZodError } from 'zod';
-import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
+
+import { db } from '@/db';
+
 import { accounts, users } from './db/schema';
-import { eq } from 'drizzle-orm';
-import { encode, decode } from 'next-auth/jwt';
+import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
+import { getUserFromDbByEmail } from './server/actions/user/get-user-from-db-by-email';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
@@ -28,6 +30,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.lastName = token.lastName as string;
         session.user.isOAuth = token.isOAuth as boolean;
         session.user.image = token.image as string;
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
         session.user.email = token.email as string;
       }
 
@@ -46,11 +49,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         where: eq(accounts.userId, existingUser.id),
       });
 
-      token.isOAuth = !!existingAccount;
+      token.isOAuth = !!existingAccount && existingUser.name;
       token.name = existingUser.name;
       token.firstName = existingUser.firstName;
       token.lastName = existingUser.lastName;
       token.image = existingUser.image;
+      token.isTwoFactorEnabled = existingUser.twoFactorEnabled;
 
       return token;
     },

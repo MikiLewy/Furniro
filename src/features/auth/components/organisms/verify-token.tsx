@@ -1,10 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import AuthFormHeader from '../atoms/auth-form-header';
-import { verifyEmailToken } from '@/server/actions/tokens/verify-email-token';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
+
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
+
+import { verifyEmailToken } from '../../server/actions/tokens/verify-email-token';
+import AuthFormHeader from '../atoms/auth-form-header';
 
 const VerifyToken = () => {
   const token = useSearchParams().get('token');

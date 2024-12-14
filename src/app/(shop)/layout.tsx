@@ -1,32 +1,16 @@
-import type { Metadata } from 'next';
-import { Poppins } from 'next/font/google';
-
-import '@app/globals.css';
 import Footer from '@components/organisms/footer';
 import Navbar from '@components/organisms/navbar';
 
-const poppins = Poppins({
-  subsets: ['latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
-
-export const metadata: Metadata = {
-  title: 'Furniro',
-  description:
-    'Discover Timeless Elegance and Functional Design at Our Furniture Shop. Explore a Wide Range of High-Quality Furniture Pieces for Your Home. Shop Now for the Perfect Blend of Style and Comfort.',
-};
-
-export default function RootLayout({
+export default function ShopLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="h-full flex flex-col relative">
       <Navbar />
-      <main className="max-w-7xl 2xl:max-w-[1440px] mx-auto flex flex-col">
-        {children}
+      <main className="max-w-[1680px] flex flex-col items-start px-4 md:px-6 lg:px-8 mx-auto w-full h-full">
+        <div className=" w-full">{children}</div>
         <Footer />
       </main>
     </div>

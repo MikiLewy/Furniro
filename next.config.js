@@ -9,6 +9,8 @@ const nextConfig = {
         port: '',
         pathname: '/storage/v1/object/public/Furniro/**',
       },
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
+      { protocol: 'https', hostname: 'utfs.io' },
     ],
   },
 };

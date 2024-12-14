@@ -1,12 +1,15 @@
 'use server';
 
-import { createSafeActionClient } from 'next-safe-action';
-import { signUpSchema } from '../validation-schemas/sign-up-schema';
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import bcrypt from 'bcrypt';
+import { createSafeActionClient } from 'next-safe-action';
+
 import { db } from '@/db';
 import { users } from '@/db/schema';
+
+import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import { sendVerificationEmail } from '../emails/email-verification';
+import { signUpSchema } from '../validation-schemas/sign-up-schema';
+
 import { generateVerificationEmailToken } from './tokens/generate-verification-email-token';
 
 const actionClient = createSafeActionClient();

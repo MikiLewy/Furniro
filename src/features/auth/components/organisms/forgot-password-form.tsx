@@ -1,9 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAction } from 'next-safe-action/hooks';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,14 +17,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import AuthFormHeader from '../atoms/auth-form-header';
-import { useAction } from 'next-safe-action/hooks';
-import { useState } from 'react';
-import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { resetPasswordAction } from '@/features/auth/server/actions/reset-password';
 import { resetPasswordSchema } from '@/features/auth/server/validation-schemas/reset-password-schema';
+
 import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
+import AuthFormHeader from '../atoms/auth-form-header';
 
 type FormValues = z.infer<typeof resetPasswordSchema>;
 

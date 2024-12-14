@@ -1,14 +1,16 @@
 'use server';
 
+import { Pool } from '@neondatabase/serverless';
+import bcrypt from 'bcrypt';
+import { eq } from 'drizzle-orm';
+import { drizzle } from 'drizzle-orm/neon-serverless';
 import { createSafeActionClient } from 'next-safe-action';
+
+import { db } from '@/db';
+import { resetPasswordTokens, users } from '@/db/schema';
+
 import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import { setPasswordSchema } from '../validation-schemas/set-password-schema';
-import { db } from '@/db';
-import { eq } from 'drizzle-orm';
-import { resetPasswordTokens, users } from '@/db/schema';
-import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import bcrypt from 'bcrypt';
 
 const actionClient = createSafeActionClient();
 

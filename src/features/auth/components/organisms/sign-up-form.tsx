@@ -1,9 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAction } from 'next-safe-action/hooks';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { PasswordInput } from '@/components/atoms/password-input';
+import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,17 +18,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { PasswordInput } from '@/components/atoms/password-input';
-import Link from 'next/link';
-import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
-import AuthFormHeader from '../atoms/auth-form-header';
-import { signUpSchema } from '@/features/auth/server/validation-schemas/sign-up-schema';
 import { signUpAction } from '@/features/auth/server/actions/sign-up';
+import { signUpSchema } from '@/features/auth/server/validation-schemas/sign-up-schema';
 
-import { useAction } from 'next-safe-action/hooks';
-import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { useState } from 'react';
 import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
+import AuthFormHeader from '../atoms/auth-form-header';
+import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
 
 type FormValues = z.infer<typeof signUpSchema>;
 

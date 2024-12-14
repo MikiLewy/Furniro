@@ -9,4 +9,12 @@ export const signInSchema = z.object({
     .string()
     .min(1, 'This field is required')
     .min(8, 'Password must be more than 8 characters'),
+  code: z.optional(
+    z.union([
+      z.literal(''),
+      z.string().min(6, {
+        message: 'Your one-time password must be 6 characters.',
+      }),
+    ]),
+  ),
 });
