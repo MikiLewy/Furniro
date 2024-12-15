@@ -1,19 +1,22 @@
 import { ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
 import { ReactNode } from 'react';
 
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
+import { Category } from '../api/types/category';
+
 export interface CategoriesActionSlotPayload {
-  id: string;
+  id: number;
   name: string;
 }
 
 export const getCategoriesTableColumns = (
   actionsSlot: (payload: CategoriesActionSlotPayload) => ReactNode,
 ) => {
-  const columns: ColumnDef<{ id: string; name: string }>[] = [
+  const columns: ColumnDef<Category>[] = [
     {
       accessorKey: 'name',
       meta: 'name',
@@ -29,6 +32,16 @@ export const getCategoriesTableColumns = (
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Image" />;
       },
+      cell: ({ getValue }) => {
+        return (
+          <Image
+            src={getValue() as string}
+            alt="category image"
+            width={30}
+            height={30}
+          />
+        );
+      },
     },
     {
       accessorKey: 'icon',
@@ -36,6 +49,16 @@ export const getCategoriesTableColumns = (
       enableHiding: false,
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Icon" />;
+      },
+      cell: ({ getValue }) => {
+        return (
+          <Image
+            src={getValue() as string}
+            alt="category icon"
+            width={22}
+            height={22}
+          />
+        );
       },
     },
     {

@@ -18,7 +18,6 @@ import { useState } from 'react';
 
 import SearchBar from '@/components/molecules/search-bar';
 import { Table } from '@/components/organisms/table/table';
-import { TablePagination } from '@/components/organisms/table/table-pagination';
 import { TableViewOptions } from '@/components/organisms/table/table-view-options';
 import { Button } from '@/components/ui/button';
 
@@ -61,9 +60,9 @@ export function CategoriesTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4 gap-2">
         <SearchBar
-          query={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          query={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           handleChangeQuery={value =>
-            table.getColumn('email')?.setFilterValue(value)
+            table.getColumn('name')?.setFilterValue(value)
           }
         />
         {isFiltered ? (
@@ -78,7 +77,6 @@ export function CategoriesTable<TData, TValue>({
         <TableViewOptions table={table} />
       </div>
       <Table columnsLength={columns.length} table={table} />
-      <TablePagination table={table} />
     </div>
   );
 }

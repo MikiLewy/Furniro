@@ -1,13 +1,18 @@
 'use client';
-import Button from '@components/atoms/button/button';
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+import { Button } from '@/components/ui/button';
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   return (
     <div className="flex flex-col  items-center justify-center gap-4 h-screen">
       <h2 className="text-5xl">Something went wrong!</h2>
-      <Button variant="contained" onClick={() => reset()}>
-        Try again
-      </Button>
+      <Button onClick={() => reset()}>Try again</Button>
     </div>
   );
 }

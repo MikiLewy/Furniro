@@ -6,8 +6,11 @@ import {
   json,
   numeric,
 } from 'drizzle-orm/pg-core';
+
+import { categories } from '@/features/account/schema/categories';
+
 import { timestamps } from '../constants/timestamps';
-import { categories } from './categories';
+
 import { productVariants } from './product-variants';
 import { tags } from './tags';
 
