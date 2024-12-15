@@ -17,7 +17,7 @@ const ServerSidebar = async () => {
   );
 
   return (
-    <aside className="border-r py-4 pr-4 hidden md:block">
+    <aside className="py-4 pr-4 hidden md:block">
       <UserDetails
         name={userName}
         email={user?.email || ''}
