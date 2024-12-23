@@ -3,8 +3,9 @@
 import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import CreateCategoryDialog from './dialogs/create-category-dialog';
 import { useDialog } from '@/hooks/use-dialog';
+
+import CreateCategoryDialog from './dialogs/create-category-dialog';
 
 const CategoriesPageHeaderActions = () => {
   const [

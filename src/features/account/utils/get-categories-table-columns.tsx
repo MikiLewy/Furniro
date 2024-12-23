@@ -37,8 +37,9 @@ export const getCategoriesTableColumns = (
           <Image
             src={getValue() as string}
             alt="category image"
-            width={30}
-            height={30}
+            height={40}
+            width={40}
+            className="rounded-sm h-12 w-12 object-cover "
           />
         );
       },

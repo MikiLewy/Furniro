@@ -17,6 +17,14 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { categoriesIcons } from '@/features/account/constants/categories-icons';
 import { createCategory } from '@/features/account/server/actions/create-category';
 import { createCategorySchema } from '@/features/account/server/validation-schemas/create-category-schema';
 import { UploadButton } from '@/utils/uploadthing';
@@ -155,55 +163,23 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Icon</FormLabel>
-              <div className="flex items-center gap-2">
-                {icon ? (
-                  <Image
-                    src={icon ?? ''}
-                    alt="Category icon"
-                    width={42}
-                    height={42}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <p className="text-sm text-muted-foreground">No icon added</p>
-                )}
-                <UploadButton
-                  className="scale-75 ut-button:ring-primary ut-button:bg-primary/75 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-label:hidden ut-allowed-content:hidden"
-                  endpoint="categoryIconUploader"
-                  content={{
-                    button({ ready }) {
-                      if (ready) {
-                        return <div className="">Upload</div>;
-                      }
-                      return <div>Uploading...</div>;
-                    },
-                  }}
-                  onUploadBegin={() => {
-                    setCategoryUploading(true);
-                  }}
-                  onClientUploadComplete={res => {
-                    form.setValue('icon', res[0].url);
-                    setCategoryUploading(false);
-                    return;
-                  }}
-                  onUploadError={(error: Error) => {
-                    form.setError('icon', {
-                      type: 'validate',
-                      message: error.message,
-                    });
-                    setCategoryUploading(false);
-                    return;
-                  }}
-                />
-              </div>
-              <FormControl>
-                <Input
-                  placeholder="User image"
-                  type="hidden"
-                  disabled={status === 'executing'}
-                  {...field}
-                />
-              </FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an icon for your category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {categoriesIcons.map(({ icon: Icon, value, label }) => (
+                    <SelectItem key={value} value={value}>
+                      <div className="flex items-center gap-2 ">
+                        <Icon />
+                        <p>{label}</p>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
