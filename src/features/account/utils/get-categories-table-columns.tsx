@@ -6,11 +6,14 @@ import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
-import { Category } from '../api/types/category';
+import { Category, CategoryIcon } from '../api/types/category';
+import { categoryIcons } from '../constants/categories-icons';
 
 export interface CategoriesActionSlotPayload {
   id: number;
   name: string;
+  icon: CategoryIcon;
+  image: string;
 }
 
 export const getCategoriesTableColumns = (
@@ -37,9 +40,9 @@ export const getCategoriesTableColumns = (
           <Image
             src={getValue() as string}
             alt="category image"
-            height={40}
-            width={40}
-            className="rounded-sm h-12 w-12 object-cover "
+            height={50}
+            width={50}
+            className="rounded-sm object-cover"
           />
         );
       },
@@ -52,14 +55,9 @@ export const getCategoriesTableColumns = (
         return <TableColumnHeader column={column} title="Icon" />;
       },
       cell: ({ getValue }) => {
-        return (
-          <Image
-            src={getValue() as string}
-            alt="category icon"
-            width={22}
-            height={22}
-          />
-        );
+        const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+
+        return <Icon />;
       },
     },
     {
@@ -86,6 +84,8 @@ export const getCategoriesTableColumns = (
         return actionsSlot({
           id: category.id,
           name: category.name,
+          icon: category.icon,
+          image: category.image || '',
         });
       },
     },

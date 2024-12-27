@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import ActionsTableMenu from '@/components/atoms/actions-table-menu';
-import { Category } from '@/features/account/api/types/category';
+import { Category, CategoryIcon } from '@/features/account/api/types/category';
 import {
   CategoriesActionSlotPayload,
   getCategoriesTableColumns,
@@ -12,6 +12,7 @@ import { useDialog } from '@/hooks/use-dialog';
 
 import { CategoriesTable } from '../../organisms/categories/categories-table';
 import RemoveCategoryDialog from '../../organisms/categories/dialogs/remove-category-dialog';
+import UpdateCategoryDialog from '../../organisms/categories/dialogs/update-category-dialog';
 
 interface Props {
   data: Category[];
@@ -20,6 +21,12 @@ interface Props {
 const ClientCategories = ({ data }: Props) => {
   const [selectedCategory, setSelectedCategory] =
     useState<CategoriesActionSlotPayload | null>(null);
+
+  const [
+    isOpenUpdateCategoryDialog,
+    handleOpenUpdateCategoryDialog,
+    handleCloseUpdateCategoryDialog,
+  ] = useDialog();
 
   const [
     isOpenRemoveCategoryDialog,
@@ -34,7 +41,7 @@ const ClientCategories = ({ data }: Props) => {
         label: 'Edit',
         onClick: () => {
           setSelectedCategory(payload);
-          // handleOpenManageMemberBanStatusDialog();
+          handleOpenUpdateCategoryDialog();
         },
       },
       {
@@ -53,7 +60,7 @@ const ClientCategories = ({ data }: Props) => {
   const columns = getCategoriesTableColumns(actionsSlot);
 
   return (
-    <div>
+    <>
       <CategoriesTable columns={columns} data={data || []} />
       <RemoveCategoryDialog
         categoryName={selectedCategory?.name || ''}
@@ -61,7 +68,15 @@ const ClientCategories = ({ data }: Props) => {
         open={isOpenRemoveCategoryDialog}
         onClose={handleCloseRemoveCategoryDialog}
       />
-    </div>
+      <UpdateCategoryDialog
+        selectedCategoryId={selectedCategory?.id || 0}
+        selectedCategoryName={selectedCategory?.name || ''}
+        open={isOpenUpdateCategoryDialog}
+        onClose={handleCloseUpdateCategoryDialog}
+        selectedCategoryIcon={selectedCategory?.icon || CategoryIcon.SOFA}
+        selectedCategoryImage={selectedCategory?.image || ''}
+      />
+    </>
   );
 };
 

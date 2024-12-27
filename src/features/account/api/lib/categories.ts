@@ -1,6 +1,6 @@
 import { db } from '@/db';
 
-export const fetchCategories = async () => {
+export const getCategories = async () => {
   const response = await db.query.categories.findMany();
 
   return response;

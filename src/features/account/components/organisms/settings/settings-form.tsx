@@ -174,7 +174,7 @@ const SettingsForm = ({ user }: Props) => {
                   )}
                   <UploadButton
                     className="scale-75 ut-button:ring-primary ut-button:bg-primary/75 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-label:hidden ut-allowed-content:hidden"
-                    endpoint="avatarUploader"
+                    endpoint="avatar"
                     content={{
                       button({ ready }) {
                         if (ready) {

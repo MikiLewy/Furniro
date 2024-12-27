@@ -7,35 +7,37 @@ import {
   Sofa,
 } from 'lucide-react';
 
-export const categoriesIcons = [
-  {
+import { CategoryIcon } from '../api/types/category';
+
+export const categoryIcons = {
+  [CategoryIcon.ARMCHAIR]: {
     icon: Armchair,
-    value: 'armchairs',
     label: 'Armchairs',
+    value: CategoryIcon.ARMCHAIR,
   },
-  {
+  [CategoryIcon.SOFA]: {
     icon: Sofa,
-    value: 'sofas',
     label: 'Sofas',
+    value: CategoryIcon.SOFA,
   },
-  {
+  [CategoryIcon.BED]: {
     icon: Bed,
-    value: 'beds',
     label: 'Beds',
+    value: CategoryIcon.BED,
   },
-  {
+  [CategoryIcon.ACCESSORIES]: {
     icon: LampCeiling,
-    value: 'accessories',
     label: 'Accessories',
+    value: CategoryIcon.ACCESSORIES,
   },
-  {
+  [CategoryIcon.WARDROBE]: {
     icon: Refrigerator,
-    value: 'wardrobe',
     label: 'Wardrobe',
+    value: CategoryIcon.WARDROBE,
   },
-  {
+  [CategoryIcon.OUTDOOR]: {
     icon: Fence,
-    value: 'outdoor',
     label: 'Outdoor',
+    value: CategoryIcon.OUTDOOR,
   },
-];
+};

@@ -1,4 +1,4 @@
-import { fetchCategories } from '@/features/account/api/lib/categories';
+import { getCategories } from '@/features/account/api/lib/categories';
 
 import AccountPageHeader from '../../molecules/account-page-header';
 import CategoriesPageHeaderActions from '../../organisms/categories/categories-page-header-actions';
@@ -6,9 +6,7 @@ import CategoriesPageHeaderActions from '../../organisms/categories/categories-p
 import ClientCategories from './categories.client';
 
 const ServerCategories = async () => {
-  const categories = await fetchCategories();
-
-  console.log(categories);
+  const categories = await getCategories();
 
   return (
     <div>

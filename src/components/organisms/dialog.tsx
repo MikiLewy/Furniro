@@ -12,8 +12,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-import { Button } from '../ui/button';
 import { LoadingButton } from '../atoms/loading-button';
+import { Button } from '../ui/button';
 
 export interface DialogActions {
   open: boolean;
@@ -45,7 +45,7 @@ const Dialog = ({
 }: Props) => {
   return (
     <DialogUi open={open} onOpenChange={onClose} defaultOpen={open} modal>
-      <DialogContent aria-describedby={description}>
+      <DialogContent aria-describedby={description} className="lg:max-w-xl">
         <DialogHeader className="flex flex-col gap-2">
           <DialogTitle>{title}</DialogTitle>
           {description ? (
@@ -54,7 +54,7 @@ const Dialog = ({
         </DialogHeader>
 
         {children}
-        <DialogFooter className="mt-4">
+        <DialogFooter className="mt-4 gap-2">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               {cancelButtonText ? cancelButtonText : 'Cancel'}
