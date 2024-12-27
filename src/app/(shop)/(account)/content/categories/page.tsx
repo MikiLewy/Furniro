@@ -1,4 +1,4 @@
-import Categories from '@/features/account/components/templates/categories';
+import Categories from '@/features/account/categories/components/templates/categories';
 
 const CategoriesPage = async () => {
   return <Categories />;

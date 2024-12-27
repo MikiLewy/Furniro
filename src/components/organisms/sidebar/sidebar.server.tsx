@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import UserDetails from '@/features/account/components/atoms/user-details';
+import UserDetails from '@/features/account/shared/components/atoms/user-details';
 import { getUserNameBasedOnLoginType } from '@/utils/get-user-name-based-on-login-type';
 
 import ClientSidebar from './sidebar.client';

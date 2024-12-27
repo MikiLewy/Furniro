@@ -5,8 +5,9 @@ import { ReactNode } from 'react';
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
-import { Category, CategoryIcon } from '../categories/types/category';
-import { categoryIcons } from '../categories/constants/categories-icons';
+
+import { Category, CategoryIcon } from '../types/category';
+import { categoryIcons } from '../constants/categories-icons';
 
 export interface CategoriesActionSlotPayload {
   id: number;
@@ -83,7 +84,7 @@ export const getCategoriesTableColumns = (
         return actionsSlot({
           id: category.id,
           name: category.name,
-          icon: category.icon as CategoryIcon.SOFA,
+          icon: category.icon,
           image: category.image || '',
         });
       },

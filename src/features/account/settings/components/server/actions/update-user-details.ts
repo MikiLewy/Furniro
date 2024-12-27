@@ -1,16 +1,16 @@
 'use server';
 
 import bcrypt from 'bcrypt';
+import { eq } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 import { createSafeActionClient } from 'next-safe-action';
 
+import { auth } from '@/auth';
 import { db } from '@/db';
 import { users } from '@/db/schema';
+import { getUserFromDbByEmail } from '@/server/actions/user/get-user-from-db-by-email';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import { updateUserDetailsSchema } from '../validation-schemas/update-user-details-schema';
-import { eq } from 'drizzle-orm';
-import { auth } from '@/auth';
-import { revalidatePath } from 'next/cache';
 
 const actionClient = createSafeActionClient();
 

@@ -4,7 +4,8 @@ import { useAction } from 'next-safe-action/hooks';
 import toast from 'react-hot-toast';
 
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
-import { removeCategory } from '@/features/account/server/actions/remove-category';
+
+import { removeCategory } from '../../../server/actions/remove-category';
 
 interface Props extends DialogActions {
   id: number;

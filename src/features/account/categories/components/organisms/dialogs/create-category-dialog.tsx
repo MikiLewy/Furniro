@@ -24,44 +24,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { CategoryIcon } from '@/features/account/api/types/category';
-import { categoryIcons } from '@/features/account/constants/categories-icons';
-import { updateCategory } from '@/features/account/server/actions/update-category';
-import { updateCategorySchema } from '@/features/account/server/validation-schemas/update-category-schema';
+import { createCategorySchema } from '@/features/account/categories/server/validation-schemas/create-category-schema';
 import { UploadDropzone } from '@/utils/uploadthing';
 
-type FormValues = z.infer<typeof updateCategorySchema>;
+import { categoryIcons } from '../../../constants/categories-icons';
+import { createCategory } from '../../../server/actions/create-category';
 
-const defaultValues: Omit<FormValues, 'id'> = {
+type FormValues = z.infer<typeof createCategorySchema>;
+
+const defaultValues: FormValues = {
   name: '',
   image: '',
   icon: '',
 };
 
-interface Props extends DialogActions {
-  selectedCategoryId: number;
-  selectedCategoryName: string;
-  selectedCategoryImage: string;
-  selectedCategoryIcon: CategoryIcon;
-}
-
-const UpdateCategoryDialog = ({
-  open,
-  onClose,
-  selectedCategoryIcon,
-  selectedCategoryId,
-  selectedCategoryImage,
-  selectedCategoryName,
-}: Props) => {
+const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
   const form = useForm<FormValues>({
     defaultValues,
     mode: 'onBlur',
-    resolver: zodResolver(updateCategorySchema),
+    resolver: zodResolver(createCategorySchema),
   });
 
   const image = form.watch('image');
 
-  const { execute, status } = useAction(updateCategory, {
+  const { execute, status } = useAction(createCategory, {
     onSuccess: ({ data }) => {
       if (data?.success) {
         toast.success(data.success);
@@ -77,37 +63,23 @@ const UpdateCategoryDialog = ({
   useEffect(() => {
     if (!open) {
       form.reset(defaultValues);
-    } else {
-      form.reset({
-        name: selectedCategoryName,
-        image: selectedCategoryImage,
-        icon: selectedCategoryIcon,
-        id: selectedCategoryId,
-      });
     }
-  }, [
-    open,
-    selectedCategoryId,
-    selectedCategoryIcon,
-    selectedCategoryImage,
-    selectedCategoryName,
-  ]);
+  }, [open]);
 
   const onSubmit = (values: FormValues) => {
-    execute({ ...values, id: selectedCategoryId });
+    execute(values);
   };
 
   return (
     <Dialog
-      title="Update category"
+      title="Create category"
       open={open}
       onClose={onClose}
       onSubmit={form.handleSubmit(onSubmit)}
       isSubmitButtonLoading={status === 'executing'}
       isSubmitButtonDisabled={
         !form.formState.isValid || !form.formState.isDirty
-      }
-      confirmButtonText="Update">
+      }>
       <FormProvider {...form}>
         <FormField
           control={form.control}
@@ -207,4 +179,4 @@ const UpdateCategoryDialog = ({
   );
 };
 
-export default UpdateCategoryDialog;
+export default CreateCategoryDialog;

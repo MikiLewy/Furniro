@@ -28,10 +28,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { updateUserDetails } from '@/features/account/server/actions/update-user-details';
-import { updateUserDetailsSchema } from '@/features/account/server/validation-schemas/update-user-details-schema';
+import { updateUserDetailsSchema } from '@/features/account/settings/components/server/validation-schemas/update-user-details-schema';
 import { ExtendUser } from '@/next-auth';
 import { UploadButton } from '@/utils/uploadthing';
+
+import { updateUserDetails } from '../server/actions/update-user-details';
 
 type FormValues = z.infer<typeof updateUserDetailsSchema>;
 

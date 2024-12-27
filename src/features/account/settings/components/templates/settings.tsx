@@ -1,9 +1,9 @@
 import { auth } from '@/auth';
+import UserDetails from '@/features/account/shared/components/atoms/user-details';
+import AccountPageHeader from '@/features/account/shared/components/molecules/account-page-header';
 import { getUserNameBasedOnLoginType } from '@/utils/get-user-name-based-on-login-type';
 
-import UserDetails from '../atoms/user-details';
-import AccountPageHeader from '../molecules/account-page-header';
-import SettingsForm from '../organisms/settings/settings-form';
+import SettingsForm from '../organisms/settings-form';
 
 const Settings = async () => {
   const session = await auth();

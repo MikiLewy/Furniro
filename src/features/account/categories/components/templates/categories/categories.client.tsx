@@ -3,16 +3,19 @@
 import { useState } from 'react';
 
 import ActionsTableMenu from '@/components/atoms/actions-table-menu';
-import { Category, CategoryIcon } from '@/features/account/api/types/category';
+import {
+  Category,
+  CategoryIcon,
+} from '@/features/account/categories/types/category';
 import {
   CategoriesActionSlotPayload,
   getCategoriesTableColumns,
-} from '@/features/account/utils/get-categories-table-columns';
+} from '@/features/account/categories/utils/get-categories-table-columns';
 import { useDialog } from '@/hooks/use-dialog';
 
-import { CategoriesTable } from '../../organisms/categories/categories-table';
-import RemoveCategoryDialog from '../../organisms/categories/dialogs/remove-category-dialog';
-import UpdateCategoryDialog from '../../organisms/categories/dialogs/update-category-dialog';
+import { CategoriesTable } from '../../organisms/categories-table';
+import RemoveCategoryDialog from '../../organisms/dialogs/remove-category-dialog';
+import UpdateCategoryDialog from '../../organisms/dialogs/update-category-dialog';
 
 interface Props {
   data: Category[];

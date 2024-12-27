@@ -6,8 +6,8 @@ import { createSafeActionClient } from 'next-safe-action';
 import { auth } from '@/auth';
 import { db } from '@/db';
 import { categories } from '@/db/schema';
+import { getUserFromDbByEmail } from '@/server/actions/user/get-user-from-db-by-email';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
 import { createCategorySchema } from '../validation-schemas/create-category-schema';
 
 const actionClient = createSafeActionClient();

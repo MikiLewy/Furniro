@@ -7,7 +7,7 @@ import {
   numeric,
 } from 'drizzle-orm/pg-core';
 
-import { categories } from '@/features/account/schema/categories';
+import { categories } from '@/features/account/categories/schema/categories';
 
 import { timestamps } from '../constants/timestamps';
 

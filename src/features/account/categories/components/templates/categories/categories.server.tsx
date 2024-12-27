@@ -1,7 +1,7 @@
-import { getCategories } from '@/features/account/api/lib/categories';
+import { getCategories } from '@/features/account/categories/api/lib/categories';
+import AccountPageHeader from '@/features/account/shared/components/molecules/account-page-header';
 
-import AccountPageHeader from '../../molecules/account-page-header';
-import CategoriesPageHeaderActions from '../../organisms/categories/categories-page-header-actions';
+import CategoriesPageHeaderActions from '../../organisms/categories-page-header-actions';
 
 import ClientCategories from './categories.client';
 
