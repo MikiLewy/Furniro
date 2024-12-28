@@ -1,24 +1,24 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
-import { Category, CategoryIcon } from '../categories/api/types/category';
-import { categoryIcons } from '../categories/constants/categories-icons';
 
-export interface CategoriesActionSlotPayload {
+import { Product } from '../api/types/product';
+
+export interface ProductsActionSlotPayload {
   id: number;
   name: string;
-  icon: CategoryIcon;
-  image: string;
+  price: string;
+  description: string;
+  categoryId: number;
 }
 
-export const getCategoriesTableColumns = (
-  actionsSlot: (payload: CategoriesActionSlotPayload) => ReactNode,
+export const getProductsTableColumns = (
+  actionsSlot: (payload: ProductsActionSlotPayload) => ReactNode,
 ) => {
-  const columns: ColumnDef<Category>[] = [
+  const columns: ColumnDef<Product>[] = [
     {
       accessorKey: 'name',
       meta: 'name',
@@ -28,35 +28,25 @@ export const getCategoriesTableColumns = (
       },
     },
     {
-      accessorKey: 'image',
-      meta: 'image',
+      accessorKey: 'price',
+      meta: 'price',
       enableHiding: false,
       header: ({ column }) => {
-        return <TableColumnHeader column={column} title="Image" />;
-      },
-      cell: ({ getValue }) => {
-        return (
-          <Image
-            src={getValue() as string}
-            alt="category image"
-            height={50}
-            width={50}
-            className="rounded-sm object-cover"
-          />
-        );
+        return <TableColumnHeader column={column} title="Price" />;
       },
     },
     {
-      accessorKey: 'icon',
-      meta: 'icon',
+      accessorKey: 'category',
+      meta: 'category',
       enableHiding: false,
       header: ({ column }) => {
-        return <TableColumnHeader column={column} title="Icon" />;
+        return <TableColumnHeader column={column} title="Category" />;
       },
       cell: ({ getValue }) => {
-        const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+        // const Icon = categoryIcons[getValue() as CategoryIcon].icon;
 
-        return <Icon />;
+        // return <Icon />;
+        <></>;
       },
     },
     {
@@ -78,13 +68,14 @@ export const getCategoriesTableColumns = (
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const category = row.original;
+        const product = row.original;
 
         return actionsSlot({
-          id: category.id,
-          name: category.name,
-          icon: category.icon as CategoryIcon.SOFA,
-          image: category.image || '',
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          categoryId: product.categoryId,
+          description: product.description,
         });
       },
     },

@@ -6,7 +6,7 @@ import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
-import { Category, CategoryIcon } from '../types/category';
+import { Category, CategoryIcon } from '../api/types/category';
 import { categoryIcons } from '../constants/categories-icons';
 
 export interface CategoriesActionSlotPayload {
@@ -58,6 +58,13 @@ export const getCategoriesTableColumns = (
         const Icon = categoryIcons[getValue() as CategoryIcon].icon;
 
         return <Icon />;
+      },
+    },
+    {
+      accessorKey: 'createdBy',
+      meta: 'Created by',
+      header: ({ column }) => {
+        return <TableColumnHeader column={column} title="Created by" />;
       },
     },
     {

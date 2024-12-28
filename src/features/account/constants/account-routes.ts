@@ -13,7 +13,7 @@ export const accountRoutes: Route[] = [
     key: 'content',
     title: 'Content',
     icon: Image,
-    href: '/content/categories',
+    href: '/content',
   },
   {
     key: 'wishlist',

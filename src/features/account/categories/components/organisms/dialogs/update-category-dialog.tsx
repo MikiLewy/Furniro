@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { updateCategorySchema } from '@/features/account/categories/server/validation-schemas/update-category-schema';
-import { CategoryIcon } from '@/features/account/categories/types/category';
+import { CategoryIcon } from '@/features/account/categories/api/types/category';
 import { UploadDropzone } from '@/utils/uploadthing';
 
 import { categoryIcons } from '../../../constants/categories-icons';
