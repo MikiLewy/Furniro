@@ -1,4 +1,4 @@
-import Button from '@components/atoms/button/button';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   btnContentTranslation: string;
@@ -6,7 +6,7 @@ interface Props {
 
 const ClientAboutUs = ({ btnContentTranslation }: Props) => {
   return (
-    <Button variant="outlined" size="lg" className="self-start">
+    <Button size="lg" className="self-start">
       {btnContentTranslation}
     </Button>
   );

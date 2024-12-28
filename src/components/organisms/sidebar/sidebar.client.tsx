@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 import SidebarItem from '@/components/atoms/sidebar-item';
-import { accountRoutes } from '@/constants/account-routes';
+import { accountRoutes } from '@/features/account/constants/account-routes';
 
 const ClientSidebar = () => {
   const pathname = usePathname();

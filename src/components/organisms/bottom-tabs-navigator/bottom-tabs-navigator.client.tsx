@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
 import BottomTabsItem from '@/components/atoms/bottom-tabs-item';
-import { accountRoutes } from '@/constants/account-routes';
+import { accountRoutes } from '@/features/account/constants/account-routes';
 
 const ClientBottomTabsNavigator = () => {
   const router = useRouter();
