@@ -19,8 +19,8 @@ const ClientBottomTabsNavigator = () => {
           key={key}
           icon={icon}
           title={title}
-          isActive={pathname === href}
-          onClick={() => router.push(`${href}`)}
+          isActive={pathname.includes(href)}
+          onClick={() => router.push(href)}
         />
       ))}
       <BottomTabsItem icon={LogOut} onClick={() => signOut()} title="Logout" />

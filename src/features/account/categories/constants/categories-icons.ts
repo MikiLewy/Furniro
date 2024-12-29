@@ -7,7 +7,7 @@ import {
   Sofa,
 } from 'lucide-react';
 
-import { CategoryIcon } from '../types/category';
+import { CategoryIcon } from '../api/types/category';
 
 export const categoryIcons = {
   [CategoryIcon.ARMCHAIR]: {

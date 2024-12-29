@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
-import { Category, CategoryIcon } from '../categories/types/category';
+import { Category, CategoryIcon } from '../categories/api/types/category';
 import { categoryIcons } from '../categories/constants/categories-icons';
 
 export interface CategoriesActionSlotPayload {

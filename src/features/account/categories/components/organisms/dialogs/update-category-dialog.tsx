@@ -24,8 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { CategoryIcon } from '@/features/account/categories/api/types/category';
 import { updateCategorySchema } from '@/features/account/categories/server/validation-schemas/update-category-schema';
-import { CategoryIcon } from '@/features/account/categories/types/category';
 import { UploadDropzone } from '@/utils/uploadthing';
 
 import { categoryIcons } from '../../../constants/categories-icons';
@@ -36,7 +36,7 @@ type FormValues = z.infer<typeof updateCategorySchema>;
 const defaultValues: Omit<FormValues, 'id'> = {
   name: '',
   image: '',
-  icon: '',
+  icon: CategoryIcon.ACCESSORIES,
 };
 
 interface Props extends DialogActions {

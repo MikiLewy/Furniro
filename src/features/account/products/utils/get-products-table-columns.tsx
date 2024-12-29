@@ -1,25 +1,25 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
-import { Category, CategoryIcon } from '../api/types/category';
-import { categoryIcons } from '../constants/categories-icons';
+import { Category } from '../../categories/api/types/category';
+import { Product } from '../api/types/product';
 
-export interface CategoriesActionSlotPayload {
+export interface ProductsActionSlotPayload {
   id: number;
   name: string;
-  icon: CategoryIcon;
-  image: string;
+  price: number;
+  description: string;
+  categoryId: number;
 }
 
-export const getCategoriesTableColumns = (
-  actionsSlot: (payload: CategoriesActionSlotPayload) => ReactNode,
+export const getProductsTableColumns = (
+  actionsSlot: (payload: ProductsActionSlotPayload) => ReactNode,
 ) => {
-  const columns: ColumnDef<Category>[] = [
+  const columns: ColumnDef<Product>[] = [
     {
       accessorKey: 'name',
       meta: 'name',
@@ -29,42 +29,32 @@ export const getCategoriesTableColumns = (
       },
     },
     {
-      accessorKey: 'image',
-      meta: 'image',
+      accessorKey: 'price',
+      meta: 'price',
       enableHiding: false,
       header: ({ column }) => {
-        return <TableColumnHeader column={column} title="Image" />;
+        return <TableColumnHeader column={column} title="Price" />;
       },
       cell: ({ getValue }) => {
-        return (
-          <Image
-            src={getValue() as string}
-            alt="category image"
-            height={50}
-            width={50}
-            className="rounded-sm object-cover"
-          />
-        );
+        return <p>€{getValue() as string}</p>;
       },
     },
     {
-      accessorKey: 'icon',
-      meta: 'icon',
+      accessorKey: 'productCategory',
+      meta: 'category',
       enableHiding: false,
-      header: ({ column }) => {
-        return <TableColumnHeader column={column} title="Icon" />;
-      },
-      cell: ({ getValue }) => {
-        const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+      filterFn: (rows, columnId, filterValue) => {
+        const category = rows.getValue(columnId) as Category;
 
-        return <Icon />;
+        return category.id === Number(filterValue);
       },
-    },
-    {
-      accessorKey: 'createdBy',
-      meta: 'Created by',
       header: ({ column }) => {
-        return <TableColumnHeader column={column} title="Created by" />;
+        return <TableColumnHeader column={column} title="Category" />;
+      },
+      cell: ({ getValue }) => {
+        const category = getValue() as Category;
+
+        return <p>{category.name}</p>;
       },
     },
     {
@@ -86,13 +76,14 @@ export const getCategoriesTableColumns = (
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => {
-        const category = row.original;
+        const product = row.original;
 
         return actionsSlot({
-          id: category.id,
-          name: category.name,
-          icon: category.icon,
-          image: category.image || '',
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          categoryId: product.categoryId,
+          description: product.description,
         });
       },
     },

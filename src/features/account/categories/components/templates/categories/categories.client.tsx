@@ -6,7 +6,7 @@ import ActionsTableMenu from '@/components/atoms/actions-table-menu';
 import {
   Category,
   CategoryIcon,
-} from '@/features/account/categories/types/category';
+} from '@/features/account/categories/api/types/category';
 import {
   CategoriesActionSlotPayload,
   getCategoriesTableColumns,

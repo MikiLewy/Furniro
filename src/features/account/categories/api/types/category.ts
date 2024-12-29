@@ -10,10 +10,9 @@ export enum CategoryIcon {
 export interface Category {
   id: number;
   name: string;
-  image: string | null;
-  icon: string | null;
+  image: string;
+  icon: CategoryIcon;
   createdBy: string | null;
   updated_at: Date | null;
   created_at: Date;
-  deleted_at: Date | null;
 }

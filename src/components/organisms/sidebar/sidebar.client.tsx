@@ -21,7 +21,7 @@ const ClientSidebar = () => {
           title={title}
           onClick={() => router.push(href)}
           primary={primary}
-          isActive={pathname === href}
+          isActive={pathname.includes(href)}
         />
       ))}
       <SidebarItem
