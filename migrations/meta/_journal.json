@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1731866625459,
+      "tag": "0000_long_tusk",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1733085341186,
+      "tag": "0001_brief_glorian",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1733336774426,
+      "tag": "0002_clammy_morlocks",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1733349164791,
+      "tag": "0003_jazzy_sleepwalker",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1734040709555,
+      "tag": "0004_secret_thanos",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1734040857378,
+      "tag": "0005_tired_metal_master",
+      "breakpoints": true
+    }
+  ]
+}

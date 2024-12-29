@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -14,22 +14,32 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "@app*": ["./app/[lang]*"],
-      "@components/*": ["./app/[lang]/components/*"],
+      "@/*": ["./src/*"],
+      "@app*": ["./src/app/*"],
+      "@components/*": ["./src/components/*"],
       "@assets/*": ["./public/assets/*"],
-      "@lib/*": ["./app/[lang]/lib/*"],
-      "@types/*": ["./app/[lang]/types/*"],
-      "@icons/*": ["./app/[lang]/icons/*"],
-      "@mocks/*": ["./app/[lang]/mocks/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@types/*": ["./src/types/*"],
+      "@icons/*": ["./src/icons/*"],
+      "@features/*": ["./src/features/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@db/*": ["./src/db/*"]
     }
   },
-  "include": ["next-env.d.ts", "commitlint.config.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "jest.setup.js", "jest.config.js"],
+  "include": [
+    "next-env.d.ts",
+    "commitlint.config.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
   "exclude": ["node_modules"]
 }
