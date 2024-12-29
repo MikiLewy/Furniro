@@ -10,20 +10,20 @@ import Pinterest from '../../icons/pinterest';
 
 const Footer = async () => {
   return (
-    <footer className="py-10 mt-auto w-full horizontal-spacing border-t bg-[#f6f6f5] border-t-[#eeeeec] grid grid-cols-1 lg:grid-cols-2">
+    <footer className="max-w-[1680px] mx-auto py-10  mb-8 mt-auto w-full bg-primary/95 px-4 md:px-6 lg:px-8 rounded-2xl grid grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col gap-2">
         <h5 className="text-xl text-secondary font-medium mb-1">Hotline</h5>
         <div className="flex items-center gap-1">
-          <OutlinedPhone className="w-4 h-4" />
+          <OutlinedPhone className="w-4 h-4 stroke-secondary-lighter" />
           <p className="text-sm text-secondary-lighter">
-            Hotline :
+            Hotline:{' '}
             <strong>
               <Link href={`tel:${hotlineNumber}`}>{hotlineNumber}</Link>
             </strong>
           </p>
         </div>
         <div className="flex items-center gap-1">
-          <Globe className="w-4 h-4" />
+          <Globe className="w-4 h-4 stroke-secondary-lighter" />
           <p className="text-sm text-secondary-lighter">
             Hotline available in English
           </p>
@@ -31,30 +31,42 @@ const Footer = async () => {
       </div>
       <div className="grid grid-cols-2 mt-10 lg:mt-0">
         <div className="flex flex-col gap-2 items-start">
-          <h6 className="text-primary text-xs uppercase font-semibold mb-1">
+          <h6 className="text-xs uppercase font-semibold mb-1 text-secondary-darker">
             Customer service
           </h6>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             Contact us
           </Link>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             FAQ
           </Link>
         </div>
         <div className="flex flex-col gap-2 items-start">
-          <h6 className="text-primary text-xs uppercase font-semibold mb-1">
+          <h6 className="text-secondary text-xs uppercase font-semibold mb-1 text-secondary-darker">
             Terms & policies
           </h6>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             Shipping policy
           </Link>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             Terms of service
           </Link>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             Refund policy
           </Link>
-          <Link href={'#'} className="font-medium text-sm hover:text-primary">
+          <Link
+            href={'#'}
+            className="font-medium text-secondary text-sm hover:text-secondary-lighter">
             Privacy policy
           </Link>
         </div>
@@ -64,13 +76,13 @@ const Footer = async () => {
           Stay in touch:
         </p>
         <Link href={'#'} className="group">
-          <Facebook className="w-4 h-4 fill-secondary-darker group-hover:fill-primary" />
+          <Facebook className="w-4 h-4 fill-secondary-darker group-hover:fill-secondary" />
         </Link>
         <Link href={'#'} className="group">
-          <Instagram className="w-4 h-4 fill-secondary-darker group-hover:fill-primary" />
+          <Instagram className="w-4 h-4 fill-secondary-darker group-hover:fill-secondary" />
         </Link>
         <Link href={'#'} className="group">
-          <Pinterest className="w-4 h-4 fill-secondary-darker group-hover:fill-primary" />
+          <Pinterest className="w-4 h-4 fill-secondary-darker group-hover:fill-secondary" />
         </Link>
       </div>
       <div className="mt-10 lg:col-span-full ">
