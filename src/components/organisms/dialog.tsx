@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
 
 import { LoadingButton } from '../atoms/loading-button';
 import { Button } from '../ui/button';
@@ -29,6 +30,8 @@ interface Props extends DialogActions {
   cancelButtonText?: string;
   isSubmitButtonDisabled?: boolean;
   isSubmitButtonLoading?: boolean;
+  scrollable?: boolean;
+  actionsSlot?: ReactNode;
 }
 
 const Dialog = ({
@@ -42,19 +45,26 @@ const Dialog = ({
   confirmButtonText,
   isSubmitButtonDisabled,
   isSubmitButtonLoading,
+  scrollable,
+  actionsSlot,
 }: Props) => {
   return (
     <DialogUi open={open} onOpenChange={onClose} defaultOpen={open} modal>
-      <DialogContent aria-describedby={description} className="lg:max-w-xl">
+      <DialogContent
+        aria-describedby={description}
+        className={cn(
+          scrollable ? 'overflow-y-scroll max-h-[700px]' : '',
+          'lg:max-w-xl ',
+        )}>
         <DialogHeader className="flex flex-col gap-2">
           <DialogTitle>{title}</DialogTitle>
           {description ? (
             <DialogDescription>{description}</DialogDescription>
           ) : null}
         </DialogHeader>
-
         {children}
         <DialogFooter className="mt-4 gap-2">
+          {actionsSlot}
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               {cancelButtonText ? cancelButtonText : 'Cancel'}

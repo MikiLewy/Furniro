@@ -3,7 +3,7 @@ import { pgTable, real, serial, text } from 'drizzle-orm/pg-core';
 
 import { products } from '@/features/account/products/schema/products';
 
-import { timestamps } from '../constants/timestamps';
+import { timestamps } from '../../../../db/constants/timestamps';
 
 export const productVariants = pgTable('product_variants', {
   id: serial('id').primaryKey(),

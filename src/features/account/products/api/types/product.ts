@@ -1,13 +1,18 @@
-import { Category } from '@/features/account/categories/api/types/category';
+import { InferResultType } from '@/types/infer-db-result-type';
 
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  categoryId: number;
-  productCategory?: Category;
-  product_variants?: [];
-  updated_at: Date | null;
-  created_at: Date;
-}
+export type Product = InferResultType<'products'>;
+
+export type ProductWithCategory = InferResultType<
+  'products',
+  { productCategory: true }
+>;
+
+export type ProductWithVariants = InferResultType<
+  'products',
+  { productVariants: true }
+>;
+
+export type ProductWithVariantsAndCategory = InferResultType<
+  'products',
+  { productVariants: true; productCategory: true }
+>;

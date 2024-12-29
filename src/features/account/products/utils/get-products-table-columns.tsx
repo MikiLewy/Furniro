@@ -7,6 +7,8 @@ import { dateFormats } from '@/constants/date-formats';
 
 import { Category } from '../../categories/api/types/category';
 import { Product } from '../api/types/product';
+import { ProductVariantsWithImagesAndTags } from '../api/types/product-variant';
+import ProductVariantTableCell from '../components/molecules/product-variant-table-cell';
 
 export interface ProductsActionSlotPayload {
   id: number;
@@ -37,6 +39,22 @@ export const getProductsTableColumns = (
       },
       cell: ({ getValue }) => {
         return <p>€{getValue() as string}</p>;
+      },
+    },
+    {
+      accessorKey: 'productVariants',
+      header: 'Variants',
+      cell: ({ row }) => {
+        const variants = row.getValue(
+          'productVariants',
+        ) as ProductVariantsWithImagesAndTags[];
+
+        return (
+          <ProductVariantTableCell
+            variants={variants}
+            productId={row.original.id}
+          />
+        );
       },
     },
     {
