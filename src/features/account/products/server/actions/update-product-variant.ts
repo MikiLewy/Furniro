@@ -6,6 +6,7 @@ import { createSafeActionClient } from 'next-safe-action';
 
 import { db } from '@/db';
 
+import algoliasearch from '../../api/clients/algoliasearch';
 import {
   productVariants,
   variantTags,
@@ -14,11 +15,6 @@ import {
 import { updateProductVariantSchema } from '../validation-schemas/update-product-variant-schema';
 
 const action = createSafeActionClient();
-
-// const client = algoliasearch(
-//   process.env.NEXT_PUBLIC_ALGOLIA_ID!,
-//   process.env.NEXT_PUBLIC_ALGOLIA_WRITE_KEY!,
-// );
 
 export const updateProductVariant = action
   .schema(updateProductVariantSchema)
@@ -68,18 +64,18 @@ export const updateProductVariant = action
           );
         }
 
-        // await client.partialUpdateObject({
-        //   indexName: 'products',
-        //   objectID: editedVariant[0].id.toString(),
-        //   attributesToUpdate: {
-        //     objectID: editedVariant[0].id,
-        //     id: productId,
-        //     productType,
-        //     color,
-        //     tags,
-        //     variantImages: variantImages[0].url,
-        //   },
-        // });
+        await algoliasearch.partialUpdateObject({
+          indexName: 'products',
+          objectID: editedVariant[0].id.toString(),
+          attributesToUpdate: {
+            objectID: editedVariant[0].id,
+            id: productId,
+            variantName: editedVariant[0].name,
+            color,
+            tags,
+            variantImages: variantImages[0].url,
+          },
+        });
 
         revalidatePath('/content/products');
         return { success: 'Successfully updated product variant' };

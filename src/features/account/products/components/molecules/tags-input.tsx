@@ -17,6 +17,7 @@ type Props = React.ComponentProps<'input'> & {
 const TagsInput = forwardRef<HTMLInputElement, Props>(
   ({ onChange, value, ...rest }, ref) => {
     const [pendingDataPoint, setPendingDataPoint] = useState<string>('');
+
     const [focused, setFocused] = useState(false);
 
     const addPendingDataPoint = () => {
@@ -40,12 +41,12 @@ const TagsInput = forwardRef<HTMLInputElement, Props>(
       <div
         onClick={() => setFocus('tags')}
         className={cn(
-          'flex min-h-[20px] w-full rounded-md border border-input bg-background  text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          'flex  w-full rounded-md border border-input bg-background  text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
           focused
             ? 'ring-offset-2 outline-none ring-ring ring-2'
             : 'ring-offset-0 outline-none ring-ring ring-0',
         )}>
-        <motion.div className="rounded-md min-h-[2.5rem] p-2 flex gap-2 flex-wrap items-center">
+        <motion.div className="rounded-md p-1 flex gap-2 flex-wrap items-center">
           <AnimatePresence>
             {value.map(tag => (
               <motion.div
@@ -53,10 +54,14 @@ const TagsInput = forwardRef<HTMLInputElement, Props>(
                 initial={{ scale: 0 }}
                 exit={{ scale: 0 }}
                 key={tag}>
-                <Badge variant="secondary">{tag}</Badge>
-                <button className="w-3 ml-2" onClick={() => onRemoveTag(tag)}>
-                  <X className="w-3" />
-                </button>
+                <Badge variant="secondary" className="relative">
+                  {tag}
+                  <button
+                    className="w-3 absolute -right-1 -top-[12px]"
+                    onClick={() => onRemoveTag(tag)}>
+                    <X className="w-3" />
+                  </button>
+                </Badge>
               </motion.div>
             ))}
           </AnimatePresence>

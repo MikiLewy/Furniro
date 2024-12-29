@@ -43,7 +43,7 @@ const VariantImages = () => {
       <FormField
         control={control}
         name="variantImages"
-        render={({ field }) => (
+        render={() => (
           <FormItem>
             <FormLabel>Variant Tags</FormLabel>
             <FormControl>
@@ -117,7 +117,6 @@ const VariantImages = () => {
                     setActiveIndex(index);
                     return;
                   }
-                  return;
                 });
               }}>
               {fields.map((field, index) => (
@@ -131,7 +130,7 @@ const VariantImages = () => {
                     field.url.search('blob:') === 0
                       ? 'animate-pulse transition-all'
                       : '',
-                    'text-sm font-bold text-muted-foreground hover:text-primary',
+                    'text-sm cursor-grab font-bold text-muted-foreground hover:text-primary',
                   )}>
                   <TableCell>{index}</TableCell>
                   <TableCell>{field.name}</TableCell>

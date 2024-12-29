@@ -1,6 +1,5 @@
 'use server';
 
-// import { algoliasearch } from 'algoliasearch';
 import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { createSafeActionClient } from 'next-safe-action';
@@ -9,12 +8,9 @@ import { z } from 'zod';
 import { db } from '@/db';
 import { productVariants } from '@/db/schema';
 
-const action = createSafeActionClient();
+import algoliasearch from '../../api/clients/algoliasearch';
 
-// const client = algoliasearch(
-//   process.env.NEXT_PUBLIC_ALGOLIA_ID!,
-//   process.env.NEXT_PUBLIC_ALGOLIA_WRITE_KEY!,
-// );
+const action = createSafeActionClient();
 
 export const removeProductVariant = action
   .schema(z.object({ id: z.number() }))
@@ -30,10 +26,10 @@ export const removeProductVariant = action
 
       await db.delete(productVariants).where(eq(productVariants.id, id));
 
-      //   await client.deleteObject({
-      //     indexName: 'products',
-      //     objectID: id.toString(),
-      //   });
+      await algoliasearch.deleteObject({
+        indexName: 'products',
+        objectID: id.toString(),
+      });
 
       revalidatePath('/content/products');
       return { success: 'Successfully deleted product variant' };

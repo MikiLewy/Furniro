@@ -6,6 +6,7 @@ import { createSafeActionClient } from 'next-safe-action';
 
 import { db } from '@/db';
 
+import algoliasearch from '../../api/clients/algoliasearch';
 import {
   productVariants,
   variantTags,
@@ -15,11 +16,6 @@ import { products } from '../../schema/products';
 import { createProductVariantSchema } from '../validation-schemas/create-product-variant-schema';
 
 const action = createSafeActionClient();
-
-// const client = algoliasearch(
-//   process.env.NEXT_PUBLIC_ALGOLIA_ID!,
-//   process.env.NEXT_PUBLIC_ALGOLIA_WRITE_KEY!,
-// );
 
 export const createProductVariant = action
   .schema(createProductVariantSchema)
@@ -58,21 +54,21 @@ export const createProductVariant = action
             })),
           );
         }
-        // if (product) {
-        //   await client.saveObject({
-        //     indexName: 'products',
-        //     body: {
-        //       objectID: createdProductVariant[0].id,
-        //       id: productId,
-        //       title: product?.name,
-        //       price: product?.price,
-        //       variantName: createdProductVariant[0].name,
-        //       color,
-        //       tags,
-        //       variantImages: variantImages[0].url,
-        //     },
-        //   });
-        // }
+        if (product) {
+          await algoliasearch.saveObject({
+            indexName: 'products',
+            body: {
+              objectID: createdProductVariant[0].id,
+              id: productId,
+              title: product?.name,
+              price: product?.price,
+              variantName: createdProductVariant[0].name,
+              color,
+              tags,
+              variantImages: variantImages[0].url,
+            },
+          });
+        }
 
         revalidatePath('/content/products');
         return { success: 'Successfully created product variant' };
