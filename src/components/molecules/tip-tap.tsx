@@ -56,54 +56,61 @@ const TipTap = ({ val, onChange }: Props) => {
     }
   }, [val]);
 
+  const tiptapActions = [
+    {
+      key: 'bold',
+      icon: Bold,
+      ariaLabel: 'Toggle bold',
+      value: 'bold',
+      action: () => editor?.chain().focus().toggleBold().run(),
+    },
+    {
+      key: 'italic',
+      icon: Italic,
+      ariaLabel: 'Toggle italic',
+      value: 'italic',
+      action: () => editor?.chain().focus().toggleItalic().run(),
+    },
+    {
+      key: 'strike',
+      icon: Strikethrough,
+      ariaLabel: 'Toggle strike',
+      value: 'strike',
+      action: () => editor?.chain().focus().toggleStrike().run(),
+    },
+    {
+      key: 'orderedList',
+      icon: ListOrdered,
+      ariaLabel: 'Toggle ordered list',
+      value: 'orderedList',
+      action: () => editor?.chain().focus().toggleOrderedList().run(),
+    },
+    {
+      key: 'bulletList',
+      icon: List,
+      ariaLabel: 'Toggle bullet list',
+      value: 'bulletList',
+      action: () => editor?.chain().focus().toggleBulletList().run(),
+    },
+  ];
+
   return (
     <div className="flex flex-col gap-2">
       {editor ? (
         <div className="flex justify-start border border-input bg-transparent rounded-md">
           <ToggleGroup type="multiple">
-            <Toggle
-              pressed={editor.isActive('bold')}
-              onPressedChange={() => editor.chain().focus().toggleBold().run()}
-              value="bold"
-              aria-label="Toggle bold">
-              <Bold className="h-4 w-4" />
-            </Toggle>
-            <Toggle
-              pressed={editor.isActive('italic')}
-              onPressedChange={() =>
-                editor.chain().focus().toggleItalic().run()
-              }
-              value="italic"
-              aria-label="Toggle italic">
-              <Italic className="h-4 w-4" />
-            </Toggle>
-            <Toggle
-              pressed={editor.isActive('strike')}
-              onPressedChange={() =>
-                editor.chain().focus().toggleStrike().run()
-              }
-              value="strike"
-              aria-label="Toggle strike">
-              <Strikethrough className="h-4 w-4" />
-            </Toggle>
-            <Toggle
-              pressed={editor.isActive('orderedList')}
-              onPressedChange={() =>
-                editor.chain().focus().toggleOrderedList().run()
-              }
-              value="orderedList"
-              aria-label="Toggle ordered list">
-              <ListOrdered className="h-4 w-4" />
-            </Toggle>
-            <Toggle
-              pressed={editor.isActive('bulletList')}
-              onPressedChange={() =>
-                editor.chain().focus().toggleBulletList().run()
-              }
-              value="bulletList"
-              aria-label="Toggle bullet list">
-              <List className="h-4 w-4" />
-            </Toggle>
+            {tiptapActions.map(
+              ({ key, icon: Icon, ariaLabel, value, action }) => (
+                <Toggle
+                  key={key}
+                  pressed={editor.isActive(value)}
+                  onPressedChange={action}
+                  value={value}
+                  aria-label={ariaLabel}>
+                  <Icon className="h-4 w-4" />
+                </Toggle>
+              ),
+            )}
           </ToggleGroup>
         </div>
       ) : null}
