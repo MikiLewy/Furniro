@@ -2,7 +2,7 @@ import { relations } from 'drizzle-orm';
 import { pgTable, serial, text, real } from 'drizzle-orm/pg-core';
 
 import { categories } from '@/db/schema';
-import { productVariants } from '@/db/schema/product-variants';
+import { productVariants } from '@/features/account/products/schema/product-variants';
 
 import { timestamps } from '../../../../db/constants/timestamps';
 
