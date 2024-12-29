@@ -14,5 +14,13 @@ export type ProductWithVariants = InferResultType<
 
 export type ProductWithVariantsAndCategory = InferResultType<
   'products',
-  { productVariants: true; productCategory: true }
+  {
+    productVariants: {
+      with: {
+        variantImages: true;
+        variantTags: true;
+      };
+    };
+    productCategory: true;
+  }
 >;
