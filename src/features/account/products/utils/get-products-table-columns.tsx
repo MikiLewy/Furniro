@@ -5,12 +5,13 @@ import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
+import { Category } from '../../categories/api/types/category';
 import { Product } from '../api/types/product';
 
 export interface ProductsActionSlotPayload {
   id: number;
   name: string;
-  price: string;
+  price: number;
   description: string;
   categoryId: number;
 }
@@ -34,19 +35,26 @@ export const getProductsTableColumns = (
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Price" />;
       },
+      cell: ({ getValue }) => {
+        return <p>€{getValue() as string}</p>;
+      },
     },
     {
-      accessorKey: 'category',
+      accessorKey: 'productCategory',
       meta: 'category',
       enableHiding: false,
+      filterFn: (rows, columnId, filterValue) => {
+        const category = rows.getValue(columnId) as Category;
+
+        return category.id === Number(filterValue);
+      },
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Category" />;
       },
       cell: ({ getValue }) => {
-        // const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+        const category = getValue() as Category;
 
-        // return <Icon />;
-        <></>;
+        return <p>{category.name}</p>;
       },
     },
     {

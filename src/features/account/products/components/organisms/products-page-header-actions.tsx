@@ -3,9 +3,16 @@
 import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Category } from '@/features/account/categories/api/types/category';
 import { useDialog } from '@/hooks/use-dialog';
 
-const ProductsPageHeaderActions = () => {
+import CreateProductDialog from './dialogs/create-product-dialog';
+
+interface Props {
+  categories: Category[];
+}
+
+const ProductsPageHeaderActions = ({ categories }: Props) => {
   const [
     isOpenCreateProductDialog,
     handleOpenCreateProductDialog,
@@ -18,10 +25,11 @@ const ProductsPageHeaderActions = () => {
         <Plus className="mr h-4 w-4" />
         Create product
       </Button>
-      {/* <CreateProductDialog
+      <CreateProductDialog
         open={isOpenCreateProductDialog}
         onClose={handleCloseCreateProductDialog}
-      /> */}
+        categories={categories}
+      />
     </>
   );
 };

@@ -18,17 +18,21 @@ import { useState } from 'react';
 
 import SearchBar from '@/components/molecules/search-bar';
 import { Table } from '@/components/organisms/table/table';
+import { TableFacetedFilter } from '@/components/organisms/table/table-faceted-filters';
+import { TablePagination } from '@/components/organisms/table/table-pagination';
 import { TableViewOptions } from '@/components/organisms/table/table-view-options';
 import { Button } from '@/components/ui/button';
 
 interface TableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  categoriesFilters: { label: string; value: string }[];
 }
 
 export function ProductsTable<TData, TValue>({
   columns,
   data,
+  categoriesFilters,
 }: TableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -65,6 +69,13 @@ export function ProductsTable<TData, TValue>({
             table.getColumn('name')?.setFilterValue(value)
           }
         />
+        {table.getColumn('productCategory') ? (
+          <TableFacetedFilter
+            column={table.getColumn('productCategory')}
+            title="Category"
+            options={categoriesFilters}
+          />
+        ) : null}
         {isFiltered ? (
           <Button
             variant="ghost"
@@ -77,6 +88,7 @@ export function ProductsTable<TData, TValue>({
         <TableViewOptions table={table} />
       </div>
       <Table columnsLength={columns.length} table={table} />
+      <TablePagination table={table} />
     </div>
   );
 }

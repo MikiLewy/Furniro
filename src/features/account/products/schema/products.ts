@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm';
-import { pgTable, serial, text, decimal } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, real } from 'drizzle-orm/pg-core';
 
 import { categories } from '@/db/schema';
 import { productVariants } from '@/db/schema/product-variants';
@@ -10,7 +10,7 @@ export const products = pgTable('products', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   description: text('description').notNull(),
-  price: decimal('price').notNull(),
+  price: real('price').notNull(),
   categoryId: serial('category_id').notNull(),
   ...timestamps,
 });

@@ -27,6 +27,7 @@ import {
 import { createCategorySchema } from '@/features/account/categories/server/validation-schemas/create-category-schema';
 import { UploadDropzone } from '@/utils/uploadthing';
 
+import { CategoryIcon } from '../../../api/types/category';
 import { categoryIcons } from '../../../constants/categories-icons';
 import { createCategory } from '../../../server/actions/create-category';
 
@@ -35,7 +36,7 @@ type FormValues = z.infer<typeof createCategorySchema>;
 const defaultValues: FormValues = {
   name: '',
   image: '',
-  icon: '',
+  icon: CategoryIcon.ACCESSORIES,
 };
 
 const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
