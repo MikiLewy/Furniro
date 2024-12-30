@@ -3,11 +3,11 @@
 import { SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@/components/atoms/product-card';
-import { ProductWithVariantsAndCategory } from '@/features/account/products/api/types/product';
+import { ProductWithVariantsImages } from '@/features/account/products/api/types/product';
 import Slider from '@components/atoms/slider';
 
 interface Props {
-  products: ProductWithVariantsAndCategory[];
+  products: ProductWithVariantsImages[];
 }
 
 const ClientRecommendedProducts = ({ products }: Props) => {
@@ -17,9 +17,9 @@ const ClientRecommendedProducts = ({ products }: Props) => {
         <SwiperSlide key={product.id}>
           <ProductCard
             title={product.name}
-            imageSrc={product.productVariants[0].variantImages[2].url}
+            imageSrc={product?.productVariants?.[0]?.variantImages?.[1]?.url}
             transparentImageSrc={
-              product.productVariants[0].variantImages[0].url
+              product?.productVariants?.[0]?.variantImages?.[0]?.url
             }
             price={product.price}
             variants={product.productVariants?.map(variant => ({

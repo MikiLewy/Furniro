@@ -5,6 +5,7 @@ export enum CategoryIcon {
   ACCESSORIES = 'accessories',
   WARDROBE = 'wardrobe',
   OUTDOOR = 'outdoor',
+  TV_SHELF = 'tv_shelf',
 }
 
 export interface Category {

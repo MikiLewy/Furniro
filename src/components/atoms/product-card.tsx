@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { cn } from '@/lib/utils';
+
 import { Heart } from '../../icons/heart';
 import { formatPrice } from '../../utils/format-price';
 
@@ -11,6 +13,8 @@ interface Props {
   imageSrc: string;
   transparentImageSrc: string;
   variants: { id: number; name: string; color: string }[];
+  size?: 'sm' | 'regular';
+  transparentFirst?: boolean;
 }
 
 const ProductCard = ({
@@ -19,25 +23,41 @@ const ProductCard = ({
   transparentImageSrc,
   price,
   variants,
+  size,
+  transparentFirst,
 }: Props) => {
   return (
     <div className="min-w-[300px]">
-      <ImageCard className="relative group cursor-pointer h-[450px] md:h-[500px] lg:h-[550px] w-full">
+      <ImageCard
+        className={cn(
+          size === 'sm' ? 'h-[380px]' : 'h-[450px]',
+          'relative group cursor-pointer  w-full',
+        )}>
         <div className="absolute top-4 right-4 z-20">
-          <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 transition duration-300 " />
+          <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 hover:fill-red-600 transition duration-300 " />
         </div>
         <Image
           src={imageSrc}
           alt={title}
           fill
-          className="block absolute h-full w-full object-cover object-bottom group-hover:hidden"
+          className={cn(
+            transparentFirst
+              ? 'opacity-0  group-hover:opacity-100 transition duration-300'
+              : 'group-hover:hidden',
+            'block absolute h-full w-full object-cover object-bottom ',
+          )}
           draggable="false"
         />
         <Image
           src={transparentImageSrc}
           alt={title}
           fill
-          className="opacity-0 absolute h-full w-full object-contain object-center group-hover:opacity-100  transition duration-300"
+          className={cn(
+            transparentFirst
+              ? 'group-hover:hidden'
+              : 'opacity-0 group-hover:opacity-100 transition duration-300',
+            ' absolute h-full w-full object-contain object-center ',
+          )}
           draggable="false"
         />
       </ImageCard>

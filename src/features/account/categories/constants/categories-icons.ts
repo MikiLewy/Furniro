@@ -5,6 +5,7 @@ import {
   LampCeiling,
   Refrigerator,
   Sofa,
+  TvMinimal,
 } from 'lucide-react';
 
 import { CategoryIcon } from '../api/types/category';
@@ -34,6 +35,11 @@ export const categoryIcons = {
     icon: Refrigerator,
     label: 'Wardrobe',
     value: CategoryIcon.WARDROBE,
+  },
+  [CategoryIcon.TV_SHELF]: {
+    icon: TvMinimal,
+    label: 'TV stands',
+    value: CategoryIcon.TV_SHELF,
   },
   [CategoryIcon.OUTDOOR]: {
     icon: Fence,
