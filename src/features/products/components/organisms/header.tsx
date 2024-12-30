@@ -9,15 +9,17 @@ const Header = () => {
       <Image
         src={productsHeaderImg}
         alt="Room interior"
-        className="rounded-3xl max-h-[300px] object-cover object-bottom lg:object-center lg:max-h-[400px] 2xl:max-h-[600px] 2xl:basis-2/4"
+        className="rounded-3xl max-h-[300px] object-cover object-bottom lg:object-center lg:max-h-[400px] 2xl:max-h-[550px] 2xl:basis-2/4"
       />
-      <div className="flex flex-col justify-center gap-4 basis-3/4 2xl:basis-2/4">
-        <SectionTitle title="Products" />
-        <p className="text-sm lg:text-base leading-7">
-          Explore Our Exquisite Collection of Furniture: Elevate your space with
-          our handpicked selection of quality furniture pieces. Discover
-          timeless designs crafted for comfort, functionality, and style. From
-          modern accents to classic essentials, find the perfect match for your
+      <div className="flex flex-col justify-center gap-2 basis-3/4 2xl:basis-2/4">
+        <SectionTitle
+          title="Products"
+          subtitle="Versatile, minimal, and feel-good"
+        />
+        <p className="text-sm lg:text-base leading-6">
+          Step inside and explore our wide selection of versatile, timeless
+          furniture pieces that seamlessly integrate into any space, offering
+          blissful joy. Discover noo.ma’s feel-good comfort and make yourself at
           home.
         </p>
       </div>

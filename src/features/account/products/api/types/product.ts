@@ -12,6 +12,15 @@ export type ProductWithVariants = InferResultType<
   { productVariants: true }
 >;
 
+export type ProductWithVariantsImages = InferResultType<
+  'products',
+  {
+    productVariants: {
+      with: { variantImages: true };
+    };
+  }
+>;
+
 export type ProductWithVariantsAndCategory = InferResultType<
   'products',
   {

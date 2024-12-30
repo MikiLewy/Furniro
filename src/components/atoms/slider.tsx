@@ -29,7 +29,7 @@ const Slider = ({ children }: Props) => {
         },
         1600: {
           slidesPerView: 4,
-          spaceBetween: 40,
+          spaceBetween: 20,
         },
       }}
       modules={[Navigation]}
@@ -42,13 +42,13 @@ const Slider = ({ children }: Props) => {
       {children}
       <div
         onClick={() => swiperRef.current?.slidePrev()}
-        className="w-16 h-16 hidden cursor-pointer rounded-full md:flex items-center justify-center backdrop-blur-md bg-opacity-60 bg-white top-[40%] absolute z-50 
+        className="w-16 h-16 hidden cursor-pointer rounded-full md:flex items-center justify-center backdrop-blur-md bg-opacity-60 bg-white top-[35%] absolute z-50 
         ">
         <Arrow className=" w-5 h-5 rotate-90 stroke-[1.5px] stroke-[#393939] " />
       </div>
       <div
         onClick={() => swiperRef.current?.slideNext()}
-        className="w-16 h-16 hidden cursor-pointer rounded-full  md:flex items-center justify-center backdrop-blur-md bg-white  bg-opacity-60 top-[40%] right-0 absolute z-50 ">
+        className="w-16 h-16 hidden cursor-pointer rounded-full  md:flex items-center justify-center backdrop-blur-md bg-white  bg-opacity-60 top-[35%] right-0 absolute z-50 ">
         <Arrow className="w-5 h-5 -rotate-90 stroke-[1.5px] stroke-[#393939] " />
       </div>
     </Swiper>
