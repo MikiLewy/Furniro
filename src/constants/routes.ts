@@ -1,8 +1,5 @@
-import { Crown } from '../icons/navigation/crown';
-import GetInspired from '../icons/navigation/get-inspired';
-import NewArrivals from '../icons/navigation/new-arrivals';
-import Products from '../icons/navigation/products';
-import Sale from '../icons/navigation/sale';
+import { BadgePercent, ShoppingBag } from 'lucide-react';
+
 import { Route } from '../types/interfaces/route';
 
 export const routes: Route[] = [
@@ -11,30 +8,12 @@ export const routes: Route[] = [
     title: 'Sale',
     href: '/products/sale',
     primary: true,
-    icon: Sale,
+    icon: BadgePercent,
   },
   {
     key: 'products',
     title: 'Products',
     href: '/products',
-    icon: Products,
-  },
-  {
-    key: 'bestsellers',
-    title: 'Bestsellers',
-    href: '/navbar/products/bestsellers',
-    icon: Crown,
-  },
-  {
-    key: 'newArrivals',
-    title: 'New Arrivals',
-    href: '/navbar/new-arrivals',
-    icon: NewArrivals,
-  },
-  {
-    key: 'getInspired',
-    title: 'Get Inspired',
-    href: '/navbar/get-inspired',
-    icon: GetInspired,
+    icon: ShoppingBag,
   },
 ];

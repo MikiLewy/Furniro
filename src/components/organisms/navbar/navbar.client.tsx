@@ -1,13 +1,25 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import Link from 'next/link';
+import { ChevronDown, ChevronUp, ShoppingBag } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-import { routes } from '@constants/routes';
+import NavbarItem from '@/components/atoms/navbar-item';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import { Category } from '@/features/account/categories/api/types/category';
+import { categoryIcons } from '@/features/account/categories/constants/categories-icons';
+import { cn } from '@/lib/utils';
 
-const ClientNavbar = () => {
+interface Props {
+  categories: Category[];
+}
+
+const ClientNavbar = ({ categories }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const pathname = usePathname();
@@ -17,7 +29,7 @@ const ClientNavbar = () => {
   };
 
   return (
-    <div>
+    <>
       <motion.button
         initial="hide"
         animate={isOpen ? 'show' : 'hide'}
@@ -84,7 +96,7 @@ const ClientNavbar = () => {
               initial="hide"
               animate="show"
               exit="hide"
-              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1  xl:px-8  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
+              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1 md:px-3  lg:px-5  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
               <motion.ul
                 variants={{
                   hide: {
@@ -95,37 +107,44 @@ const ClientNavbar = () => {
                   },
                 }}
                 className="flex flex-col gap-1">
-                {routes.map(
-                  ({ title, key, href, icon: RouteIcon, primary }) => (
-                    <Link
-                      key={key}
-                      href={href}
-                      className={`flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl ${
-                        primary ? 'text-primary' : 'text-secondary'
-                      } font-medium cursor-pointer ${
-                        pathname === href
-                          ? primary
-                            ? 'bg-primary-outlinedHover'
-                            : 'bg-gray-50'
-                          : 'bg-transparent'
-                      } ${
-                        primary
-                          ? 'hover:bg-primary-outlinedHover'
-                          : 'hover:bg-gray-50'
-                      }  transition-colors duration-500`}>
-                      <div className="w-5 h-5 stroke-gray-300">
-                        <RouteIcon />
+                <Collapsible defaultOpen className="group">
+                  <CollapsibleTrigger asChild>
+                    <div
+                      className={cn(
+                        `flex items-center gap-3 text-sm px-4 py-3 rounded-3xl text-secondary-darker cursor-pointer bg-transparent hover:bg-gray-50  transition-colors duration-500`,
+                      )}>
+                      <div className="stroke-gray-300 ">
+                        <ShoppingBag className="w-5 h-5" />
                       </div>
-                      {title}
-                    </Link>
-                  ),
-                )}
+                      Products
+                      <ChevronDown className="h-5 w-5 ml-auto shrink-0 transition-transform duration-200 group-data-[state=open]:hidden" />
+                      <ChevronUp className="h-5 w-5 ml-auto shrink-0 transition-transform duration-200 group-data-[state=closed]:hidden" />
+                    </div>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-1">
+                    {categories?.map(({ id, name, icon }) => {
+                      const RouteIcon = categoryIcons[icon].icon;
+
+                      const categoryValue = categoryIcons[icon].value;
+
+                      return (
+                        <NavbarItem
+                          key={id}
+                          href={`/products/${categoryValue}`}
+                          title={name}
+                          RouteIcon={RouteIcon}
+                          isActive={pathname === `/products/${categoryValue}`}
+                        />
+                      );
+                    })}
+                  </CollapsibleContent>
+                </Collapsible>
               </motion.ul>
             </motion.div>
           </MotionConfig>
         ) : null}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 
