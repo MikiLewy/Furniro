@@ -4,7 +4,7 @@ import { SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@/components/atoms/product-card';
 import { ProductWithVariantsImages } from '@/features/account/products/api/types/product';
-import Slider from '@components/atoms/slider';
+import RecommendedProductsSlider from '@/features/home/components/molecules/recommended-products-slider';
 
 interface Props {
   products: ProductWithVariantsImages[];
@@ -12,7 +12,7 @@ interface Props {
 
 const ClientRecommendedProducts = ({ products }: Props) => {
   return (
-    <Slider>
+    <RecommendedProductsSlider>
       {products?.map(product => (
         <SwiperSlide key={product.id}>
           <ProductCard
@@ -30,7 +30,7 @@ const ClientRecommendedProducts = ({ products }: Props) => {
           />
         </SwiperSlide>
       ))}
-    </Slider>
+    </RecommendedProductsSlider>
   );
 };
 

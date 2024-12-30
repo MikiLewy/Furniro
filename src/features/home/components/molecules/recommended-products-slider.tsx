@@ -1,17 +1,18 @@
 'use client';
+
 import { ReactNode, useRef } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper } from 'swiper/react';
 
-import { Arrow } from '../../icons/arrow';
+import { Arrow } from '../../../../icons/arrow';
 import 'swiper/css';
 
 interface Props {
   children: ReactNode;
 }
 
-const Slider = ({ children }: Props) => {
+const RecommendedProductsSlider = ({ children }: Props) => {
   const swiperRef = useRef<SwiperType>();
 
   return (
@@ -55,4 +56,4 @@ const Slider = ({ children }: Props) => {
   );
 };
 
-export default Slider;
+export default RecommendedProductsSlider;
