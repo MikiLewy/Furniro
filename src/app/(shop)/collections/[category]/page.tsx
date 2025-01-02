@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ProductsPage = async ({ params }: Props) => {
-  const categorySlug = decodeURI((await params).category);
+  const categorySlug = (await params).category;
 
   const categories = await getCategories();
 
