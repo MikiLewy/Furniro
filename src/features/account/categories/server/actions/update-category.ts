@@ -13,30 +13,45 @@ const actionClient = createSafeActionClient();
 
 export const updateCategory = actionClient
   .schema(updateCategorySchema)
-  .action(async ({ parsedInput: { id, name, icon, image } }) => {
-    try {
-      const existingCategory = await db.query.categories.findFirst({
-        where: eq(categories.id, id),
-      });
+  .action(
+    async ({
+      parsedInput: {
+        id,
+        name,
+        type,
+        categoryImage,
+        description,
+        mainImage,
+        subtitle,
+      },
+    }) => {
+      try {
+        const existingCategory = await db.query.categories.findFirst({
+          where: eq(categories.id, id),
+        });
 
-      if (!existingCategory) {
-        return { error: 'Category not found' };
+        if (!existingCategory) {
+          return { error: 'Category not found' };
+        }
+
+        await db
+          .update(categories)
+          .set({
+            name,
+            type,
+            description,
+            mainImage,
+            subtitle,
+            image: categoryImage,
+            updated_at: new Date(),
+          })
+          .where(eq(categories.id, id));
+
+        revalidatePath('/content/categories');
+
+        return { success: 'Successfully updated category' };
+      } catch (error) {
+        return { error: 'Failed to update category' };
       }
-
-      await db
-        .update(categories)
-        .set({
-          name,
-          icon,
-          image,
-          updated_at: new Date(),
-        })
-        .where(eq(categories.id, id));
-
-      revalidatePath('/content/categories');
-
-      return { success: 'Successfully updated category' };
-    } catch (error) {
-      return { error: 'Failed to update category' };
-    }
-  });
+    },
+  );

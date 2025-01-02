@@ -7,7 +7,7 @@ import ProductsPageHeaderActions from '../../organisms/products-page-header-acti
 import ClientProducts from './products.client';
 
 const ServerProducts = async () => {
-  const products = await getProductsWithVariantsAndCategory();
+  const products = await getProductsWithVariantsAndCategory({});
 
   const categories = await getCategories();
 

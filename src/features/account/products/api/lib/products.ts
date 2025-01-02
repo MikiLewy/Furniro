@@ -1,4 +1,7 @@
+import { eq } from 'drizzle-orm';
+
 import { db } from '@/db';
+import { products } from '@/db/schema';
 
 export const getProducts = async () => {
   const response = await db.query.products.findMany();
@@ -26,8 +29,13 @@ export const getProductsWithVariants = async () => {
   return response;
 };
 
-export const getProductsWithVariantsImages = async () => {
+export const getProductsWithVariantsImages = async ({
+  categoryId,
+}: {
+  categoryId?: number;
+}) => {
   const response = await db.query.products.findMany({
+    where: categoryId ? eq(products.categoryId, categoryId) : undefined,
     with: {
       productVariants: {
         with: {
@@ -40,8 +48,13 @@ export const getProductsWithVariantsImages = async () => {
   return response;
 };
 
-export const getProductsWithVariantsAndCategory = async () => {
+export const getProductsWithVariantsAndCategory = async ({
+  categoryId,
+}: {
+  categoryId?: number;
+}) => {
   const response = await db.query.products.findMany({
+    where: categoryId ? eq(products.categoryId, categoryId) : undefined,
     with: {
       productVariants: {
         with: {
