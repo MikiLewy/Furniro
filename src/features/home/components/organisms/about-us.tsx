@@ -34,7 +34,7 @@ const AboutUs = async () => {
   ];
 
   return (
-    <section className="horizontal-spacing flex flex-col gap-5 lg:flex-row lg:justify-end lg:items-center lg:gap-10">
+    <section className="flex flex-col gap-5 lg:flex-row lg:justify-end lg:items-center lg:gap-10">
       <div className="flex flex-col lg:basis-3/4 xl:basis-1/2 ">
         <SectionTitle
           title="Hi, we're Furniro!"

@@ -17,7 +17,7 @@ const ServerNavbar = async () => {
 
   return (
     <nav
-      className="sticky top-0 z-30 bg-white py-4 horizontal-spacing border-b border-b-[#eeeeec]
+      className="sticky top-0 z-30 bg-white py-4 border-b border-b-[#eeeeec]
       ">
       <div className="max-w-[1680px] px-4 md:px-6 lg:px-8 mx-auto flex items-center md:justify-between">
         <div className="flex gap-3 md:gap-8 items-center ">

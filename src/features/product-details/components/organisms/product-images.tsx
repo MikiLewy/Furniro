@@ -11,6 +11,9 @@ import {
 } from '@/components/ui/carousel';
 import { VariantImages } from '@/features/account/products/api/types/product-variant';
 
+import Thumbnail from '../atoms/thumbnail';
+import MobileCarouselNavigator from '../molecules/mobile-carousel-navigator';
+
 interface Props {
   images: VariantImages[];
 }
@@ -18,14 +21,12 @@ interface Props {
 const ProductImages = ({ images }: Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (!api) {
       return;
     }
 
-    setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 1);
 
     api.on('select', () => {
@@ -43,33 +44,41 @@ const ProductImages = ({ images }: Props) => {
 
   return (
     <div className="flex-1">
-      <Carousel setApi={setApi}>
-        <CarouselContent>
-          {images.map(image => (
-            <CarouselItem key={image.id}>
-              <Image
-                src={image.url}
-                alt={image.name}
-                width={1000}
-                height={800}
-                style={{ aspectRatio: '1000/800' }}
-                className="object-cover max-h-[600px] rounded-3xl"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+      <Carousel
+        setApi={setApi}
+        opts={{
+          loop: true,
+        }}>
+        <div className="relative">
+          <CarouselContent>
+            {images.map(image => (
+              <CarouselItem key={image.id}>
+                <Image
+                  src={image.url}
+                  alt={image.name}
+                  width={800}
+                  height={620}
+                  style={{ aspectRatio: '1' }}
+                  className="object-cover max-h-[400px] w-full object-center md:max-h-[500px] rounded-3xl cursor-grab"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <MobileCarouselNavigator
+            currentSlideIndex={current - 1}
+            onClick={onThumbClick}
+            slidesCount={api?.scrollSnapList().length || 0}
+          />
+        </div>
       </Carousel>
-      <div className="flex gap-4 items-center mt-4 flex-wrap">
+      <div className="gap-4 items-center mt-4 flex-wrap hidden lg:flex">
         {images.map((image, index) => (
-          <Image
+          <Thumbnail
             key={image.id}
             src={image.url}
-            alt={image.name}
+            name={image.name}
             onClick={() => onThumbClick(index)}
-            width={100}
-            height={90}
-            style={{ aspectRatio: '80/80' }}
-            className=" object-cover h-[80px] w-[80px] rounded-lg cursor-pointer"
+            isSelected={index === current - 1}
           />
         ))}
       </div>

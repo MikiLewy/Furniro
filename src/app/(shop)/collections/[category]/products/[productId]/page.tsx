@@ -25,8 +25,8 @@ const ProductDetailsPage = async ({ params, searchParams }: Props) => {
   }
 
   return (
-    <main className="flex flex-col horizontal-spacing gap-10 py-4 lg:py-10 lg:gap-20">
-      <div className="flex justify-between items-start gap-10">
+    <main className="flex flex-col gap-10 py-4 lg:py-10 lg:gap-20">
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-5 lg:gap-10">
         <ProductImages images={productVariant?.variantImages} />
         <div className="flex-1">{productVariant?.product.name}</div>
       </div>

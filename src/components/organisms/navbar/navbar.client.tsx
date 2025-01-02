@@ -132,7 +132,7 @@ const ClientNavbar = ({ categories }: Props) => {
                             href={`/collections/${type}`}
                             title={name}
                             RouteIcon={RouteIcon}
-                            isActive={pathname === `/collections/${type}`}
+                            isActive={pathname.includes(`/collections/${type}`)}
                           />
                         );
                       })}
