@@ -1,4 +1,4 @@
-import CategoriesList from '@/features/home/components/organisms/categories-list';
+import CategoriesList from '@/components/organisms/categories-list';
 import AboutUs from '@features/home/components/organisms/about-us';
 import Hero from '@features/home/components/organisms/hero';
 import RecommendedProducts from '@features/home/components/organisms/recommended-products';

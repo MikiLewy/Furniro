@@ -6,14 +6,14 @@ export const routes: Route[] = [
   {
     key: 'sale',
     title: 'Sale',
-    href: '/products/sale',
+    href: '/collections//sale',
     primary: true,
     icon: BadgePercent,
   },
   {
     key: 'products',
     title: 'Products',
-    href: '/products',
+    href: '/collections/all',
     icon: ShoppingBag,
   },
 ];

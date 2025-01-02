@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Category } from '@/features/account/categories/api/types/category';
-import { categoryIcons } from '@/features/account/categories/constants/categories-icons';
+import { categoriesTypes } from '@/features/account/categories/constants/categories-types';
 
 import { updateProduct } from '../../../server/actions/update-product';
 import { updateProductSchema } from '../../../server/validation-schemas/update-product-schema';
@@ -189,8 +189,8 @@ const UpdateProductDialog = ({
                 </FormControl>
                 <SelectContent>
                   {categories ? (
-                    Object.values(categories).map(({ id, name, icon }) => {
-                      const Icon = categoryIcons[icon].icon;
+                    Object.values(categories).map(({ id, name, type }) => {
+                      const Icon = categoriesTypes[type].icon;
 
                       return (
                         <SelectItem key={id} value={id.toString()}>

@@ -1,6 +1,6 @@
 import { InferResultType } from '@/types/infer-db-result-type';
 
-export enum CategoryIcon {
+export enum CategoryType {
   ARMCHAIR = 'armchairs',
   SOFA = 'sofas',
   BED = 'beds',

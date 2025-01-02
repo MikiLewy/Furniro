@@ -1,8 +1,12 @@
 import ProductCard from '@/components/atoms/product-card';
-import { getProductsWithVariantsImages } from '@/features/account/products/api/lib/products';
+import { getProductsWithVariantsAndCategory } from '@/features/account/products/api/lib/products';
 
-const ProductsList = async () => {
-  const products = await getProductsWithVariantsImages();
+interface Props {
+  categoryId: number | undefined;
+}
+
+const ProductsList = async ({ categoryId }: Props) => {
+  const products = await getProductsWithVariantsAndCategory({ categoryId });
 
   return (
     <main>
@@ -10,6 +14,7 @@ const ProductsList = async () => {
         {products?.map(product => (
           <div key={product.id} className="col-span-1">
             <ProductCard
+              productId={product.id}
               title={product.name}
               imageSrc={product?.productVariants?.[0]?.variantImages?.[1]?.url}
               transparentImageSrc={
@@ -22,6 +27,7 @@ const ProductsList = async () => {
                 color: variant.color,
               }))}
               size="sm"
+              category={product?.productCategory?.type}
               transparentFirst
             />
           </div>

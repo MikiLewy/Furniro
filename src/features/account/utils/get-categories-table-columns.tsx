@@ -5,13 +5,14 @@ import { ReactNode } from 'react';
 import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
-import { Category, CategoryIcon } from '../categories/api/types/category';
-import { categoryIcons } from '../categories/constants/categories-icons';
+
+import { Category, CategoryType } from '../categories/api/types/category';
+import { categoriesTypes } from '../categories/constants/categories-types';
 
 export interface CategoriesActionSlotPayload {
   id: number;
   name: string;
-  icon: CategoryIcon;
+  type: CategoryType;
   image: string;
 }
 
@@ -54,7 +55,7 @@ export const getCategoriesTableColumns = (
         return <TableColumnHeader column={column} title="Icon" />;
       },
       cell: ({ getValue }) => {
-        const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+        const Icon = categoriesTypes[getValue() as CategoryType].icon;
 
         return <Icon />;
       },
@@ -83,7 +84,7 @@ export const getCategoriesTableColumns = (
         return actionsSlot({
           id: category.id,
           name: category.name,
-          icon: category.icon as CategoryIcon.SOFA,
+          type: category.type,
           image: category.image || '',
         });
       },

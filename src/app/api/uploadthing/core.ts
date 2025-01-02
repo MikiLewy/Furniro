@@ -17,6 +17,12 @@ export const ourFileRouter = {
       maxFileCount: 1,
     },
   }).onUploadComplete(async ({ metadata, file }) => {}),
+  productCategoryMainImage: f({
+    image: {
+      maxFileSize: '4MB',
+      maxFileCount: 1,
+    },
+  }).onUploadComplete(async ({ metadata, file }) => {}),
   productVariant: f({
     image: {
       maxFileSize: '4MB',

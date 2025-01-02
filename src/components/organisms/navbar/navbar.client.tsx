@@ -12,7 +12,7 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import { Category } from '@/features/account/categories/api/types/category';
-import { categoryIcons } from '@/features/account/categories/constants/categories-icons';
+import { categoriesTypes } from '@/features/account/categories/constants/categories-types';
 import { cn } from '@/lib/utils';
 
 interface Props {
@@ -96,7 +96,7 @@ const ClientNavbar = ({ categories }: Props) => {
               initial="hide"
               animate="show"
               exit="hide"
-              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1 md:px-3  lg:px-5  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
+              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1 md:px-3  lg:px-5  bg-white  pt-20 flex flex-col justify-start space-y-10">
               <motion.ul
                 variants={{
                   hide: {
@@ -122,21 +122,21 @@ const ClientNavbar = ({ categories }: Props) => {
                     </div>
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-1">
-                    {categories?.map(({ id, name, icon }) => {
-                      const RouteIcon = categoryIcons[icon].icon;
+                    <div className="flex flex-col gap-1">
+                      {categories?.map(({ id, name, type }) => {
+                        const RouteIcon = categoriesTypes[type].icon;
 
-                      const categoryValue = categoryIcons[icon].value;
-
-                      return (
-                        <NavbarItem
-                          key={id}
-                          href={`/products/${categoryValue}`}
-                          title={name}
-                          RouteIcon={RouteIcon}
-                          isActive={pathname === `/products/${categoryValue}`}
-                        />
-                      );
-                    })}
+                        return (
+                          <NavbarItem
+                            key={id}
+                            href={`/collections/${type}`}
+                            title={name}
+                            RouteIcon={RouteIcon}
+                            isActive={pathname === `/collections/${type}`}
+                          />
+                        );
+                      })}
+                    </div>
                   </CollapsibleContent>
                 </Collapsible>
               </motion.ul>

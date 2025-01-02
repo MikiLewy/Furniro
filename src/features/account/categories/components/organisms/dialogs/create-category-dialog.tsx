@@ -8,9 +8,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 
+import TipTap from '@/components/molecules/tip-tap';
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,16 +29,19 @@ import {
 import { createCategorySchema } from '@/features/account/categories/server/validation-schemas/create-category-schema';
 import { UploadDropzone } from '@/utils/uploadthing';
 
-import { CategoryIcon } from '../../../api/types/category';
-import { categoryIcons } from '../../../constants/categories-icons';
+import { CategoryType } from '../../../api/types/category';
+import { categoriesTypes } from '../../../constants/categories-types';
 import { createCategory } from '../../../server/actions/create-category';
 
 type FormValues = z.infer<typeof createCategorySchema>;
 
 const defaultValues: FormValues = {
   name: '',
-  image: '',
-  icon: CategoryIcon.ACCESSORIES,
+  categoryImage: '',
+  type: CategoryType.ARMCHAIR,
+  description: '',
+  mainImage: '',
+  subtitle: '',
 };
 
 const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
@@ -46,7 +51,9 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
     resolver: zodResolver(createCategorySchema),
   });
 
-  const image = form.watch('image');
+  const categoryImage = form.watch('categoryImage');
+
+  const categoryPageMainImage = form.watch('mainImage');
 
   const { execute, status } = useAction(createCategory, {
     onSuccess: ({ data }) => {
@@ -78,6 +85,7 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
       onClose={onClose}
       onSubmit={form.handleSubmit(onSubmit)}
       isSubmitButtonLoading={status === 'executing'}
+      scrollable
       isSubmitButtonDisabled={
         !form.formState.isValid || !form.formState.isDirty
       }>
@@ -97,7 +105,7 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
         />
         <FormField
           control={form.control}
-          name="icon"
+          name="type"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Icon</FormLabel>
@@ -108,7 +116,7 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {Object.values(categoryIcons).map(
+                  {Object.values(categoriesTypes).map(
                     ({ icon: Icon, value, label }) => (
                       <SelectItem key={value} value={value}>
                         <div className="flex items-center gap-2 ">
@@ -126,7 +134,7 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
         />
         <FormField
           control={form.control}
-          name="image"
+          name="categoryImage"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Category image</FormLabel>
@@ -141,13 +149,13 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
                     },
                   }}
                   onClientUploadComplete={res => {
-                    form.setValue('image', res[0].url, {
+                    form.setValue('categoryImage', res[0].url, {
                       shouldValidate: true,
                       shouldDirty: true,
                     });
                   }}
                   onUploadError={(error: Error) => {
-                    form.setError('image', {
+                    form.setError('categoryImage', {
                       type: 'validate',
                       message: error.message,
                     });
@@ -155,9 +163,12 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
                   config={{ mode: 'auto' }}
                 />
               </div>
-              {image ? (
+              <FormDescription>
+                This image will be used as the category image
+              </FormDescription>
+              {categoryImage ? (
                 <Image
-                  src={image ?? ''}
+                  src={categoryImage ?? ''}
                   alt="Category image"
                   width={100}
                   height={80}
@@ -166,6 +177,101 @@ const CreateCategoryDialog = ({ open, onClose }: DialogActions) => {
               <FormControl>
                 <Input
                   placeholder="Category image"
+                  type="hidden"
+                  disabled={status === 'executing'}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="subtitle"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Subtitle</FormLabel>
+              <FormControl>
+                <Input autoFocus={false} {...field} />
+              </FormControl>
+              <FormMessage />
+              <FormDescription>
+                This will be used as subtitle in the category page
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <TipTap
+                  val={field.value}
+                  onChange={value =>
+                    form.setValue('description', value, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                      shouldTouch: true,
+                    })
+                  }
+                />
+              </FormControl>
+              <FormMessage />
+              <FormDescription>
+                This will be used as description in the category page
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="mainImage"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category page image</FormLabel>
+              <div className="flex flex-col  gap-2">
+                <UploadDropzone
+                  className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm "
+                  endpoint="productCategoryMainImage"
+                  content={{
+                    button({ ready, isUploading }) {
+                      if (ready && !isUploading) return 'Upload image';
+                      return 'Loading...';
+                    },
+                  }}
+                  onClientUploadComplete={res => {
+                    form.setValue('mainImage', res[0].url, {
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    });
+                  }}
+                  onUploadError={(error: Error) => {
+                    form.setError('mainImage', {
+                      type: 'validate',
+                      message: error.message,
+                    });
+                  }}
+                  config={{ mode: 'auto' }}
+                />
+              </div>
+              <FormDescription>
+                This image will be used as the main image in the category page
+              </FormDescription>
+              {categoryPageMainImage ? (
+                <Image
+                  src={categoryPageMainImage ?? ''}
+                  alt="Category page main image"
+                  width={100}
+                  height={80}
+                />
+              ) : null}
+              <FormControl>
+                <Input
+                  placeholder="Category page main image"
                   type="hidden"
                   disabled={status === 'executing'}
                   {...field}

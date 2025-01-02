@@ -25,7 +25,7 @@ const ServerNavbar = async () => {
           <Logo />
           <ul className="hidden md:flex  gap-4 relative z-30">
             <Link
-              href="/products"
+              href="/collections/all"
               className="text-base hover:text-secondary-darker transition-colors duration-200 font-medium cursor-pointer hover:text-primary">
               Products
             </Link>

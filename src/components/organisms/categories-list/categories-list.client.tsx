@@ -1,9 +1,11 @@
 'use client';
 
-import { Category } from '@/features/account/categories/api/types/category';
-import CategoriesSlider from '../../molecules/categories-slider';
 import { SwiperSlide } from 'swiper/react';
+
 import CategoryCard from '@/components/atoms/category-card';
+import { Category } from '@/features/account/categories/api/types/category';
+
+import CategoriesSlider from '../../../features/home/components/molecules/categories-slider';
 
 interface Props {
   categories: Category[];
@@ -18,6 +20,7 @@ const ClientCategoriesList = ({ categories }: Props) => {
             key={category.id}
             name={category.name}
             image={category.image}
+            type={category.type}
           />
         </SwiperSlide>
       ))}

@@ -3,11 +3,11 @@
 import { SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@/components/atoms/product-card';
-import { ProductWithVariantsImages } from '@/features/account/products/api/types/product';
+import { ProductWithVariantsAndCategory } from '@/features/account/products/api/types/product';
 import RecommendedProductsSlider from '@/features/home/components/molecules/recommended-products-slider';
 
 interface Props {
-  products: ProductWithVariantsImages[];
+  products: ProductWithVariantsAndCategory[];
 }
 
 const ClientRecommendedProducts = ({ products }: Props) => {
@@ -16,6 +16,7 @@ const ClientRecommendedProducts = ({ products }: Props) => {
       {products?.map(product => (
         <SwiperSlide key={product.id}>
           <ProductCard
+            productId={product.id}
             title={product.name}
             imageSrc={product?.productVariants?.[0]?.variantImages?.[1]?.url}
             transparentImageSrc={
@@ -27,6 +28,7 @@ const ClientRecommendedProducts = ({ products }: Props) => {
               name: variant.name,
               color: variant.color,
             }))}
+            category={product?.productCategory?.type}
           />
         </SwiperSlide>
       ))}
