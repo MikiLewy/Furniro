@@ -10,6 +10,7 @@ import { Heart } from '../../icons/heart';
 import { formatPrice } from '../../utils/format-price';
 
 import ImageCard from './image-card';
+import VariantCircle from './variant-circle';
 
 interface Props {
   productId: number;
@@ -41,7 +42,7 @@ const ProductCard = ({
       <div
         onClick={() =>
           router.push(
-            `/collections/${category}/products/${productId}?variant=${variants?.[0]?.id}`,
+            `/collections/${category}/products/${productId}?variantId=${variants?.[0]?.id}`,
           )
         }>
         <ImageCard
@@ -81,13 +82,13 @@ const ProductCard = ({
       <div className="flex flex-col items-start gap-1 pt-3 ">
         <div className="flex gap-1">
           {variants?.map(variant => (
-            <div
+            <VariantCircle
+              name={variant.name}
               key={variant.id}
-              className="w-5 h-5 rounded-full"
-              style={{ backgroundColor: variant?.color }}
+              color={variant.color}
               onClick={() =>
                 router.push(
-                  `/collections/${category}/products/${productId}?variant=${variant.id}`,
+                  `/collections/${category}/products/${productId}?variantId=${variant.id}`,
                 )
               }
             />
