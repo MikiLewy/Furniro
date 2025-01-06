@@ -16,7 +16,11 @@ export const getProductWithVariants = async ({
       eq(productVariants.id, variantId),
     ),
     with: {
-      product: true,
+      product: {
+        with: {
+          productVariants: true,
+        },
+      },
       variantImages: true,
       variantTags: true,
     },
