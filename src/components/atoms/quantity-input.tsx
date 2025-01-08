@@ -5,24 +5,48 @@ import { useFormContext } from 'react-hook-form';
 
 import { FormField, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
-import { ProductActionsFormValues } from '../molecules/product-actions';
+export const quantityFormDefaultValues = {
+  quantity: 1,
+};
 
-const QuantityInput = () => {
-  const { control } = useFormContext<ProductActionsFormValues>();
+export interface QuantityFormValues {
+  quantity: number;
+}
+
+interface Props {
+  compact?: boolean;
+  min?: number;
+  onPlusClick?: () => void;
+  onMinusClick?: () => void;
+}
+
+const QuantityInput = ({
+  compact,
+  min = 1,
+  onMinusClick,
+  onPlusClick,
+}: Props) => {
+  const { control } = useFormContext<QuantityFormValues>();
 
   return (
     <div className="flex flex-col gap-1">
-      <h3 className="text-sm">Quantity</h3>
+      {!compact ? <h3 className="text-sm">Quantity</h3> : null}
       <FormField
         name="quantity"
         control={control}
         render={({ field }) => (
           <div className="flex flex-col gap-1">
-            <div className="flex max-w-40 cursor-pointer focus-within:ring-2 focus-within:ring-primary rounded-lg">
+            <div
+              className={cn(
+                compact ? 'max-w-28' : 'max-w-36',
+                'flex cursor-pointer focus-within:ring-2 focus-within:ring-primary rounded-lg',
+              )}>
               <div
                 onClick={() => {
-                  if (field.value <= 1) return;
+                  onMinusClick?.();
+                  if (field.value <= min) return;
                   field.onChange(field.value - 1);
                   field.onBlur();
                 }}
@@ -32,11 +56,13 @@ const QuantityInput = () => {
               <Input
                 {...field}
                 min={1}
+                max={99}
                 type="number"
-                className="rounded-none text-center focus-visible:ring-2 focus-visible:ring-offset-0 focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="rounded-none border-x-0 text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <div
                 onClick={() => {
+                  onPlusClick?.();
                   field.onChange(+field.value + 1);
                   field.onBlur();
                 }}

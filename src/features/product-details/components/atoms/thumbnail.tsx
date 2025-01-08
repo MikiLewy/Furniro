@@ -20,7 +20,7 @@ const Thumbnail = ({ isSelected, name, onClick, src }: Props) => {
       style={{ aspectRatio: '1' }}
       className={cn(
         isSelected ? 'opacity-100' : 'opacity-55',
-        'object-cover h-[65px] w-[65px] rounded-lg cursor-pointer transition-opacity duration-300 ease-in-out',
+        'object-cover h-[65px] w-[65px] 2xl:h-[70px] 2xl:w-[70px] rounded-lg cursor-pointer transition-opacity duration-300 ease-in-out',
       )}
     />
   );
