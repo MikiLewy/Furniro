@@ -20,6 +20,7 @@ interface Props {
   thumbnail: string;
   variantId: number;
   quantity: number;
+  productId: number;
 }
 
 const CartItem = ({
@@ -29,7 +30,9 @@ const CartItem = ({
   thumbnail,
   variantId,
   quantity,
+  productId,
 }: Props) => {
+  const addToCart = useCartStore(state => state.addToCart);
   const removeFromCart = useCartStore(state => state.removeFromCart);
 
   const validationSchema = z.object({
@@ -79,8 +82,20 @@ const CartItem = ({
               <QuantityInput
                 compact
                 min={0}
+                readOnly
                 onMinusClick={() => {
                   removeFromCart(variantId, 1);
+                }}
+                onPlusClick={() => {
+                  addToCart({
+                    variantId,
+                    productName,
+                    productVariantName,
+                    productId,
+                    price,
+                    thumbnail,
+                    quantity: 1,
+                  });
                 }}
               />
             </FormProvider>

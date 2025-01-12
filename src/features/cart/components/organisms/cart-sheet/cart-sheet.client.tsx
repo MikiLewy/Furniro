@@ -20,6 +20,7 @@ const ClientCartSheet = () => {
             key={product.variantId}
             variantId={product.variantId}
             price={product.price}
+            productId={product.productId}
             productName={product.productName}
             productVariantName={product.productVariantName}
             thumbnail={product.thumbnail}

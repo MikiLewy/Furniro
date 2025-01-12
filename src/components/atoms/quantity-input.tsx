@@ -18,6 +18,7 @@ export interface QuantityFormValues {
 interface Props {
   compact?: boolean;
   min?: number;
+  readOnly?: boolean;
   onPlusClick?: () => void;
   onMinusClick?: () => void;
 }
@@ -25,6 +26,7 @@ interface Props {
 const QuantityInput = ({
   compact,
   min = 1,
+  readOnly,
   onMinusClick,
   onPlusClick,
 }: Props) => {
@@ -57,6 +59,7 @@ const QuantityInput = ({
                 {...field}
                 min={1}
                 max={99}
+                readOnly={readOnly}
                 type="number"
                 className="rounded-none border-x-0 text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
