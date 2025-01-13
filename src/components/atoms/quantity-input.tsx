@@ -42,7 +42,7 @@ const QuantityInput = ({
           <div className="flex flex-col gap-1">
             <div
               className={cn(
-                compact ? 'max-w-28' : 'max-w-36',
+                compact ? 'max-w-24 sm:max-w-28' : 'max-w-36',
                 'flex cursor-pointer focus-within:ring-2 focus-within:ring-primary rounded-lg',
               )}>
               <div
@@ -53,7 +53,9 @@ const QuantityInput = ({
                   field.onBlur();
                 }}
                 className="flex items-center justify-center border border-r-0 rounded-lg rounded-r-none p-2 ring-inset">
-                <Minus className="w-4 h-4" />
+                <Minus
+                  className={cn(compact ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4')}
+                />
               </div>
               <Input
                 {...field}
@@ -61,16 +63,18 @@ const QuantityInput = ({
                 max={99}
                 readOnly={readOnly}
                 type="number"
-                className="rounded-none border-x-0 text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="text-xs rounded-none border-x-0 text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <div
                 onClick={() => {
                   onPlusClick?.();
-                  field.onChange(+field.value + 1);
+                  field.onChange(field.value + 1);
                   field.onBlur();
                 }}
                 className="flex cursor-pointer items-center justify-center border border-l-0 rounded-lg rounded-l-none p-2 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none">
-                <Plus className="w-4 h-4" />
+                <Plus
+                  className={cn(compact ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-4 h-4')}
+                />
               </div>
             </div>
             <FormMessage />

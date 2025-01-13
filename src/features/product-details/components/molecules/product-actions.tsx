@@ -60,6 +60,7 @@ const ProductActions = ({
       productVariantName,
       thumbnail,
     });
+    form.reset(quantityFormDefaultValues);
     toast.success('Product added to cart');
   };
 

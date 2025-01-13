@@ -37,52 +37,55 @@ type CartStore = CartState & CartActions;
 
 export const useCartStore = create<CartStore>()((set, get) => ({
   ...defaultState,
-  addToCart: (product: CartProduct) => {
+  addToCart: (addedProduct: CartProduct) => {
     const cart = get().products;
 
     const cartItem = cart.find(
-      cartProduct => cartProduct.variantId === product.variantId,
+      cartProduct => cartProduct.variantId === addedProduct.variantId,
     );
 
     if (cartItem) {
-      const updatedProducts = cart.map(cartProduct =>
-        cartProduct.variantId === product.variantId
-          ? { ...product, quantity: cartProduct.quantity + product.quantity }
-          : product,
-      );
+      set(state => {
+        const updatedProducts = state.products.map(cartProduct => {
+          if (cartProduct.variantId === addedProduct.variantId) {
+            return {
+              ...cartProduct,
+              quantity: cartProduct.quantity + addedProduct.quantity,
+            };
+          }
 
-      const updatedCart = {
-        products: updatedProducts,
-        totalItems: get().totalItems + product.quantity,
-        totalPrice: get().totalPrice + product.price * product.quantity,
-      };
+          return cartProduct;
+        });
 
-      set(state => ({
-        products: updatedProducts,
-        totalItems: state.totalItems + product.quantity,
-        totalPrice: state.totalPrice + product.price * product.quantity,
-      }));
+        const updatedCart = {
+          products: updatedProducts,
+          totalItems: state.totalItems + addedProduct.quantity,
+          totalPrice:
+            state.totalPrice + addedProduct.price * addedProduct.quantity,
+        };
 
-      StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
+        StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
+
+        return updatedCart;
+      });
     } else {
-      const updatedProducts = [
-        ...cart,
-        { ...product, quantity: product.quantity },
-      ];
+      set(state => {
+        const updatedProducts = [
+          ...cart,
+          { ...addedProduct, quantity: addedProduct.quantity },
+        ];
 
-      const updatedCart = {
-        products: updatedProducts,
-        totalItems: get().totalItems + product.quantity,
-        totalPrice: get().totalPrice + product.price * product.quantity,
-      };
+        const updatedCart = {
+          products: updatedProducts,
+          totalItems: state.totalItems + addedProduct.quantity,
+          totalPrice:
+            state.totalPrice + addedProduct.price * addedProduct.quantity,
+        };
 
-      set(state => ({
-        products: updatedProducts,
-        totalItems: state.totalItems + product.quantity,
-        totalPrice: state.totalPrice + product.price * product.quantity,
-      }));
+        StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
 
-      StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
+        return updatedCart;
+      });
     }
   },
   removeFromCart: (variantId: number, quantity?: number) => {
@@ -92,39 +95,39 @@ export const useCartStore = create<CartStore>()((set, get) => ({
       cartProduct => cartProduct.variantId === variantId,
     );
 
-    const productQuantityToRemove = quantity || productToRemove?.quantity || 1;
+    if (!productToRemove) return;
+
+    const productQuantityToRemove = quantity || productToRemove.quantity;
 
     const productPriceToRemove =
-      (productToRemove?.price || 0) * productQuantityToRemove;
+      productToRemove.price * productQuantityToRemove;
 
     const shouldFilterOutProduct =
-      (productToRemove?.quantity || 1) - productQuantityToRemove > 0;
+      productToRemove.quantity - productQuantityToRemove <= 0;
 
-    const updatedProducts = shouldFilterOutProduct
-      ? get().products.map(cartProduct =>
-          cartProduct.variantId === variantId
-            ? {
-                ...cartProduct,
-                quantity: cartProduct.quantity - 1,
-              }
-            : cartProduct,
-        )
-      : get().products.filter(
-          cartProduct => cartProduct.variantId !== variantId,
-        );
+    set(state => {
+      const updatedProducts = shouldFilterOutProduct
+        ? state.products.filter(
+            cartProduct => cartProduct.variantId !== variantId,
+          )
+        : state.products.map(cartProduct =>
+            cartProduct.variantId === variantId
+              ? {
+                  ...cartProduct,
+                  quantity: cartProduct.quantity - 1,
+                }
+              : cartProduct,
+          );
 
-    set(state => ({
-      products: updatedProducts,
-      totalItems: state.totalItems - productQuantityToRemove,
-      totalPrice: state.totalPrice - productPriceToRemove,
-    }));
+      const updatedCart = {
+        products: updatedProducts,
+        totalItems: state.totalItems - productQuantityToRemove,
+        totalPrice: state.totalPrice - productPriceToRemove,
+      };
 
-    const updatedCart = {
-      products: updatedProducts,
-      totalItems: get().totalItems - productQuantityToRemove,
-      totalPrice: get().totalPrice - productPriceToRemove,
-    };
+      StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
 
-    StorageService.setItem(StorageKeys.CART, JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   },
 }));

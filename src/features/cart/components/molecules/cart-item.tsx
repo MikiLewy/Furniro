@@ -55,8 +55,7 @@ const CartItem = ({
   }, [quantity]);
 
   useEffect(() => {
-    if (productQuantity === '0') {
-      console.log('true');
+    if (productQuantity == 0) {
       removeFromCart(variantId);
     }
   }, [productQuantity]);
@@ -64,7 +63,7 @@ const CartItem = ({
   return (
     <div className="bg-white rounded-2xl p-2">
       <div className="flex gap-4">
-        <div className="border rounded-xl p-2 flex items-center justify-center">
+        <div className="border rounded-xl p-1 sm:p-2 flex items-center justify-center">
           <Image src={thumbnail} alt={productName} width={80} height={50} />
         </div>
         <div className="flex flex-col flex-1 gap-4">

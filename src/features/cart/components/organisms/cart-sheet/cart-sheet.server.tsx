@@ -22,10 +22,12 @@ const ServerCartSheet = () => {
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="flex flex-col sm:max-w-[500px] bg-[#f6f6f5]">
+        className="flex flex-col px-3 sm:px-4 w-11/12 sm:max-w-[500px] bg-[#f6f6f5]">
         <SheetHeader>
           <CartSheetTitle />
-          <SheetDescription>Review your items before checkout</SheetDescription>
+          <SheetDescription className="text-left">
+            Review your items before checkout
+          </SheetDescription>
         </SheetHeader>
         <ClientCartSheet />
       </SheetContent>
