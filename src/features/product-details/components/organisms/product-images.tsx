@@ -57,9 +57,9 @@ const ProductImages = ({ images }: Props) => {
                   src={image.url}
                   alt={image.name}
                   width={800}
-                  height={620}
+                  height={550}
                   style={{ aspectRatio: '1' }}
-                  className="object-cover max-h-[400px] w-full object-center md:max-h-[500px] rounded-3xl cursor-grab"
+                  className="object-cover max-h-[400px] w-full object-center md:max-h-[500px] 2xl:max-h-[550px] rounded-3xl cursor-grab"
                 />
               </CarouselItem>
             ))}

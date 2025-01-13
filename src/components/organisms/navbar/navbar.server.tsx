@@ -1,10 +1,11 @@
-import { ShoppingCart, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import Link from 'next/link';
 
 import { auth } from '@/auth';
 import Logo from '@/components/atoms/logo';
 import AccountPopover from '@/components/molecules/account-popover';
 import { getCategories } from '@/features/account/categories/api/lib/categories';
+import CartSheet from '@/features/cart/components/organisms/cart-sheet';
 
 import ClientNavbar from './navbar.client';
 
@@ -31,8 +32,8 @@ const ServerNavbar = async () => {
             </Link>
           </ul>
         </div>
-        <div className="ml-auto flex items-center gap-5 relative z-30">
-          <ShoppingCart className={`w-5 h-5 cursor-pointer`} />
+        <div className="ml-auto flex items-center gap-3 relative z-30">
+          <CartSheet />
           <div className="hidden md:flex">
             {user ? (
               <AccountPopover user={user} />

@@ -11,6 +11,7 @@ interface Props {
   price: number;
   description: string;
   productVariants: ProductVariant[];
+  thumbnail: string;
 }
 
 const ProductDetails = ({
@@ -19,6 +20,7 @@ const ProductDetails = ({
   variantName,
   price,
   productVariants,
+  thumbnail,
 }: Props) => {
   return (
     <div className="flex-1 w-full">
@@ -35,7 +37,12 @@ const ProductDetails = ({
             productVariants={productVariants}
             variantName={variantName}
           />
-          <ProductActions />
+          <ProductActions
+            price={price}
+            productName={productName}
+            productVariantName={variantName}
+            thumbnail={thumbnail}
+          />
           <ProductAdvantages />
         </div>
       </div>

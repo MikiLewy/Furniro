@@ -35,6 +35,7 @@ const ProductDetailsPage = async ({ params, searchParams }: Props) => {
           variantName={productVariant?.name}
           productVariants={productVariant?.product?.productVariants}
           description={productVariant?.product?.description}
+          thumbnail={productVariant?.variantImages?.[0]?.url}
         />
       </div>
     </main>
