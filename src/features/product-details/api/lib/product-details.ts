@@ -1,7 +1,7 @@
 import { and, eq } from 'drizzle-orm';
 
 import { db } from '@/db';
-import { productVariants } from '@/db/schema';
+import { productVariants, reviews } from '@/db/schema';
 
 export const getProductWithVariants = async ({
   productId,
@@ -23,6 +23,17 @@ export const getProductWithVariants = async ({
       },
       variantImages: true,
       variantTags: true,
+    },
+  });
+
+  return response;
+};
+
+export const getProductReviews = async (productId: number) => {
+  const response = await db.query.reviews.findMany({
+    where: eq(reviews.productId, productId),
+    with: {
+      user: true,
     },
   });
 
