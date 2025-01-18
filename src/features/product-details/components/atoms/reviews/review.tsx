@@ -1,7 +1,8 @@
 import { formatDistance } from 'date-fns';
-import { Star } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { RATING_SCALE } from '@/features/product-details/constants/rating-scale';
+
+import Ratings from '../ratings';
 
 interface Props {
   rating: number;
@@ -11,32 +12,11 @@ interface Props {
   userName: string;
 }
 
-const ReviewItem = ({
-  title,
-  createdAt,
-  description,
-  rating,
-  userName,
-}: Props) => {
+const Review = ({ title, createdAt, description, rating, userName }: Props) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center">
-        <p className="flex items-center gap-1">
-          {Array.from({ length: 5 }).map((_, index) => {
-            console.log({ rating, index });
-            return (
-              <Star
-                key={index}
-                className={cn(
-                  rating < index + 1
-                    ? 'text-secondary-lighter fill-white'
-                    : 'text-yellow-400 fill-yellow-400',
-                  ' w-5',
-                )}
-              />
-            );
-          })}
-        </p>
+        <Ratings rating={rating} ratingScale={RATING_SCALE} />
         <p className="text-secondary-darker text-sm">
           {formatDistance(createdAt, new Date(), {
             addSuffix: true,
@@ -52,4 +32,4 @@ const ReviewItem = ({
   );
 };
 
-export default ReviewItem;
+export default Review;

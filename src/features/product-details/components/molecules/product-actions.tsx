@@ -53,7 +53,7 @@ const ProductActions = ({
   const onAddToCartClick = () => {
     addToCart({
       price,
-      quantity: form.getValues('quantity'),
+      quantity: +form.getValues('quantity'),
       variantId: +(variantId || 0),
       productId: +(productId || 0),
       productName,

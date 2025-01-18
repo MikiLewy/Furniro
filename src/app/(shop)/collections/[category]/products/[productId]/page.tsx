@@ -1,10 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { SearchParams } from 'nuqs/server';
 
-import {
-  getProductReviews,
-  getProductWithVariants,
-} from '@/features/product-details/api/lib/product-details';
+import { getProductWithVariants } from '@/features/product-details/api/lib/product-details';
 import ProductDetails from '@/features/product-details/components/organisms/product-details';
 import ProductImages from '@/features/product-details/components/organisms/product-images';
 import ProductReviews from '@/features/product-details/components/organisms/product-reviews';
@@ -25,8 +22,6 @@ const ProductDetailsPage = async ({ params, searchParams }: Props) => {
     variantId,
   });
 
-  const productReviews = await getProductReviews(productId);
-
   if (!productVariant) {
     notFound();
   }
@@ -37,6 +32,7 @@ const ProductDetailsPage = async ({ params, searchParams }: Props) => {
         <ProductImages images={productVariant?.variantImages} />
         <div className="flex-1 w-full flex flex-col gap-5 lg:gap-10">
           <ProductDetails
+            productId={productId}
             productName={productVariant?.product?.name}
             price={productVariant?.product?.price}
             variantName={productVariant?.name}
@@ -44,9 +40,9 @@ const ProductDetailsPage = async ({ params, searchParams }: Props) => {
             description={productVariant?.product?.description}
             thumbnail={productVariant?.variantImages?.[0]?.url}
           />
-          <ProductReviews productReviews={productReviews} />
         </div>
       </div>
+      <ProductReviews productId={productId} />
     </main>
   );
 };

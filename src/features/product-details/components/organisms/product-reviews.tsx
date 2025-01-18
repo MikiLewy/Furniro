@@ -1,56 +1,18 @@
-import { subDays } from 'date-fns';
-
-import { Separator } from '@/components/ui/separator';
-import { getUserNameBasedOnLoginType } from '@/utils/get-user-name-based-on-login-type';
-
-import { ReviewWithUser } from '../../api/types/reviews';
-import ReviewItem from '../molecules/reviews/review-item';
+import { getProductReviews } from '../../api/lib/product-details';
+import { ReviewsCard } from '../molecules/reviews/reviews-card';
+import ReviewsList from '../molecules/reviews/reviews-list';
 
 interface Props {
-  productReviews: ReviewWithUser[];
+  productId: number;
 }
 
-const ProductReviews = ({ productReviews }: Props) => {
-  console.log({ productReviews });
+const ProductReviews = async ({ productId }: Props) => {
+  const productReviews = await getProductReviews(productId);
 
   return (
-    <div>
-      <h3 className="text-lg">
-        Reviews{' '}
-        <span className="text-base">({productReviews?.length} reviews)</span>
-      </h3>
-      <div className="flex flex-col gap-2 mt-4">
-        {productReviews.map(review => (
-          <>
-            <ReviewItem
-              key={review.id}
-              rating={review.rating}
-              title={review.title || ''}
-              description={review.description || ''}
-              createdAt={review.created_at}
-              userName={getUserNameBasedOnLoginType(
-                !!review?.user?.name,
-                review?.user?.name,
-                review?.user?.firstName || '',
-                review?.user?.lastName || '',
-              )}
-            />
-            <Separator />
-          </>
-        ))}
-        <ReviewItem
-          rating={4}
-          title={'Great product'}
-          description={'I love this product'}
-          createdAt={subDays(new Date(), 5)}
-          userName={getUserNameBasedOnLoginType(
-            true,
-            'User name',
-            ' name',
-            ' name',
-          )}
-        />
-      </div>
+    <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-10">
+      <ReviewsList productReviews={productReviews} />
+      <ReviewsCard productReviews={productReviews} />
     </div>
   );
 };
