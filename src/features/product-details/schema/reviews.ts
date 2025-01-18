@@ -9,8 +9,12 @@ export const reviews = pgTable('reviews', {
   title: text('title'),
   description: text('description'),
   rating: real('rating').notNull(),
-  productId: serial('productId').notNull(),
-  userId: text('userId').notNull(),
+  productId: serial('productId')
+    .notNull()
+    .references(() => products.id, { onDelete: 'cascade' }),
+  userId: text('userId')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
   ...timestamps,
 });
 
