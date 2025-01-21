@@ -16,7 +16,7 @@ const ProductsPage = async ({ params }: Props) => {
   const category = categories?.find(category => category.type === categorySlug);
 
   return (
-    <main className="flex flex-col gap-10 py-4 lg:py-10 lg:gap-20">
+    <section className="flex flex-col gap-10 py-4 lg:py-10 lg:gap-20">
       <Header
         title={category ? category?.name : 'Products'}
         subtitle={
@@ -36,7 +36,7 @@ const ProductsPage = async ({ params }: Props) => {
       />
       {categorySlug === 'all' || !category ? <CategoriesList /> : null}
       <ProductsList categoryId={category?.id} />
-    </main>
+    </section>
   );
 };
 

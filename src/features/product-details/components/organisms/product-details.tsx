@@ -13,9 +13,10 @@ interface Props {
   description: string;
   productVariants: ProductVariant[];
   thumbnail: string;
+  wishlistItemId: number | undefined;
 }
 
-const ProductDetails = ({
+const ProductDetails = async ({
   productId,
   productName,
   description,
@@ -23,6 +24,7 @@ const ProductDetails = ({
   price,
   productVariants,
   thumbnail,
+  wishlistItemId,
 }: Props) => {
   return (
     <div className="flex-1 py-2 lg:py-6 w-full">
@@ -47,6 +49,7 @@ const ProductDetails = ({
           productName={productName}
           productVariantName={variantName}
           thumbnail={thumbnail}
+          wishlistItemId={wishlistItemId}
         />
         <ProductAdvantages />
       </div>

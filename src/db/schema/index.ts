@@ -7,3 +7,5 @@ export * from '@/features/account/products/schema/products';
 export * from '@/features/account/products/schema/product-variants';
 
 export * from '@/features/product-details/schema/reviews';
+
+export * from '@/features/wishlist/schema/wishlist';

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
   children: ReactNode;
@@ -7,7 +8,10 @@ interface Props {
 }
 
 const ImageCard = ({ className, children }: Props) => {
-  const mergedClassName = twMerge('overflow-hidden rounded-3xl bg-gray-100  w-full', className);
+  const mergedClassName = cn(
+    'overflow-hidden rounded-3xl bg-gray-100  w-full',
+    className,
+  );
 
   return <div className={mergedClassName}>{children}</div>;
 };
