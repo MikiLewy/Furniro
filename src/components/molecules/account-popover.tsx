@@ -34,10 +34,10 @@ const AccountPopover = ({ user }: Props) => {
 
   const dropdownItems = [
     {
-      key: 'favorites',
-      label: 'Favorites',
+      key: 'wishlist',
+      label: 'Wishlist',
       icon: Heart,
-      onClick: () => router.push('/favorites'),
+      onClick: () => router.push('/wishlist'),
     },
     {
       key: 'orders',

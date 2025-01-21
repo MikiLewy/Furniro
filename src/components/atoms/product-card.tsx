@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import { CategoryType } from '@/features/account/categories/api/types/category';
+import { useWishlistItem } from '@/features/wishlist/hooks/query/use-wishlist-item';
 import { cn } from '@/lib/utils';
+import { formatPrice } from '@/utils/format-price';
 
-import { Heart } from '../../icons/heart';
-import { formatPrice } from '../../utils/format-price';
-
+import HeartButton from './heart-button';
 import ImageCard from './image-card';
 import VariantCircle from './variant-circle';
 
@@ -37,6 +38,14 @@ const ProductCard = ({
 }: Props) => {
   const router = useRouter();
 
+  const user = useSession()?.data?.user;
+
+  const { data: wishlistItemData } = useWishlistItem(
+    variants?.[0]?.id,
+    user?.id || '',
+    !!user?.id,
+  );
+
   return (
     <div className="min-w-[300px]">
       <div
@@ -50,9 +59,10 @@ const ProductCard = ({
             size === 'sm' ? 'h-[380px]' : 'h-[450px]',
             'relative group cursor-pointer  w-full',
           )}>
-          <div className="absolute top-4 right-4 z-20">
-            <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 hover:fill-red-600 transition duration-300 " />
-          </div>
+          <HeartButton
+            productVariantId={variants?.[0]?.id}
+            wishlistItemId={wishlistItemData?.id}
+          />
           <Image
             src={imageSrc}
             alt={title}

@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams } from 'next/navigation';
+import { useAction } from 'next-safe-action/hooks';
 import { useQueryState } from 'nuqs';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -9,6 +10,8 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/features/cart/store/cart-store';
+import { addToWishlist } from '@/features/wishlist/server/actions/add-to-wishlist';
+import { removeFromWishlist } from '@/features/wishlist/server/actions/remove-from-wishlist';
 import QuantityInput, {
   quantityFormDefaultValues,
   QuantityFormValues,
@@ -21,6 +24,7 @@ interface Props {
   productName: string;
   thumbnail: string;
   productVariantName: string;
+  wishlistItemId: number | undefined;
 }
 
 const ProductActions = ({
@@ -28,6 +32,7 @@ const ProductActions = ({
   productName,
   productVariantName,
   thumbnail,
+  wishlistItemId,
 }: Props) => {
   const { productId } = useParams<{
     productId: string;
@@ -50,11 +55,13 @@ const ProductActions = ({
     mode: 'onBlur',
   });
 
+  const parsedVariantId = +(variantId || 0);
+
   const onAddToCartClick = () => {
     addToCart({
       price,
       quantity: +form.getValues('quantity'),
-      variantId: +(variantId || 0),
+      variantId: parsedVariantId,
       productId: +(productId || 0),
       productName,
       productVariantName,
@@ -62,6 +69,42 @@ const ProductActions = ({
     });
     form.reset(quantityFormDefaultValues);
     toast.success('Product added to cart');
+  };
+
+  const { execute: addProductToWishlist, status: addProductToWishlistStatus } =
+    useAction(addToWishlist, {
+      onSuccess: ({ data }) => {
+        if (data?.success) {
+          toast.success(data.success);
+        }
+
+        if (data?.error) {
+          toast.error(data.error);
+        }
+      },
+    });
+
+  const {
+    execute: removeProductFromWishlist,
+    status: removeProductFromWishlistStatus,
+  } = useAction(removeFromWishlist, {
+    onSuccess: ({ data }) => {
+      if (data?.success) {
+        toast.success(data.success);
+      }
+
+      if (data?.error) {
+        toast.error(data.error);
+      }
+    },
+  });
+
+  const onClickFavoriteButton = () => {
+    if (wishlistItemId) {
+      removeProductFromWishlist({ wishlistItemId });
+    } else {
+      addProductToWishlist({ productVariantId: parsedVariantId });
+    }
   };
 
   return (
@@ -77,7 +120,14 @@ const ProductActions = ({
           onClick={onAddToCartClick}>
           Add to cart
         </Button>
-        <FavoritesButton />
+        <FavoritesButton
+          isFavorite={!!wishlistItemId}
+          onClick={onClickFavoriteButton}
+          disabled={
+            addProductToWishlistStatus === 'executing' ||
+            removeProductFromWishlistStatus === 'executing'
+          }
+        />
       </div>
     </div>
   );
