@@ -36,7 +36,7 @@ const Providers = ({ children }: Props) => {
           initialIsOpen={false}
           buttonPosition="bottom-left"
         />
-        <Toaster position="top-center" />
+        <Toaster position="bottom-right" />
       </SessionProvider>
     </QueryClientProvider>
   );

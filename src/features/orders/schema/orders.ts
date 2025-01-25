@@ -6,7 +6,7 @@ import { products, productVariants, users } from '@/db/schema';
 
 export const orders = pgTable('orders', {
   id: serial('id').primaryKey(),
-  userId: text('d')
+  userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
   total: real('total').notNull(),
