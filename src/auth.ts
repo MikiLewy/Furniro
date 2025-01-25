@@ -10,8 +10,8 @@ import { ZodError } from 'zod';
 import { db } from '@/db';
 
 import { accounts, users } from './db/schema';
+import { getUserFromDbByEmail } from './features/auth/server/actions/user/get-user-from-db-by-email';
 import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
-import { getUserFromDbByEmail } from './server/actions/user/get-user-from-db-by-email';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),

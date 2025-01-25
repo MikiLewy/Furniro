@@ -8,7 +8,7 @@ import { createSafeActionClient } from 'next-safe-action';
 import { auth } from '@/auth';
 import { db } from '@/db';
 import { users } from '@/db/schema';
-import { getUserFromDbByEmail } from '@/server/actions/user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from '@/features/auth/server/actions/user/get-user-from-db-by-email';
 
 import { updateUserDetailsSchema } from '../validation-schemas/update-user-details-schema';
 
