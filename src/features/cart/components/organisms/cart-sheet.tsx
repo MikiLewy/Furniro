@@ -49,7 +49,7 @@ const CartSheet = () => {
           <div className="flex flex-col gap-4 py-4">
             {cartProducts.map(product => (
               <CartItem
-                key={product.variantId}
+                key={`${product.productId}-${product.variantId}`}
                 variantId={product.variantId}
                 price={product.price}
                 productId={product.productId}

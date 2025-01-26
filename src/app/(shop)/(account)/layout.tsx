@@ -18,9 +18,7 @@ export default async function AccountLayout({
   return (
     <div className="flex gap-4 w-full">
       <Sidebar />
-      <section className="md:px-4 py-4 md:border-l h-[80vh] flex-1">
-        {children}
-      </section>
+      <section className="md:px-4 py-4 md:border-l flex-1">{children}</section>
       <BottomTabsNavigator />
     </div>
   );

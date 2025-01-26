@@ -11,6 +11,7 @@ import { useAction } from 'next-safe-action/hooks';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/features/cart/store/cart-store';
 import { createOrder } from '@/features/orders/server/actions/create-order';
@@ -38,7 +39,7 @@ export default function CheckoutForm() {
         setIsLoading(false);
         setMessage(null);
         toast.success(data.success);
-        // router.push('/checkout/success');
+        router.push('/checkout/success');
       }
 
       if (data?.error) {
@@ -99,8 +100,10 @@ export default function CheckoutForm() {
           error?.type === 'validation_error'
         ) {
           setMessage(error.message || '');
+          return;
         } else if (error) {
           setMessage('An unexpected error occurred.');
+          return;
         }
 
         executeCreateOrder({
@@ -135,7 +138,9 @@ export default function CheckoutForm() {
           {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
         </span>
       </Button>
-      {message && <div id="payment-message">{message}</div>}
+      {message ? (
+        <SubmittedFormMessage message={message} variant="error" />
+      ) : null}
     </form>
   );
 }
