@@ -4,13 +4,15 @@ import { integer, pgTable, real, serial, text } from 'drizzle-orm/pg-core';
 import { timestamps } from '@/db/constants/timestamps';
 import { products, productVariants, users } from '@/db/schema';
 
+import { OrderStatus } from '../api/types/order-status';
+
 export const orders = pgTable('orders', {
   id: serial('id').primaryKey(),
   userId: text('userId')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),
   total: real('total').notNull(),
-  status: text('status').notNull(),
+  status: text('status').$type<OrderStatus>().notNull(),
   receiptURL: text('receiptURL'),
   paymentIntentID: text('paymentIntentID'),
   ...timestamps,
