@@ -1,6 +1,5 @@
 'use server';
 
-// This is your test secret API key.
 import { createSafeActionClient } from 'next-safe-action';
 import Stripe from 'stripe';
 

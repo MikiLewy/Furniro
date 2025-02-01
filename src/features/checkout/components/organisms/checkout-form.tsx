@@ -11,8 +11,8 @@ import { useAction } from 'next-safe-action/hooks';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
 
+import { LoadingButton } from '@/components/atoms/loading-button';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/features/cart/store/cart-store';
 import { createOrder } from '@/features/orders/server/actions/create-order';
 
@@ -129,15 +129,14 @@ export default function CheckoutForm() {
         }}
       />
       <AddressElement options={{ mode: 'shipping' }} />
-      <Button
+      <LoadingButton
         disabled={isLoading || !stripe || !elements}
         id="submit"
         size="lg"
+        loading={isLoading}
         className="self-end">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : 'Pay now'}
-        </span>
-      </Button>
+        Pay now
+      </LoadingButton>
       {message ? (
         <SubmittedFormMessage message={message} variant="error" />
       ) : null}
