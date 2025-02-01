@@ -19,7 +19,7 @@ export const wishlistRelations = relations(wishlist, ({ one }) => ({
   user: one(users, {
     fields: [wishlist.userId],
     references: [users.id],
-    relationName: 'user',
+    relationName: 'user_wishlist',
   }),
   productVariant: one(productVariants, {
     fields: [wishlist.productVariantId],

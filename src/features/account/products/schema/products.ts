@@ -1,7 +1,7 @@
 import { relations } from 'drizzle-orm';
 import { pgTable, serial, text, real } from 'drizzle-orm/pg-core';
 
-import { categories } from '@/db/schema';
+import { categories, reviews } from '@/db/schema';
 import { productVariants } from '@/features/account/products/schema/product-variants';
 
 import { timestamps } from '../../../../db/constants/timestamps';
@@ -23,5 +23,8 @@ export const productsRelations = relations(products, ({ one, many }) => ({
   }),
   productVariants: many(productVariants, {
     relationName: 'product_variants',
+  }),
+  reviews: many(reviews, {
+    relationName: 'product_reviews',
   }),
 }));

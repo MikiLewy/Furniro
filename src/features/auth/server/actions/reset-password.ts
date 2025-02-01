@@ -2,7 +2,7 @@
 
 import { createSafeActionClient } from 'next-safe-action';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { sendForgotPasswordEmail } from '../emails/forgot-password';
 import { resetPasswordSchema } from '../validation-schemas/reset-password-schema';
 

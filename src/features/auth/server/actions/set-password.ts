@@ -9,7 +9,7 @@ import { createSafeActionClient } from 'next-safe-action';
 import { db } from '@/db';
 import { resetPasswordTokens, users } from '@/db/schema';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { setPasswordSchema } from '../validation-schemas/set-password-schema';
 
 const actionClient = createSafeActionClient();

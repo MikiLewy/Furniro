@@ -18,7 +18,7 @@ import { Button } from '../ui/button';
 
 export interface DialogActions {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   onSubmit?: () => void;
 }
 
@@ -65,17 +65,21 @@ const Dialog = ({
         {children}
         <DialogFooter className="mt-4 gap-2">
           {actionsSlot}
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              {cancelButtonText ? cancelButtonText : 'Cancel'}
-            </Button>
-          </DialogClose>
-          <LoadingButton
-            disabled={isSubmitButtonDisabled}
-            loading={isSubmitButtonLoading}
-            onClick={onSubmit}>
-            {confirmButtonText ? confirmButtonText : 'Confirm'}
-          </LoadingButton>
+          {onClose ? (
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                {cancelButtonText ? cancelButtonText : 'Cancel'}
+              </Button>
+            </DialogClose>
+          ) : null}
+          {onSubmit ? (
+            <LoadingButton
+              disabled={isSubmitButtonDisabled}
+              loading={isSubmitButtonLoading}
+              onClick={onSubmit}>
+              {confirmButtonText ? confirmButtonText : 'Confirm'}
+            </LoadingButton>
+          ) : null}
         </DialogFooter>
       </DialogContent>
     </DialogUi>

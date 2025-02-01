@@ -6,7 +6,7 @@ import { createSafeActionClient } from 'next-safe-action';
 import { db } from '@/db';
 import { users } from '@/db/schema';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { sendVerificationEmail } from '../emails/email-verification';
 import { signUpSchema } from '../validation-schemas/sign-up-schema';
 

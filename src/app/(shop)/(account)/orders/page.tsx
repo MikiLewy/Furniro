@@ -1,9 +1,7 @@
+import Orders from '@/features/orders/components/templates/orders';
+
 const OrdersPage = () => {
-  return (
-    <div>
-      <h1>Orders</h1>
-    </div>
-  );
+  return <Orders />;
 };
 
 export default OrdersPage;

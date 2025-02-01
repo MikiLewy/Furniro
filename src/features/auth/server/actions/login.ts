@@ -8,7 +8,7 @@ import { signIn } from '@/auth';
 import { db } from '@/db';
 import { twoFactorTokens } from '@/db/schema';
 
-import { getUserFromDbByEmail } from '../../../../server/actions/user/get-user-from-db-by-email';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { sendVerificationEmail } from '../emails/email-verification';
 import { sendOTPCodeEmail } from '../emails/otp-code';
 import { signInSchema } from '../validation-schemas/sign-in-schema';
