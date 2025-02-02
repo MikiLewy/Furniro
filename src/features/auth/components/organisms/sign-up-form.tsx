@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -18,9 +17,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signUpAction } from '@/features/auth/server/actions/sign-up';
 import { signUpSchema } from '@/features/auth/server/validation-schemas/sign-up-schema';
 
+import { useSignUp } from '../../hooks/action/use-sign-up';
 import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 import AuthFormHeader from '../atoms/auth-form-header';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
@@ -45,18 +44,12 @@ const SignUpForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useAction(signUpAction, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        setSuccess(data.success);
-        form.reset(defaultValues);
-      }
+  const onSuccessSignUp = (message: string) => {
+    setSuccess(message);
+    form.reset(defaultValues);
+  };
 
-      if (data?.error) {
-        setError(data.error);
-      }
-    },
-  });
+  const { execute } = useSignUp(onSuccessSignUp, setError);
 
   const onSubmit = (values: FormValues) => {
     setError(null);

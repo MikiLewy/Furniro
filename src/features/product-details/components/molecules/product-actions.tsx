@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams } from 'next/navigation';
-import { useAction } from 'next-safe-action/hooks';
 import { useQueryState } from 'nuqs';
 import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -10,8 +9,8 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/features/cart/store/cart-store';
-import { addToWishlist } from '@/features/wishlist/server/actions/add-to-wishlist';
-import { removeFromWishlist } from '@/features/wishlist/server/actions/remove-from-wishlist';
+import { useAddProductToWishlist } from '@/features/wishlist/hooks/action/use-add-product-to-wishlist';
+import { useRemoveProductFromWishlist } from '@/features/wishlist/hooks/action/use-remove-product-from-wishlist';
 import QuantityInput, {
   quantityFormDefaultValues,
   QuantityFormValues,
@@ -72,32 +71,12 @@ const ProductActions = ({
   };
 
   const { execute: addProductToWishlist, status: addProductToWishlistStatus } =
-    useAction(addToWishlist, {
-      onSuccess: ({ data }) => {
-        if (data?.success) {
-          toast.success(data.success);
-        }
-
-        if (data?.error) {
-          toast.error(data.error);
-        }
-      },
-    });
+    useAddProductToWishlist();
 
   const {
     execute: removeProductFromWishlist,
     status: removeProductFromWishlistStatus,
-  } = useAction(removeFromWishlist, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  } = useRemoveProductFromWishlist();
 
   const onClickFavoriteButton = () => {
     if (wishlistItemId) {

@@ -39,7 +39,7 @@ const VariantImages = () => {
   });
 
   return (
-    <div>
+    <div className="max-w-[280px] sm:max-w-full">
       <FormField
         control={control}
         name="variantImages"
@@ -48,7 +48,7 @@ const VariantImages = () => {
             <FormLabel>Variant Tags</FormLabel>
             <FormControl>
               <UploadDropzone
-                className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm "
+                className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm max-w-[280px] sm:max-w-full "
                 endpoint="productVariant"
                 onUploadError={error =>
                   setError('variantImages', {

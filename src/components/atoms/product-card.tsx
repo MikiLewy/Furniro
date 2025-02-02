@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import { CategoryType } from '@/features/account/categories/api/types/category';
+import { useAddProductToWishlist } from '@/features/wishlist/hooks/action/use-add-product-to-wishlist';
+import { useRemoveProductFromWishlist } from '@/features/wishlist/hooks/action/use-remove-product-from-wishlist';
 import { useWishlistItem } from '@/features/wishlist/hooks/query/use-wishlist-item';
 import { cn } from '@/lib/utils';
 import { formatPrice } from '@/utils/format-price';
@@ -46,6 +48,20 @@ const ProductCard = ({
     !!user?.id,
   );
 
+  const { execute: addProductToWishlist } = useAddProductToWishlist();
+
+  const { execute: removeProductFromWishlist } = useRemoveProductFromWishlist();
+
+  const onClickWishlistButton = () => {
+    if (wishlistItemData?.id) {
+      removeProductFromWishlist({
+        wishlistItemId: wishlistItemData?.id,
+      });
+    } else {
+      addProductToWishlist({ productVariantId: variants?.[0]?.id });
+    }
+  };
+
   return (
     <div className="min-w-[300px]">
       <div
@@ -60,8 +76,8 @@ const ProductCard = ({
             'relative group cursor-pointer  w-full',
           )}>
           <HeartButton
-            productVariantId={variants?.[0]?.id}
-            wishlistItemId={wishlistItemData?.id}
+            onClick={onClickWishlistButton}
+            isAddedToWishlist={!!wishlistItemData?.id}
           />
           <Image
             src={imageSrc}

@@ -2,10 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams } from 'next/navigation';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import { Textarea } from '@/components/atoms/textarea';
@@ -20,7 +18,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { RATING_SCALE } from '@/features/product-details/constants/rating-scale';
-import { createReview } from '@/features/product-details/server/actions/create-review';
+import { useCreateReview } from '@/features/product-details/hooks/action/use-create-review';
 import { createReviewSchema } from '@/features/product-details/server/validation-schemas/create-review-schema';
 
 import Ratings from '../../atoms/ratings';
@@ -45,18 +43,7 @@ const CreateReviewDialog = ({ open, onClose }: DialogActions) => {
     defaultValues,
   });
 
-  const { execute, status } = useAction(createReview, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useCreateReview(onClose);
 
   const onSubmit = (values: FormValues) => {
     execute({ ...values, productId: +productId, category });

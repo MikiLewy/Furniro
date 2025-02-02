@@ -65,7 +65,8 @@ export function OrdersTable<TData, TValue>({
   ];
 
   return (
-    <div>
+    // <ScrollArea className="w-full">
+    <>
       <div className="flex items-center py-4 gap-2">
         {table.getColumn('status') ? (
           <TableFacetedFilter
@@ -86,6 +87,8 @@ export function OrdersTable<TData, TValue>({
       </div>
       <Table columnsLength={columns.length} table={table} />
       <TablePagination table={table} />
-    </div>
+    </>
+    //   <ScrollBar orientation="horizontal" />
+    // </ScrollArea>
   );
 }

@@ -4,7 +4,7 @@ import SectionTitle from '@components/atoms/section-title';
 import ClientRecommendedProducts from './recommended-products.client';
 
 const ServerRecommendedProducts = async () => {
-  const products = await getProductsWithVariantsAndCategory({});
+  const products = await getProductsWithVariantsAndCategory({ limit: 9 });
 
   return (
     <section>

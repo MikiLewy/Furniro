@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -17,9 +16,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { resetPasswordAction } from '@/features/auth/server/actions/reset-password';
 import { resetPasswordSchema } from '@/features/auth/server/validation-schemas/reset-password-schema';
 
+import { useResetPassword } from '../../hooks/action/use-reset-password';
 import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 import AuthFormHeader from '../atoms/auth-form-header';
 
@@ -40,17 +39,7 @@ const ForgotPasswordForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useAction(resetPasswordAction, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        setSuccess(data.success);
-      }
-
-      if (data?.error) {
-        setError(data.error);
-      }
-    },
-  });
+  const { execute } = useResetPassword(setSuccess, setError);
 
   const onSubmit = (values: FormValues) => {
     setSuccess(null);

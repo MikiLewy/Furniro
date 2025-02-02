@@ -7,16 +7,14 @@ import {
   AddressElement,
 } from '@stripe/react-stripe-js';
 import { useRouter } from 'next/navigation';
-import { useAction } from 'next-safe-action/hooks';
 import { FormEvent, useState } from 'react';
-import toast from 'react-hot-toast';
 
 import { LoadingButton } from '@/components/atoms/loading-button';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
 import { useCartStore } from '@/features/cart/store/cart-store';
-import { createOrder } from '@/features/orders/server/actions/create-order';
 
-import { createPaymentIntent } from '../../server/actions/create-payment-intent';
+import { useCreateOrder } from '../../hooks/action/use-create-order';
+import { useCreatePaymentIntent } from '../../hooks/action/use-create-payment-intent';
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -30,23 +28,15 @@ export default function CheckoutForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { executeAsync: executeCreatePaymentIntent } =
-    useAction(createPaymentIntent);
+  const { executeAsync: executeCreatePaymentIntent } = useCreatePaymentIntent();
 
-  const { execute: executeCreateOrder } = useAction(createOrder, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        setIsLoading(false);
-        setMessage(null);
-        toast.success(data.success);
-        router.push('/checkout/success');
-      }
+  const onSuccessCreateOrder = () => {
+    setIsLoading(false);
+    setMessage(null);
+    router.push('/checkout/success');
+  };
 
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute: executeCreateOrder } = useCreateOrder(onSuccessCreateOrder);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

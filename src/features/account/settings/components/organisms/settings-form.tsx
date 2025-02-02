@@ -2,10 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import * as z from 'zod';
 
 import { PasswordInput } from '@/components/atoms/password-input';
@@ -32,7 +30,7 @@ import { updateUserDetailsSchema } from '@/features/account/settings/components/
 import { ExtendUser } from '@/next-auth';
 import { UploadButton } from '@/utils/uploadthing';
 
-import { updateUserDetails } from '../server/actions/update-user-details';
+import { useUpdateUserDetails } from '../../hooks/action/use-update-user-details';
 
 type FormValues = z.infer<typeof updateUserDetailsSchema>;
 
@@ -62,17 +60,7 @@ const SettingsForm = ({ user }: Props) => {
 
   const image = form.watch('image');
 
-  const { execute, status } = useAction(updateUserDetails, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useUpdateUserDetails();
 
   const onSubmit = (values: FormValues) => {
     execute(values);

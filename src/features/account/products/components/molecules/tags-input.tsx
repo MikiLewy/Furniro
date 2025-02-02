@@ -41,7 +41,7 @@ const TagsInput = forwardRef<HTMLInputElement, Props>(
       <div
         onClick={() => setFocus('tags')}
         className={cn(
-          'flex  w-full rounded-md border border-input bg-background  text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          'flex  w-full rounded-md border border-input bg-background text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 max-w-full ',
           focused
             ? 'ring-offset-2 outline-none ring-ring ring-2'
             : 'ring-offset-0 outline-none ring-ring ring-0',

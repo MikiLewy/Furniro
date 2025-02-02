@@ -36,7 +36,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-4 lg:flex-row lg:gap-8 h-full">
+    <div className="flex-1 w-full flex flex-col gap-4 lg:flex-row lg:gap-8 min-h-full">
       <div className="flex-1 flex flex-col gap-4 lg:gap-6 py-4 lg:py-10 px-4 md:px-6 lg:px-8">
         <Logo />
         <Breadcrumb>

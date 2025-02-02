@@ -16,11 +16,15 @@ const ProductRating = async ({ productId }: Props) => {
     productReviews?.length,
   );
 
+  const decimalRating = convertRatingToDecimal(averageRating);
+
   return (
     <div className="flex items-center gap-2 p-2 bg-zinc-50 rounded-full">
-      <p className="text-sm text-secondary-darker font-medium">
-        {convertRatingToDecimal(averageRating)}
-      </p>
+      {decimalRating && decimalRating !== '0' ? (
+        <p className="text-sm text-secondary-darker font-medium">
+          {decimalRating}
+        </p>
+      ) : null}
       <Ratings
         rating={Math.round(averageRating)}
         ratingScale={RATING_SCALE}

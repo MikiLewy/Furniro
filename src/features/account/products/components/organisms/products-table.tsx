@@ -62,29 +62,31 @@ export function ProductsTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center py-4 gap-2">
         <SearchBar
           query={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           handleChangeQuery={value =>
             table.getColumn('name')?.setFilterValue(value)
           }
         />
-        {table.getColumn('productCategory') ? (
-          <TableFacetedFilter
-            column={table.getColumn('productCategory')}
-            title="Category"
-            options={categoriesFilters}
-          />
-        ) : null}
-        {isFiltered ? (
-          <Button
-            variant="ghost"
-            onClick={() => table.resetColumnFilters()}
-            className="text-sm px-2 lg:px-3">
-            Reset
-            <Cross2Icon className="ml-2 h-4 w-4" />
-          </Button>
-        ) : null}
+        <div className="flex items-center gap-2">
+          {table.getColumn('productCategory') ? (
+            <TableFacetedFilter
+              column={table.getColumn('productCategory')}
+              title="Category"
+              options={categoriesFilters}
+            />
+          ) : null}
+          {isFiltered ? (
+            <Button
+              variant="ghost"
+              onClick={() => table.resetColumnFilters()}
+              className="text-sm px-2 lg:px-3">
+              Reset
+              <Cross2Icon className="ml-2 h-4 w-4" />
+            </Button>
+          ) : null}
+        </div>
         <TableViewOptions table={table} />
       </div>
       <Table columnsLength={columns.length} table={table} />

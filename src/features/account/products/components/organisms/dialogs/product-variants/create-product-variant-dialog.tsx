@@ -1,10 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
@@ -16,7 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { createProductVariant } from '@/features/account/products/server/actions/create-product-variant';
+import { useCreateProductVariant } from '@/features/account/products/hooks/action/use-create-product-variant';
 import { createProductVariantSchema } from '@/features/account/products/server/validation-schemas/create-product-variant-schema';
 
 import TagsInput from '../../../molecules/tags-input';
@@ -41,17 +39,7 @@ const CreateProductVariantDialog = ({ productId, open, onClose }: Props) => {
     defaultValues,
   });
 
-  const { execute, status } = useAction(createProductVariant, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useCreateProductVariant(onClose);
 
   const onSubmit = (values: FormValues) => {
     execute({ ...values, productId });

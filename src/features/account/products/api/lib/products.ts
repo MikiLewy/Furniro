@@ -50,11 +50,14 @@ export const getProductsWithVariantsImages = async ({
 
 export const getProductsWithVariantsAndCategory = async ({
   categoryId,
+  limit,
 }: {
   categoryId?: number;
+  limit?: number;
 }) => {
   const response = await db.query.products.findMany({
     where: categoryId ? eq(products.categoryId, categoryId) : undefined,
+    limit,
     with: {
       productVariants: {
         with: {
