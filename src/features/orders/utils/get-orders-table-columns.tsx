@@ -38,6 +38,9 @@ export const getOrdersTableColumns = (
       accessorKey: 'status',
       meta: 'status',
       enableHiding: false,
+      filterFn: (rows, columnId, filterValue) => {
+        return filterValue.includes(rows.getValue(columnId));
+      },
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Status" />;
       },
@@ -65,7 +68,7 @@ export const getOrdersTableColumns = (
       },
     },
     {
-      accessorKey: 'createdAt',
+      accessorKey: 'created_at',
       meta: 'Created at',
       enableHiding: false,
       header: ({ column }) => {

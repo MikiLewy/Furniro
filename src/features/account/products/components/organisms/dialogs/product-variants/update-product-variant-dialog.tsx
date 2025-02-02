@@ -1,10 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import { LoadingButton } from '@/components/atoms/loading-button';
@@ -18,8 +16,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { ProductVariantsWithImagesAndTags } from '@/features/account/products/api/types/product-variant';
-import { removeProductVariant } from '@/features/account/products/server/actions/remove-product-variant';
-import { updateProductVariant } from '@/features/account/products/server/actions/update-product-variant';
+import { useRemoveProductVariant } from '@/features/account/products/hooks/action/use-remove-product-variant';
+import { useUpdateProductVariant } from '@/features/account/products/hooks/action/use-update-product-variant';
 import { updateProductVariantSchema } from '@/features/account/products/server/validation-schemas/update-product-variant-schema';
 
 import TagsInput from '../../../molecules/tags-input';
@@ -53,32 +51,12 @@ const UpdateProductVariantDialog = ({
   const {
     execute: executeUpdateProductVariant,
     status: updateProductVariantStatus,
-  } = useAction(updateProductVariant, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  } = useUpdateProductVariant(onClose);
 
   const {
     execute: executeRemoveProductVariant,
     status: removeProductVariantStatus,
-  } = useAction(removeProductVariant, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  } = useRemoveProductVariant(onClose);
 
   const onSubmit = (values: FormValues) => {
     executeUpdateProductVariant({ ...values, productId, id: variant?.id });

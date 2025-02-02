@@ -1,11 +1,8 @@
 'use client';
 
-import { useAction } from 'next-safe-action/hooks';
-import toast from 'react-hot-toast';
-
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
 
-import { removeCategory } from '../../../server/actions/remove-category';
+import { useRemoveCategory } from '../../../hooks/action/use-remove-category';
 
 interface Props extends DialogActions {
   id: number;
@@ -13,18 +10,7 @@ interface Props extends DialogActions {
 }
 
 const RemoveCategoryDialog = ({ open, onClose, id, categoryName }: Props) => {
-  const { execute, status } = useAction(removeCategory, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useRemoveCategory(onClose);
 
   return (
     <Dialog

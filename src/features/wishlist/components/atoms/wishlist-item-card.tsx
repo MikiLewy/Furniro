@@ -3,7 +3,6 @@
 import { X } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useAction } from 'next-safe-action/hooks';
 import toast from 'react-hot-toast';
 
 import ImageCard from '@/components/atoms/image-card';
@@ -12,7 +11,7 @@ import { useCartStore } from '@/features/cart/store/cart-store';
 import { cn } from '@/lib/utils';
 import { formatPrice } from '@/utils/format-price';
 
-import { removeFromWishlist } from '../../server/actions/remove-from-wishlist';
+import { useRemoveProductFromWishlist } from '../../hooks/action/use-remove-product-from-wishlist';
 
 interface Props {
   wishlistItemId: number;
@@ -39,17 +38,7 @@ const WishlistItemCard = ({
 
   const addToCart = useCartStore(state => state.addToCart);
 
-  const { execute: removeProductFromWishlist } = useAction(removeFromWishlist, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute: removeProductFromWishlist } = useRemoveProductFromWishlist();
 
   return (
     <div className="min-w-[300px]">
@@ -93,6 +82,7 @@ const WishlistItemCard = ({
               thumbnail: imageSrc,
               quantity: 1,
             });
+            toast.success('Product added to cart');
           }}>
           Add to cart
         </Button>

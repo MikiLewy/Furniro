@@ -2,10 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import TipTap from '@/components/molecules/tip-tap';
@@ -31,7 +29,7 @@ import { updateCategorySchema } from '@/features/account/categories/server/valid
 import { UploadDropzone } from '@/utils/uploadthing';
 
 import { categoriesTypes } from '../../../constants/categories-types';
-import { updateCategory } from '../../../server/actions/update-category';
+import { useUpdateCategory } from '../../../hooks/action/use-update-category';
 
 type FormValues = z.infer<typeof updateCategorySchema>;
 
@@ -75,18 +73,7 @@ const UpdateCategoryDialog = ({
 
   const categoryPageMainImage = form.watch('mainImage');
 
-  const { execute, status } = useAction(updateCategory, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useUpdateCategory(onClose);
 
   useEffect(() => {
     if (!open) {
@@ -180,7 +167,7 @@ const UpdateCategoryDialog = ({
               <FormLabel>Category image</FormLabel>
               <div className="flex flex-col  gap-2">
                 <UploadDropzone
-                  className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm "
+                  className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm max-w-[280px] sm:max-w-full "
                   endpoint="productCategory"
                   content={{
                     button({ ready, isUploading }) {
@@ -275,7 +262,7 @@ const UpdateCategoryDialog = ({
               <FormLabel>Category page image</FormLabel>
               <div className="flex flex-col  gap-2">
                 <UploadDropzone
-                  className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm "
+                  className="ut-button:ring-primary cursor-pointer hover:ut-label:text-primary ut-button:bg-primary/85 hover:ut-button:bg-primary ut-button:transition-all ut-button:duration-500 ut-button:text-sm max-w-[280px] sm:max-w-full "
                   endpoint="productCategoryMainImage"
                   content={{
                     button({ ready, isUploading }) {

@@ -1,11 +1,8 @@
 'use client';
 
-import { useAction } from 'next-safe-action/hooks';
-import toast from 'react-hot-toast';
-
 import Dialog, { DialogActions } from '@/components/organisms/dialog';
 
-import { removeProduct } from '../../../server/actions/remove-product';
+import { useRemoveProduct } from '../../../hooks/action/use-remove-product';
 
 interface Props extends DialogActions {
   id: number;
@@ -13,18 +10,7 @@ interface Props extends DialogActions {
 }
 
 const RemoveProductDialog = ({ open, onClose, id, productName }: Props) => {
-  const { execute, status } = useAction(removeProduct, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useRemoveProduct(onClose);
 
   return (
     <Dialog
