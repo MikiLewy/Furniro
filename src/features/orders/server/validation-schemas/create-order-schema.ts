@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const createOrderSchema = z.object({
   total: z.number(),
-  status: z.string(),
+  status: z.union([z.literal('pending'), z.literal('succeeded')]),
   paymentIntentId: z.string(),
   products: z.array(
     z.object({
