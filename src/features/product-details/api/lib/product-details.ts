@@ -19,6 +19,12 @@ export const getProductWithVariants = async ({
       product: {
         with: {
           productVariants: true,
+          productCategory: {
+            columns: {
+              name: true,
+              type: true,
+            },
+          },
         },
       },
       variantImages: true,

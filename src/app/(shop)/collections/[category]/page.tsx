@@ -1,15 +1,23 @@
+import { SearchParams } from 'nuqs';
+
 import CategoriesList from '@/components/organisms/categories-list';
 import { getCategories } from '@/features/account/categories/api/lib/categories';
+import { productsSearchParamsCache } from '@/features/account/products/lib/search-params-cache';
+import { Products } from '@/features/products/components/templates/products';
 import productsHeaderImg from '@assets/images/products-page.webp';
 import Header from '@features/products/components/organisms/header';
-import ProductsList from '@features/products/components/organisms/products-list';
 
 interface Props {
   params: Promise<{ category: string }>;
+  searchParams: Promise<SearchParams>;
 }
 
-const ProductsPage = async ({ params }: Props) => {
+const ProductsPage = async ({ params, searchParams }: Props) => {
   const categorySlug = (await params).category;
+
+  const parsedSearchParams = productsSearchParamsCache.parse(
+    await searchParams,
+  );
 
   const categories = await getCategories();
 
@@ -34,8 +42,11 @@ const ProductsPage = async ({ params }: Props) => {
         }
         image={category?.mainImage ? category.mainImage : productsHeaderImg}
       />
-      {categorySlug === 'all' || !category ? <CategoriesList /> : null}
-      <ProductsList categoryId={category?.id} />
+      <CategoriesList />
+      <Products
+        categoryId={category?.id}
+        parsedSearchParams={parsedSearchParams}
+      />
     </section>
   );
 };

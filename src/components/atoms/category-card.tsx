@@ -16,7 +16,7 @@ const CategoryCard = ({ name, image, type }: Props) => {
 
   return (
     <div
-      className="bg-[#f8f8f8] cursor-pointer px-2 py-8 flex-1 flex flex-col items-center justify-center gap-2 rounded-3xl transition duration-500 hover:scale-105 hover:bg-[#f5f5f5]"
+      className="bg-[#f8f8f8]  cursor-pointer px-2 py-8 flex-1 flex flex-col items-center justify-center gap-2 rounded-3xl transition duration-500 hover:scale-105 hover:bg-[#f5f5f5]"
       onClick={() => router.push(`/collections/${type}`)}>
       <Image
         src={image}

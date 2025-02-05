@@ -8,8 +8,6 @@ import { z } from 'zod';
 import { db } from '@/db';
 import { productVariants } from '@/db/schema';
 
-import algoliasearch from '../../api/clients/algoliasearch';
-
 const action = createSafeActionClient();
 
 export const removeProductVariant = action
@@ -25,11 +23,6 @@ export const removeProductVariant = action
       }
 
       await db.delete(productVariants).where(eq(productVariants.id, id));
-
-      await algoliasearch.deleteObject({
-        indexName: 'products',
-        objectID: id.toString(),
-      });
 
       revalidatePath('/content/products');
       return { success: 'Successfully deleted product variant' };
