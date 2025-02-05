@@ -6,7 +6,6 @@ import { createSafeActionClient } from 'next-safe-action';
 
 import { db } from '@/db';
 
-import algoliasearch from '../../api/clients/algoliasearch';
 import {
   productVariants,
   variantTags,
@@ -63,19 +62,6 @@ export const updateProductVariant = action
             })),
           );
         }
-
-        await algoliasearch.partialUpdateObject({
-          indexName: 'products',
-          objectID: editedVariant[0].id.toString(),
-          attributesToUpdate: {
-            objectID: editedVariant[0].id,
-            id: productId,
-            variantName: editedVariant[0].name,
-            color,
-            tags,
-            variantImages: variantImages[0].url,
-          },
-        });
 
         revalidatePath('/content/products');
         return { success: 'Successfully updated product variant' };

@@ -1,9 +1,11 @@
 'use client';
 
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper } from 'swiper/react';
+
+import { cn } from '@/lib/utils';
 
 import { Arrow } from '../../../../icons/arrow';
 import 'swiper/css';
@@ -15,8 +17,14 @@ interface Props {
 const RecommendedProductsSlider = ({ children }: Props) => {
   const swiperRef = useRef<SwiperType>();
 
+  const [shouldShowSlider, setShouldShowSlider] = useState(false);
+
   return (
     <Swiper
+      className={cn(
+        shouldShowSlider ? 'opacity-100' : 'opacity-0 ',
+        'relative transition-all duration-500',
+      )}
       spaceBetween={10}
       slidesPerView={1}
       breakpoints={{
@@ -37,9 +45,9 @@ const RecommendedProductsSlider = ({ children }: Props) => {
       scrollbar={{ draggable: true }}
       onBeforeInit={swiper => {
         swiperRef.current = swiper;
+        setShouldShowSlider(true);
       }}
-      direction="horizontal"
-      className="relative">
+      direction="horizontal">
       {children}
       <div
         onClick={() => swiperRef.current?.slidePrev()}
