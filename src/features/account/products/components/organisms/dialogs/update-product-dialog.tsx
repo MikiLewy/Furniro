@@ -2,10 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DollarSign } from 'lucide-react';
-import { useAction } from 'next-safe-action/hooks';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { z } from 'zod';
 
 import TipTap from '@/components/molecules/tip-tap';
@@ -26,9 +24,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Category } from '@/features/account/categories/api/types/category';
-import { categoryIcons } from '@/features/account/categories/constants/categories-icons';
+import { categoriesTypes } from '@/features/account/categories/constants/categories-types';
 
-import { updateProduct } from '../../../server/actions/update-product';
+import { useUpdateProduct } from '../../../hooks/action/use-update-product';
 import { updateProductSchema } from '../../../server/validation-schemas/update-product-schema';
 
 type FormValues = Omit<z.infer<typeof updateProductSchema>, 'id'>;
@@ -65,18 +63,7 @@ const UpdateProductDialog = ({
     resolver: zodResolver(updateProductSchema),
   });
 
-  const { execute, status } = useAction(updateProduct, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        toast.success(data.success);
-        onClose();
-      }
-
-      if (data?.error) {
-        toast.error(data.error);
-      }
-    },
-  });
+  const { execute, status } = useUpdateProduct(onClose);
 
   useEffect(() => {
     if (!open) {
@@ -111,6 +98,7 @@ const UpdateProductDialog = ({
       isSubmitButtonDisabled={
         !form.formState.isValid || !form.formState.isDirty
       }
+      scrollable
       confirmButtonText="Update">
       <FormProvider {...form}>
         <FormField
@@ -189,8 +177,8 @@ const UpdateProductDialog = ({
                 </FormControl>
                 <SelectContent>
                   {categories ? (
-                    Object.values(categories).map(({ id, name, icon }) => {
-                      const Icon = categoryIcons[icon].icon;
+                    Object.values(categories).map(({ id, name, type }) => {
+                      const Icon = categoriesTypes[type].icon;
 
                       return (
                         <SelectItem key={id} value={id.toString()}>

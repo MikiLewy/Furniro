@@ -6,14 +6,17 @@ import { FormatDate } from '@/components/atoms/format-date';
 import { TableColumnHeader } from '@/components/organisms/table/table-column-header';
 import { dateFormats } from '@/constants/date-formats';
 
-import { Category, CategoryIcon } from '../api/types/category';
-import { categoryIcons } from '../constants/categories-icons';
+import { Category, CategoryType } from '../api/types/category';
+import { categoriesTypes } from '../constants/categories-types';
 
 export interface CategoriesActionSlotPayload {
   id: number;
   name: string;
-  icon: CategoryIcon;
+  type: CategoryType;
   image: string;
+  subtitle: string;
+  description: string;
+  mainImage: string;
 }
 
 export const getCategoriesTableColumns = (
@@ -48,14 +51,14 @@ export const getCategoriesTableColumns = (
       },
     },
     {
-      accessorKey: 'icon',
+      accessorKey: 'type',
       meta: 'icon',
       enableHiding: false,
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Icon" />;
       },
       cell: ({ getValue }) => {
-        const Icon = categoryIcons[getValue() as CategoryIcon].icon;
+        const Icon = categoriesTypes[getValue() as CategoryType]?.icon;
 
         return <Icon />;
       },
@@ -91,8 +94,11 @@ export const getCategoriesTableColumns = (
         return actionsSlot({
           id: category.id,
           name: category.name,
-          icon: category.icon,
+          type: category.type,
           image: category.image || '',
+          subtitle: category.subtitle || '',
+          description: category.description || '',
+          mainImage: category.mainImage || '',
         });
       },
     },

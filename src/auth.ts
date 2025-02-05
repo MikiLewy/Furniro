@@ -5,18 +5,34 @@ import NextAuth from 'next-auth';
 import { encode, decode } from 'next-auth/jwt';
 import Credentials from 'next-auth/providers/credentials';
 import Google from 'next-auth/providers/google';
+import Stripe from 'stripe';
 import { ZodError } from 'zod';
 
 import { db } from '@/db';
 
 import { accounts, users } from './db/schema';
+import { getUserFromDbByEmail } from './features/auth/server/actions/user/get-user-from-db-by-email';
 import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
-import { getUserFromDbByEmail } from './server/actions/user/get-user-from-db-by-email';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
   session: {
     strategy: 'jwt',
+  },
+  events: {
+    createUser: async ({ user }) => {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+      const customer = await stripe.customers.create({
+        email: user.email || '',
+        name: user.name || '',
+      });
+
+      await db
+        .update(users)
+        .set({ customerId: customer.id })
+        .where(eq(users.id, user.id || ''));
+    },
   },
   jwt: { encode, decode },
   callbacks: {

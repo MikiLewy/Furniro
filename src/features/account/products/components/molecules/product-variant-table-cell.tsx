@@ -3,6 +3,7 @@
 import { PlusCircle } from 'lucide-react';
 import { useState } from 'react';
 
+import VariantCircle from '@/components/atoms/variant-circle';
 import {
   Tooltip,
   TooltipContent,
@@ -44,13 +45,13 @@ const ProductVariantTableCell = ({ variants, productId }: Props) => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div
+                  <VariantCircle
                     onClick={() => {
                       setSelectedVariant(variant);
                       handleOpenUpdateProductVariantDialog();
                     }}
-                    className="h-5 w-5 rounded-full cursor-pointer"
-                    style={{ background: variant?.color }}
+                    color={variant.color}
+                    name={variant.name}
                   />
                 </TooltipTrigger>
                 <TooltipContent>

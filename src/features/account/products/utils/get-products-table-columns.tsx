@@ -64,7 +64,7 @@ export const getProductsTableColumns = (
       filterFn: (rows, columnId, filterValue) => {
         const category = rows.getValue(columnId) as Category;
 
-        return category.id === Number(filterValue);
+        return filterValue.includes(category.id.toString());
       },
       header: ({ column }) => {
         return <TableColumnHeader column={column} title="Category" />;

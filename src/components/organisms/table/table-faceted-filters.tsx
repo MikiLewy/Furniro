@@ -1,7 +1,5 @@
-'use client';
-
-import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons';
 import { Column } from '@tanstack/react-table';
+import { Check, PlusCircle } from 'lucide-react';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -25,7 +23,6 @@ import { Separator } from '@components/ui/separator';
 interface TableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
   title?: string;
-  isFilteredValueBoolean?: boolean;
   options: {
     label: string;
     value: string;
@@ -37,21 +34,15 @@ export function TableFacetedFilter<TData, TValue>({
   column,
   title,
   options,
-  isFilteredValueBoolean,
 }: TableFacetedFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
-
-  const selectedValues = new Set(
-    (column?.getFilterValue() as number[] | string[] | boolean[])?.map(val =>
-      val.toString(),
-    ),
-  );
+  const selectedValues = new Set(column?.getFilterValue() as string[]);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <PlusCircle className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -66,7 +57,7 @@ export function TableFacetedFilter<TData, TValue>({
                   <Badge
                     variant="secondary"
                     className="rounded-sm px-1 font-normal">
-                    Selected: {selectedValues.size}
+                    {selectedValues.size} selected
                   </Badge>
                 ) : (
                   options
@@ -104,13 +95,7 @@ export function TableFacetedFilter<TData, TValue>({
                       }
                       const filterValues = Array.from(selectedValues);
                       column?.setFilterValue(
-                        filterValues.length
-                          ? isFilteredValueBoolean
-                            ? filterValues?.map(value =>
-                                value === 'true' ? true : false,
-                              )
-                            : filterValues
-                          : undefined,
+                        filterValues.length ? filterValues : undefined,
                       );
                     }}>
                     <div
@@ -120,7 +105,7 @@ export function TableFacetedFilter<TData, TValue>({
                           ? 'bg-primary text-primary-foreground'
                           : 'opacity-50 [&_svg]:invisible',
                       )}>
-                      <CheckIcon className={cn('h-4 w-4')} />
+                      <Check className={cn('h-4 w-4')} />
                     </div>
                     {option.icon && (
                       <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />

@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams } from 'next/navigation';
-import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -18,9 +17,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { setPasswordAction } from '@/features/auth/server/actions/set-password';
 import { setPasswordSchema } from '@/features/auth/server/validation-schemas/set-password-schema';
 
+import { useSetPassword } from '../../hooks/action/use-set-password';
 import AuthFormHeader from '../atoms/auth-form-header';
 
 type FormValues = z.infer<typeof setPasswordSchema>;
@@ -43,17 +42,7 @@ const SetPasswordForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useAction(setPasswordAction, {
-    onSuccess: ({ data }) => {
-      if (data?.success) {
-        setSuccess(data.success);
-      }
-
-      if (data?.error) {
-        setError(data.error);
-      }
-    },
-  });
+  const { execute } = useSetPassword(setSuccess, setError);
 
   const onSubmit = (values: FormValues) => {
     setSuccess(null);

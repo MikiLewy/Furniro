@@ -1,53 +1,122 @@
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
-import { Heart } from '../../icons/heart';
-import { formatPrice } from '../../utils/format-price';
+import { CategoryType } from '@/features/account/categories/api/types/category';
+import { useAddProductToWishlist } from '@/features/wishlist/hooks/action/use-add-product-to-wishlist';
+import { useRemoveProductFromWishlist } from '@/features/wishlist/hooks/action/use-remove-product-from-wishlist';
+import { useWishlistItem } from '@/features/wishlist/hooks/query/use-wishlist-item';
+import { cn } from '@/lib/utils';
+import { formatPrice } from '@/utils/format-price';
 
+import HeartButton from './heart-button';
 import ImageCard from './image-card';
+import VariantCircle from './variant-circle';
 
 interface Props {
+  productId: number;
   title: string;
   price: number;
   imageSrc: string;
   transparentImageSrc: string;
   variants: { id: number; name: string; color: string }[];
+  size?: 'sm' | 'regular';
+  category: CategoryType;
+  transparentFirst?: boolean;
 }
 
 const ProductCard = ({
+  productId,
   title,
   imageSrc,
   transparentImageSrc,
   price,
   variants,
+  size,
+  category,
+  transparentFirst,
 }: Props) => {
+  const router = useRouter();
+
+  const user = useSession()?.data?.user;
+
+  const { data: wishlistItemData } = useWishlistItem(
+    variants?.[0]?.id,
+    user?.id || '',
+    !!user?.id,
+  );
+
+  const { execute: addProductToWishlist } = useAddProductToWishlist();
+
+  const { execute: removeProductFromWishlist } = useRemoveProductFromWishlist();
+
+  const onClickWishlistButton = () => {
+    if (wishlistItemData?.id) {
+      removeProductFromWishlist({
+        wishlistItemId: wishlistItemData?.id,
+      });
+    } else {
+      addProductToWishlist({ productVariantId: variants?.[0]?.id });
+    }
+  };
+
   return (
     <div className="min-w-[300px]">
-      <ImageCard className="relative group cursor-pointer h-[450px] md:h-[500px] lg:h-[550px] w-full">
-        <div className="absolute top-4 right-4 z-20">
-          <Heart className=" w-4 h-4  fill-none stroke-gray-400 hover:scale-110 hover:stroke-red-600 transition duration-300 " />
-        </div>
-        <Image
-          src={imageSrc}
-          alt={title}
-          fill
-          className="block absolute h-full w-full object-cover object-bottom group-hover:hidden"
-          draggable="false"
-        />
-        <Image
-          src={transparentImageSrc}
-          alt={title}
-          fill
-          className="opacity-0 absolute h-full w-full object-contain object-center group-hover:opacity-100  transition duration-300"
-          draggable="false"
-        />
-      </ImageCard>
+      <div
+        onClick={() =>
+          router.push(
+            `/collections/${category}/products/${productId}?variantId=${variants?.[0]?.id}`,
+          )
+        }>
+        <ImageCard
+          className={cn(
+            size === 'sm' ? 'h-[380px]' : 'h-[450px]',
+            'relative group cursor-pointer  w-full',
+          )}>
+          <HeartButton
+            onClick={onClickWishlistButton}
+            isAddedToWishlist={!!wishlistItemData?.id}
+          />
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className={cn(
+              transparentFirst
+                ? 'opacity-0  group-hover:opacity-100 transition duration-300'
+                : 'group-hover:hidden',
+              'block absolute h-full w-full object-cover object-bottom ',
+            )}
+            draggable="false"
+          />
+          <Image
+            src={transparentImageSrc}
+            alt={title}
+            fill
+            className={cn(
+              transparentFirst
+                ? 'group-hover:hidden'
+                : 'opacity-0 group-hover:opacity-100 transition duration-300',
+              ' absolute h-full w-full object-contain object-center ',
+            )}
+            draggable="false"
+          />
+        </ImageCard>
+      </div>
       <div className="flex flex-col items-start gap-1 pt-3 ">
         <div className="flex gap-1">
           {variants?.map(variant => (
-            <div
+            <VariantCircle
+              name={variant.name}
               key={variant.id}
-              className="w-5 h-5 rounded-full"
-              style={{ backgroundColor: variant?.color }}
+              color={variant.color}
+              onClick={() =>
+                router.push(
+                  `/collections/${category}/products/${productId}?variantId=${variant.id}`,
+                )
+              }
             />
           ))}
         </div>

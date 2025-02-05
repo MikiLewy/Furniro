@@ -1,14 +1,24 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import Link from 'next/link';
+import { Heart, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
-import { routes } from '@constants/routes';
+import NavbarItem from '@/components/atoms/navbar-item';
+import { Separator } from '@/components/ui/separator';
+import { Category } from '@/features/account/categories/api/types/category';
+import { categoriesTypes } from '@/features/account/categories/constants/categories-types';
 
-const ClientNavbar = () => {
+interface Props {
+  categories: Category[];
+}
+
+const ClientNavbar = ({ categories }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const session = useSession();
 
   const pathname = usePathname();
 
@@ -16,8 +26,12 @@ const ClientNavbar = () => {
     setIsOpen(prev => !prev);
   };
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
-    <div>
+    <>
       <motion.button
         initial="hide"
         animate={isOpen ? 'show' : 'hide'}
@@ -84,48 +98,53 @@ const ClientNavbar = () => {
               initial="hide"
               animate="show"
               exit="hide"
-              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto  md:min-w-[400px] px-1  xl:px-8  bg-white  pt-20 flex flex-col justify-start space-y-10 ">
-              <motion.ul
-                variants={{
-                  hide: {
-                    opacity: 0,
-                  },
-                  show: {
-                    opacity: 1,
-                  },
-                }}
-                className="flex flex-col gap-1">
-                {routes.map(
-                  ({ title, key, href, icon: RouteIcon, primary }) => (
-                    <Link
-                      key={key}
-                      href={href}
-                      className={`flex items-center gap-2 text-base px-4 md:px-8 py-4 rounded-3xl ${
-                        primary ? 'text-primary' : 'text-secondary'
-                      } font-medium cursor-pointer ${
-                        pathname === href
-                          ? primary
-                            ? 'bg-primary-outlinedHover'
-                            : 'bg-gray-50'
-                          : 'bg-transparent'
-                      } ${
-                        primary
-                          ? 'hover:bg-primary-outlinedHover'
-                          : 'hover:bg-gray-50'
-                      }  transition-colors duration-500`}>
-                      <div className="w-5 h-5 stroke-gray-300">
-                        <RouteIcon />
-                      </div>
-                      {title}
-                    </Link>
-                  ),
-                )}
-              </motion.ul>
+              className="fixed top-0 left-0 bottom-0 right-0 md:right-auto md:min-w-[400px] px-1 md:px-3 lg:-ml-2 lg:pl-0 lg:pr-5 pt-[73px] flex flex-col justify-start space-y-10 lg:left-auto">
+              <div className="bg-white h-full w-full lg:pr-5 py-2">
+                <motion.ul
+                  variants={{
+                    hide: {
+                      opacity: 0,
+                    },
+                    show: {
+                      opacity: 1,
+                    },
+                  }}
+                  className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1">
+                    {categories?.map(({ id, name, type }) => {
+                      const RouteIcon = categoriesTypes[type].icon;
+
+                      return (
+                        <NavbarItem
+                          key={id}
+                          href={`/collections/${type}`}
+                          title={name}
+                          RouteIcon={RouteIcon}
+                          isActive={pathname.includes(`/collections/${type}`)}
+                        />
+                      );
+                    })}
+                  </div>
+                  <Separator className="my-2" />
+                  <NavbarItem
+                    href={session?.data?.user ? `/orders` : '/login'}
+                    title="Account"
+                    RouteIcon={User}
+                    isActive={pathname.includes(`/orders`)}
+                  />
+                  <NavbarItem
+                    href={`/wishlist`}
+                    title="Wishlist"
+                    RouteIcon={Heart}
+                    isActive={pathname.includes(`/wishlist`)}
+                  />
+                </motion.ul>
+              </div>
             </motion.div>
           </MotionConfig>
         ) : null}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

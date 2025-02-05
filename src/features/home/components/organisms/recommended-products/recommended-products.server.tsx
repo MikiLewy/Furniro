@@ -1,10 +1,10 @@
-import { getProducts } from '@/features/account/products/api/lib/products';
+import { getProductsWithVariantsAndCategory } from '@/features/account/products/api/lib/products';
 import SectionTitle from '@components/atoms/section-title';
 
 import ClientRecommendedProducts from './recommended-products.client';
 
 const ServerRecommendedProducts = async () => {
-  const products = await getProducts();
+  const products = await getProductsWithVariantsAndCategory({ limit: 9 });
 
   return (
     <section>

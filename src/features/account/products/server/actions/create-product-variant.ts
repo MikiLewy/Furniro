@@ -6,7 +6,6 @@ import { createSafeActionClient } from 'next-safe-action';
 
 import { db } from '@/db';
 
-import algoliasearch from '../../api/clients/algoliasearch';
 import {
   productVariants,
   variantTags,
@@ -53,21 +52,6 @@ export const createProductVariant = action
               variantId: createdProductVariant[0].id,
             })),
           );
-        }
-        if (product) {
-          await algoliasearch.saveObject({
-            indexName: 'products',
-            body: {
-              objectID: createdProductVariant[0].id,
-              id: productId,
-              title: product?.name,
-              price: product?.price,
-              variantName: createdProductVariant[0].name,
-              color,
-              tags,
-              variantImages: variantImages[0].url,
-            },
-          });
         }
 
         revalidatePath('/content/products');

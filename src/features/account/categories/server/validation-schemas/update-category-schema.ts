@@ -1,10 +1,13 @@
 import { z } from 'zod';
 
-import { CategoryIcon } from '../../api/types/category';
+import { CategoryType } from '../../api/types/category';
 
 export const updateCategorySchema = z.object({
   id: z.number(),
-  name: z.string().min(1, 'This field is required'),
-  image: z.string().min(1, 'This field is required'),
-  icon: z.nativeEnum(CategoryIcon, { message: 'This field is required' }),
+  name: z.string().min(1, { message: 'This field is required' }),
+  categoryImage: z.string().min(1, { message: 'This field is required' }),
+  mainImage: z.string().min(1, { message: 'This field is required' }),
+  subtitle: z.string().min(1, { message: 'This field is required' }),
+  description: z.string().min(1, { message: 'This field is required' }),
+  type: z.nativeEnum(CategoryType, { message: 'This field is required' }),
 });

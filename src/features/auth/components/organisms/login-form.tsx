@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -24,9 +23,9 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from '@/components/ui/input-otp';
-import { loginInAction } from '@/features/auth/server/actions/login';
 import { signInSchema } from '@/features/auth/server/validation-schemas/sign-in-schema';
 
+import { useLogin } from '../../hooks/action/use-login';
 import AuthActionsLinksContainer from '../atoms/auth-actions-links-container';
 import AuthFormHeader from '../atoms/auth-form-header';
 import SignUpWithGoogleButton from '../atoms/sign-up-with-google-button';
@@ -46,27 +45,15 @@ const LoginForm = () => {
     mode: 'onBlur',
   });
 
-  const [success, setSuccess] = useState<string | null>(null);
-
   const [error, setError] = useState<string | null>(null);
 
   const [showOTPInput, setShowOTPInput] = useState(false);
 
   const resetValues = () => {
-    setSuccess(null);
     setError(null);
   };
 
-  const { execute } = useAction(loginInAction, {
-    onSuccess: ({ data }) => {
-      if (data?.error) {
-        setError(data.error);
-      }
-      if (data?.otp) {
-        setShowOTPInput(true);
-      }
-    },
-  });
+  const { execute } = useLogin(() => setShowOTPInput(true), setError);
 
   const onSubmit = (values: FormValues) => {
     resetValues();
@@ -153,9 +140,6 @@ const LoginForm = () => {
               />
             </>
           )}
-          {success ? (
-            <SubmittedFormMessage message={success} variant="success" />
-          ) : null}
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}

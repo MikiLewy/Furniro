@@ -8,7 +8,7 @@ const ClientHero = () => {
 
   return (
     <Button
-      onClick={() => router.push(`/products`)}
+      onClick={() => router.push(`/collections/all`)}
       variant="secondary"
       size="lg">
       Shop now

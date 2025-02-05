@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ActionsTableMenu from '@/components/atoms/actions-table-menu';
 import {
   Category,
-  CategoryIcon,
+  CategoryType,
 } from '@/features/account/categories/api/types/category';
 import {
   CategoriesActionSlotPayload,
@@ -76,8 +76,11 @@ const ClientCategories = ({ data }: Props) => {
         selectedCategoryName={selectedCategory?.name || ''}
         open={isOpenUpdateCategoryDialog}
         onClose={handleCloseUpdateCategoryDialog}
-        selectedCategoryIcon={selectedCategory?.icon || CategoryIcon.SOFA}
+        selectedCategoryIcon={selectedCategory?.type || CategoryType.SOFA}
         selectedCategoryImage={selectedCategory?.image || ''}
+        selectedCategorySubtitle={selectedCategory?.subtitle || ''}
+        selectedCategoryDescription={selectedCategory?.description || ''}
+        selectedCategoryMainImage={selectedCategory?.mainImage || ''}
       />
     </>
   );

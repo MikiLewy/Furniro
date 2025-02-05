@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
   boolean,
   timestamp,
@@ -7,6 +8,8 @@ import {
   integer,
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccountType } from 'next-auth/adapters';
+
+import { orders, reviews, wishlist } from '@/db/schema';
 
 export const users = pgTable('user', {
   id: text('id')
@@ -20,7 +23,14 @@ export const users = pgTable('user', {
   twoFactorEnabled: boolean('twoFactorEnabled').default(false),
   image: text('image'),
   password: text('password'),
+  customerId: text('customerId'),
 });
+
+export const userRelations = relations(users, ({ many }) => ({
+  reviews: many(reviews, { relationName: 'user_reviews' }),
+  orders: many(orders, { relationName: 'user_orders' }),
+  wishlist: many(wishlist, { relationName: 'user_wishlist' }),
+}));
 
 export const accounts = pgTable(
   'account',
