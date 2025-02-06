@@ -1,6 +1,7 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 import VariantCircle from '@/components/atoms/variant-circle';
 import { ProductVariant } from '@/features/account/products/api/types/product-variant';

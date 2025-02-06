@@ -6,7 +6,7 @@ import {
   useElements,
   AddressElement,
 } from '@stripe/react-stripe-js';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import { FormEvent, useState } from 'react';
 
 import { LoadingButton } from '@/components/atoms/loading-button';

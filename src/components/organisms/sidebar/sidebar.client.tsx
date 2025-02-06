@@ -1,8 +1,9 @@
 'use client';
 
 import { LogOut } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'nextjs-toploader/app';
 
 import SidebarItem from '@/components/atoms/sidebar-item';
 import { accountRoutes } from '@/features/account/constants/account-routes';

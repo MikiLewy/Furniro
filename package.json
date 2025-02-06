@@ -60,6 +60,7 @@
     "next": "^15.1.6",
     "next-auth": "^5.0.0-beta.25",
     "next-safe-action": "^7.9.9",
+    "nextjs-toploader": "^3.7.15",
     "nuqs": "^2.3.0",
     "postgres": "^3.4.5",
     "react": "^18.2.0",
