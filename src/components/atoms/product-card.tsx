@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'nextjs-toploader/app';
 
 import { CategoryType } from '@/features/account/categories/api/types/category';
 import { useAddProductToWishlist } from '@/features/wishlist/hooks/action/use-add-product-to-wishlist';

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 
 import '@app/globals.css';
 import Providers from '@providers/providers';
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <NextTopLoader />
         <Providers>{children}</Providers>
       </body>
     </html>
