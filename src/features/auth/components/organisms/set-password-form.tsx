@@ -1,14 +1,14 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { LoadingButton } from '@/components/atoms/loading-button';
 import { PasswordInput } from '@/components/atoms/password-input';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -32,6 +32,8 @@ const defaultValues: FormValues = {
 const SetPasswordForm = () => {
   const token = useSearchParams().get('token');
 
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(setPasswordSchema),
     defaultValues,
@@ -42,7 +44,10 @@ const SetPasswordForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useSetPassword(setSuccess, setError);
+  const { execute, status } = useSetPassword(message => {
+    setSuccess(message);
+    router.push('/login');
+  }, setError);
 
   const onSubmit = (values: FormValues) => {
     setSuccess(null);
@@ -92,7 +97,9 @@ const SetPasswordForm = () => {
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit">Reset</Button>
+          <LoadingButton loading={status === 'executing'} type="submit">
+            Reset
+          </LoadingButton>
         </form>
       </Form>
     </div>

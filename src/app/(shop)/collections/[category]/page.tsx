@@ -40,7 +40,8 @@ const ProductsPage = async ({ params, searchParams }: Props) => {
           blissful joy. Discover noo.ma’s feel-good comfort and make yourself at
           home.`
         }
-        image={category?.mainImage ? category.mainImage : productsHeaderImg}
+        image={category?.mainImage ? category.mainImage : productsHeaderImg.src}
+        blurDataUrl={productsHeaderImg.blurDataURL}
       />
       <CategoriesList />
       <Products

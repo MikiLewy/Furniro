@@ -1,6 +1,8 @@
-import ClientHero from './hero.client';
+import Link from 'next/link';
 
-const ServerHero = () => {
+import { Button } from '@/components/ui/button';
+
+const Hero = () => {
   return (
     <header
       className={`bg-[url('/assets/images/auth-background.webp')] bg-cover bg-no-repeat bg-center w-full min-h-[55vh] sm:min-h-[70vh] flex mt-4 lg:mt-8 rounded-2xl overflow-hidden items-center justify-center relative `}>
@@ -9,10 +11,12 @@ const ServerHero = () => {
         <h1 className="text-3xl md:text-4xl lg:text-7xl text-white font-medium mt-1">
           Discover Our New Collection
         </h1>
-        <ClientHero />
+        <Button asChild variant="secondary" size="lg">
+          <Link href="/collections/all">Shop now</Link>
+        </Button>
       </div>
     </header>
   );
 };
 
-export default ServerHero;
+export default Hero;

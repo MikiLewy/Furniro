@@ -24,13 +24,6 @@ const ServerNavbar = async () => {
         <div className="flex gap-3 md:gap-8 items-center">
           <ClientNavbar categories={categories} />
           <Logo />
-          <ul className="hidden md:flex  gap-4 relative z-30">
-            <Link
-              href="/collections/all"
-              className="text-base hover:text-secondary-darker transition-colors duration-200 font-medium cursor-pointer hover:text-primary">
-              Products
-            </Link>
-          </ul>
         </div>
         <div className="ml-auto flex items-center gap-3 relative z-30">
           <CartSheet />

@@ -53,7 +53,7 @@ const Dialog = ({
       <DialogContent
         aria-describedby={description}
         className={cn(
-          scrollable ? 'overflow-y-scroll max-h-[550px] sm:max-h-[700px]' : '',
+          scrollable ? 'overflow-y-auto max-h-[550px] sm:max-h-[700px]' : '',
           'lg:max-w-xl ',
         )}>
         <DialogHeader className="flex flex-col gap-2">
@@ -62,7 +62,7 @@ const Dialog = ({
             <DialogDescription>{description}</DialogDescription>
           ) : null}
         </DialogHeader>
-        {children}
+        <div className="overflow-x-auto">{children}</div>
         <DialogFooter className="mt-4 gap-2">
           {actionsSlot}
           {onClose ? (

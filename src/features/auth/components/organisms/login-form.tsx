@@ -1,13 +1,14 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { LoadingButton } from '@/components/atoms/loading-button';
 import { PasswordInput } from '@/components/atoms/password-input';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -39,6 +40,8 @@ const defaultValues: FormValues = {
 };
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(signInSchema),
     defaultValues,
@@ -53,7 +56,10 @@ const LoginForm = () => {
     setError(null);
   };
 
-  const { execute } = useLogin(() => setShowOTPInput(true), setError);
+  const { execute, status } = useLogin(() => {
+    setShowOTPInput(true);
+    router.push('/');
+  }, setError);
 
   const onSubmit = (values: FormValues) => {
     resetValues();
@@ -143,7 +149,9 @@ const LoginForm = () => {
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit">{showOTPInput ? 'Verify' : 'Login'}</Button>
+          <LoadingButton loading={status === 'executing'} type="submit">
+            {showOTPInput ? 'Verify' : 'Login'}
+          </LoadingButton>
         </form>
         <SignUpWithGoogleButton />
         <AuthActionsLinksContainer links={actionsLinks} />

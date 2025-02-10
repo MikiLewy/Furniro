@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import { Heart, User } from 'lucide-react';
+import { Heart, ShoppingBag, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
@@ -110,6 +110,12 @@ const ClientNavbar = ({ categories }: Props) => {
                     },
                   }}
                   className="flex flex-col gap-1">
+                  <NavbarItem
+                    href={`/collections/all`}
+                    title="All products"
+                    RouteIcon={ShoppingBag}
+                    isActive={pathname.includes(`/collections/all`)}
+                  />
                   <div className="flex flex-col gap-1">
                     {categories?.map(({ id, name, type }) => {
                       const RouteIcon = categoriesTypes[type].icon;
