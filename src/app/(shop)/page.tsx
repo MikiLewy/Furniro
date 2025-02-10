@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className="h-full">
       <Hero />
-      <section className="flex flex-col gap-10 py-6 lg:py-10 lg:gap-14">
+      <section className="flex flex-col gap-8 py-6 lg:py-10 lg:gap-12">
         <CategoriesList />
         <RecommendedProducts />
         <AboutUs />
