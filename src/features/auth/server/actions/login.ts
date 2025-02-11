@@ -8,13 +8,13 @@ import { signIn } from '@/auth';
 import { db } from '@/db';
 import { twoFactorTokens } from '@/db/schema';
 
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { sendVerificationEmail } from '../emails/email-verification';
 import { sendOTPCodeEmail } from '../emails/otp-code';
 import { signInSchema } from '../validation-schemas/sign-in-schema';
 
 import { generateOTPCode } from './tokens/generate-otp-code';
 import { generateVerificationEmailToken } from './tokens/generate-verification-email-token';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 
 const actionClient = createSafeActionClient();
 
@@ -80,8 +80,6 @@ export const loginInAction = actionClient
     await signIn('credentials', {
       email,
       password,
-      redirectTo: '/',
-      redirect: true,
     });
 
     return { success: 'User logged in successfully' };

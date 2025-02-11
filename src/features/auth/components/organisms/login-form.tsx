@@ -56,10 +56,13 @@ const LoginForm = () => {
     setError(null);
   };
 
-  const { execute, status } = useLogin(() => {
-    setShowOTPInput(true);
-    router.push('/');
-  }, setError);
+  const { execute, status } = useLogin(
+    () => {
+      router.push('/');
+    },
+    () => setShowOTPInput(true),
+    setError,
+  );
 
   const onSubmit = (values: FormValues) => {
     resetValues();
