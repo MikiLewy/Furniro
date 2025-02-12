@@ -20,11 +20,11 @@ const CarouselImage = ({ src, alt }: Props) => {
         alt={alt}
         width={800}
         height={550}
-        style={{ opacity: isImageLoaded ? 1 : 0, aspectRatio: '1' }}
+        style={{ opacity: isImageLoaded ? 1 : 0 }}
         onLoadingComplete={() => {
           setIsImageLoaded(true);
         }}
-        className="relative z-10 object-cover max-h-[400px] w-full object-center md:max-h-[500px] 2xl:max-h-[550px] rounded-3xl cursor-grab transition-opacity duration-500 delay-200"
+        className="relative z-10 object-cover max-h-[400px] w-full object-center md:max-h-[500px] 2xl:max-h-[550px] rounded-3xl cursor-grab transition-opacity duration-500 delay-200 aspect-[3/2] md:aspect-[2/1] lg:aspect-square "
       />
       <div
         style={{ opacity: isImageLoaded ? 0 : 1 }}

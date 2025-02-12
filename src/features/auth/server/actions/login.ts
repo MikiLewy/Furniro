@@ -80,6 +80,7 @@ export const loginInAction = actionClient
     await signIn('credentials', {
       email,
       password,
+      redirect: false,
     });
 
     return { success: 'User logged in successfully' };
