@@ -1,16 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
-  CarouselItem,
 } from '@/components/ui/carousel';
 import { VariantImages } from '@/features/account/products/api/types/product-variant';
 
+import CarouselImage from '../atoms/carousel-item';
 import Thumbnail from '../atoms/thumbnail';
 import MobileCarouselNavigator from '../molecules/mobile-carousel-navigator';
 
@@ -43,7 +42,7 @@ const ProductImages = ({ images }: Props) => {
   );
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 w-full">
       <Carousel
         setApi={setApi}
         opts={{
@@ -51,18 +50,15 @@ const ProductImages = ({ images }: Props) => {
         }}>
         <div className="relative">
           <CarouselContent>
-            {images.map(image => (
-              <CarouselItem key={image.id}>
-                <Image
+            {images.map(image => {
+              return (
+                <CarouselImage
+                  key={image.id}
                   src={image.url}
                   alt={image.name}
-                  width={800}
-                  height={550}
-                  style={{ aspectRatio: '1' }}
-                  className="object-cover max-h-[400px] w-full object-center md:max-h-[500px] 2xl:max-h-[550px] rounded-3xl cursor-grab"
                 />
-              </CarouselItem>
-            ))}
+              );
+            })}
           </CarouselContent>
           <MobileCarouselNavigator
             currentSlideIndex={current - 1}
