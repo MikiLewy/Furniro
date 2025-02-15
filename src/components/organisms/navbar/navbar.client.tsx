@@ -1,9 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import { Heart, ShoppingBag, User } from 'lucide-react';
+import { Heart, ShoppingBag } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import NavbarItem from '@/components/atoms/navbar-item';
@@ -17,8 +16,6 @@ interface Props {
 
 const ClientNavbar = ({ categories }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const session = useSession();
 
   const pathname = usePathname();
 
@@ -132,12 +129,6 @@ const ClientNavbar = ({ categories }: Props) => {
                     })}
                   </div>
                   <Separator className="my-2" />
-                  <NavbarItem
-                    href={session?.data?.user ? `/orders` : '/login'}
-                    title="Account"
-                    RouteIcon={User}
-                    isActive={pathname.includes(`/orders`)}
-                  />
                   <NavbarItem
                     href={`/wishlist`}
                     title="Wishlist"
