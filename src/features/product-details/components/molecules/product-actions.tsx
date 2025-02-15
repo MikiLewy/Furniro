@@ -87,7 +87,7 @@ const ProductActions = ({
   };
 
   return (
-    <div>
+    <div className="max-w-lg">
       <FormProvider {...form}>
         <QuantityInput />
       </FormProvider>

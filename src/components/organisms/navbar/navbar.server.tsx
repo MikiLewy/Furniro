@@ -3,9 +3,10 @@ import Link from 'next/link';
 
 import { auth } from '@/auth';
 import Logo from '@/components/atoms/logo';
-import AccountPopover from '@/components/molecules/account-popover';
+import UserAvatar from '@/components/atoms/user-avatar';
 import { getCategories } from '@/features/account/categories/api/lib/categories';
 import CartSheet from '@/features/cart/components/organisms/cart-sheet';
+import { getUserNameBasedOnLoginType } from '@/utils/get-user-name-based-on-login-type';
 
 import ClientNavbar from './navbar.client';
 
@@ -16,6 +17,13 @@ const ServerNavbar = async () => {
 
   const categories = await getCategories();
 
+  const userName = getUserNameBasedOnLoginType(
+    user?.isOAuth,
+    user?.name,
+    user?.firstName,
+    user?.lastName,
+  );
+
   return (
     <nav
       className="sticky top-0 z-30 bg-white py-4 border-b border-b-[#eeeeec]
@@ -24,19 +32,14 @@ const ServerNavbar = async () => {
         <div className="flex gap-3 md:gap-8 items-center">
           <ClientNavbar categories={categories} />
           <Logo />
-          <ul className="hidden md:flex  gap-4 relative z-30">
-            <Link
-              href="/collections/all"
-              className="text-base hover:text-secondary-darker transition-colors duration-200 font-medium cursor-pointer hover:text-primary">
-              Products
-            </Link>
-          </ul>
         </div>
         <div className="ml-auto flex items-center gap-3 relative z-30">
           <CartSheet />
-          <div className="hidden md:flex">
+          <div className="flex">
             {user ? (
-              <AccountPopover user={user} />
+              <Link href="/orders">
+                <UserAvatar name={userName || ''} image={user?.image || ''} />
+              </Link>
             ) : (
               <Link href="/login">
                 <User className="w-5 h-5 cursor-pointer" />

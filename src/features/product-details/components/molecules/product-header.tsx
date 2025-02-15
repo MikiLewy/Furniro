@@ -46,11 +46,15 @@ const ProductHeader = ({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex items-center justify-between">
-        <ProductTitle name={title} />
-        <ProductRating productId={productId} />
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <ProductTitle name={title} />
+          <ProductRating productId={productId} />
+        </div>
+        <p className="text-secondary-darker">
+          {formatPrice({ amount: price })}
+        </p>
       </div>
-      <p className="text-secondary-darker">{formatPrice({ amount: price })}</p>
     </div>
   );
 };

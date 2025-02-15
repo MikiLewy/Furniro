@@ -4,6 +4,7 @@ import { loginInAction } from '../../server/actions/login';
 
 export const useLogin = (
   onSuccess?: () => void,
+  onSuccessOtp?: () => void,
   onError?: (message: string) => void,
 ) => {
   return useAction(loginInAction, {
@@ -12,6 +13,9 @@ export const useLogin = (
         onError?.(data.error);
       }
       if (data?.otp) {
+        onSuccessOtp?.();
+      }
+      if (data?.success) {
         onSuccess?.();
       }
     },
