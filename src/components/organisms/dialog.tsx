@@ -56,14 +56,14 @@ const Dialog = ({
           scrollable ? 'overflow-y-auto max-h-[550px] sm:max-h-[700px]' : '',
           'lg:max-w-xl ',
         )}>
-        <DialogHeader className="flex flex-col gap-2">
+        <DialogHeader className="flex flex-col gap-2 p-1">
           <DialogTitle>{title}</DialogTitle>
           {description ? (
             <DialogDescription>{description}</DialogDescription>
           ) : null}
         </DialogHeader>
-        <div className="overflow-x-auto">{children}</div>
-        <DialogFooter className="mt-4 gap-2">
+        <div className="overflow-x-auto p-1">{children}</div>
+        <DialogFooter className="mt-4 gap-2 p-1">
           {actionsSlot}
           {onClose ? (
             <DialogClose asChild>

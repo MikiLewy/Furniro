@@ -32,7 +32,7 @@ const ProductDetails = async ({
 }: Props) => {
   return (
     <div className="flex-1 py-2 lg:py-6 w-full">
-      <div className="w-full max-w-lg flex flex-col gap-4 lg:gap-4">
+      <div className="w-full flex flex-col gap-4 lg:gap-4">
         <ProductHeader
           title={productName}
           productId={productId}
