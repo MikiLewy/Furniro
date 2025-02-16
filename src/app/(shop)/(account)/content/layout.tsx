@@ -1,16 +1,10 @@
 'use client';
 
-import { Metadata } from 'next';
 import { usePathname } from 'next/navigation';
 
 import TabItem from '@/components/atoms/tab-item';
 import Tabs from '@/components/organisms/tabs';
 import { usePermissions } from '@/permissions/can';
-
-export const metadata: Metadata = {
-  title: 'Content',
-  description: 'Manage shop content and products.',
-};
 
 export default function AdminsLayout({
   children,
