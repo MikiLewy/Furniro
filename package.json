@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.4",
+    "@casl/ability": "^6.7.3",
+    "@casl/react": "^5.0.0",
     "@contentful/rich-text-react-renderer": "^16.0.1",
     "@hookform/resolvers": "^3.9.1",
     "@neondatabase/serverless": "^0.10.3",

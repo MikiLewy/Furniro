@@ -11,6 +11,8 @@ import { extractRouterConfig } from 'uploadthing/server';
 
 import { ourFileRouter } from '@/app/api/uploadthing/core';
 
+import PermissionsProvider from './permissions-provider';
+
 interface Props {
   children: ReactNode;
 }
@@ -30,13 +32,15 @@ const Providers = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
-        <NuqsAdapter>{children}</NuqsAdapter>
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <ReactQueryDevtools
-          initialIsOpen={false}
-          buttonPosition="bottom-left"
-        />
-        <Toaster position="bottom-right" />
+        <PermissionsProvider>
+          <NuqsAdapter>{children}</NuqsAdapter>
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-left"
+          />
+          <Toaster position="bottom-right" />
+        </PermissionsProvider>
       </SessionProvider>
     </QueryClientProvider>
   );
