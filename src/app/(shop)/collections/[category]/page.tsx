@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { SearchParams } from 'nuqs';
 
 import CategoriesList from '@/components/organisms/categories-list';
@@ -10,6 +11,27 @@ import Header from '@features/products/components/organisms/header';
 interface Props {
   params: Promise<{ category: string }>;
   searchParams: Promise<SearchParams>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const categorySlug = (await params).category;
+
+  const categories = await getCategories();
+
+  const category = categories?.find(category => category.type === categorySlug);
+
+  if (category) {
+    return {
+      title: category?.name,
+      description: category?.description,
+    };
+  }
+
+  return {
+    title: 'Collections',
+    description:
+      'Explore our curated selection of high-quality furniture for every room. From contemporary sofas to traditional dining sets, discover pieces that blend style and comfort for your perfect home.',
+  };
 }
 
 const ProductsPage = async ({ params, searchParams }: Props) => {
