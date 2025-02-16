@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ActionsTableMenu from '@/components/atoms/actions-table-menu';
 import { Category } from '@/features/account/categories/api/types/category';
 import { useDialog } from '@/hooks/use-dialog';
+import { usePermissions } from '@/permissions/can';
 
 import { Product } from '../../../api/types/product';
 import {
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const ClientCategories = ({ data, categories }: Props) => {
+  const permissions = usePermissions();
+
   const [selectedProduct, setSelectedProduct] =
     useState<ProductsActionSlotPayload | null>(null);
 
@@ -45,6 +48,8 @@ const ClientCategories = ({ data, categories }: Props) => {
           setSelectedProduct(payload);
           handleOpenUpdateProductDialog();
         },
+        disabled: permissions.cannot('update', 'AccountProducts'),
+        tooltipTitle: 'Not sufficient permissions',
       },
       {
         key: 'delete',
@@ -53,6 +58,8 @@ const ClientCategories = ({ data, categories }: Props) => {
           setSelectedProduct(payload);
           handleOpenRemoveProductDialog();
         },
+        disabled: permissions.cannot('delete', 'AccountProducts'),
+        tooltipTitle: 'Not sufficient permissions',
       },
     ];
 

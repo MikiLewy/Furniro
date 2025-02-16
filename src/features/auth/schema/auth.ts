@@ -10,6 +10,7 @@ import {
 import type { AdapterAccountType } from 'next-auth/adapters';
 
 import { orders, reviews, wishlist } from '@/db/schema';
+import { UserRole } from '@/types/user-role';
 
 export const users = pgTable('user', {
   id: text('id')
@@ -21,6 +22,7 @@ export const users = pgTable('user', {
   email: text('email').unique(),
   emailVerified: timestamp('emailVerified', { mode: 'date' }),
   twoFactorEnabled: boolean('twoFactorEnabled').default(false),
+  role: text('role').$type<UserRole>().default('customer'),
   image: text('image'),
   password: text('password'),
   customerId: text('customerId'),

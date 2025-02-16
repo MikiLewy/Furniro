@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import TabItem from '@/components/atoms/tab-item';
 import Tabs from '@/components/organisms/tabs';
+import { usePermissions } from '@/permissions/can';
 
 export default function AdminsLayout({
   children,
@@ -12,17 +13,27 @@ export default function AdminsLayout({
 }) {
   const pathname = usePathname();
 
+  const permissions = usePermissions();
+
   const tabs = [
-    {
-      key: 'products',
-      title: 'Products',
-      href: '/content/products',
-    },
-    {
-      key: 'categories',
-      title: 'Categories',
-      href: '/content/categories',
-    },
+    ...(permissions.can('read', 'AccountProducts')
+      ? [
+          {
+            key: 'products',
+            title: 'Products',
+            href: '/content/products',
+          },
+        ]
+      : []),
+    ...(permissions.can('read', 'AccountCategories')
+      ? [
+          {
+            key: 'categories',
+            title: 'Categories',
+            href: '/content/categories',
+          },
+        ]
+      : []),
   ];
 
   return (

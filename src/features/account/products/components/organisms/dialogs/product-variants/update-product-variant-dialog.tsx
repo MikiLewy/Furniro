@@ -15,10 +15,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { ProductVariantsWithImagesAndTags } from '@/features/account/products/api/types/product-variant';
 import { useRemoveProductVariant } from '@/features/account/products/hooks/action/use-remove-product-variant';
 import { useUpdateProductVariant } from '@/features/account/products/hooks/action/use-update-product-variant';
 import { updateProductVariantSchema } from '@/features/account/products/server/validation-schemas/update-product-variant-schema';
+import { Can } from '@/permissions/can';
 
 import TagsInput from '../../../molecules/tags-input';
 import VariantImages from '../../../molecules/variant-images';
@@ -84,13 +91,34 @@ const UpdateProductVariantDialog = ({
       isSubmitButtonLoading={updateProductVariantStatus === 'executing'}
       confirmButtonText="Update"
       actionsSlot={
-        <LoadingButton
-          loading={removeProductVariantStatus === 'executing'}
-          variant="destructive"
-          disabled={!variant?.id}
-          onClick={() => executeRemoveProductVariant({ id: variant?.id || 0 })}>
-          Remove
-        </LoadingButton>
+        <div className="ml-auto">
+          <Can I="deleteVariant" a="AccountProducts" passThrough>
+            {allowed => (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="w-full">
+                      <LoadingButton
+                        loading={removeProductVariantStatus === 'executing'}
+                        variant="destructive"
+                        disabled={!variant?.id || !allowed}
+                        onClick={() =>
+                          executeRemoveProductVariant({ id: variant?.id || 0 })
+                        }>
+                        Remove
+                      </LoadingButton>
+                    </span>
+                  </TooltipTrigger>
+                  {!allowed ? (
+                    <TooltipContent>
+                      <p>Not sufficient permissions</p>
+                    </TooltipContent>
+                  ) : null}
+                </Tooltip>
+              </TooltipProvider>
+            )}
+          </Can>
+        </div>
       }
       isSubmitButtonDisabled={
         !form.formState.isValid || !form.formState.isDirty

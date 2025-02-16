@@ -6,12 +6,14 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'nextjs-toploader/app';
 
 import BottomTabsItem from '@/components/atoms/bottom-tabs-item';
-import { accountRoutes } from '@/features/account/constants/account-routes';
+import { useAccountRoutes } from '@/features/account/hooks/use-account-routes';
 
 const ClientBottomTabsNavigator = () => {
   const router = useRouter();
 
   const pathname = usePathname();
+
+  const accountRoutes = useAccountRoutes();
 
   return (
     <ul className="flex justify-between w-full items-center">

@@ -12,6 +12,7 @@ import {
   getCategoriesTableColumns,
 } from '@/features/account/categories/utils/get-categories-table-columns';
 import { useDialog } from '@/hooks/use-dialog';
+import { usePermissions } from '@/permissions/can';
 
 import { CategoriesTable } from '../../organisms/categories-table';
 import RemoveCategoryDialog from '../../organisms/dialogs/remove-category-dialog';
@@ -22,6 +23,8 @@ interface Props {
 }
 
 const ClientCategories = ({ data }: Props) => {
+  const permissions = usePermissions();
+
   const [selectedCategory, setSelectedCategory] =
     useState<CategoriesActionSlotPayload | null>(null);
 
@@ -46,6 +49,8 @@ const ClientCategories = ({ data }: Props) => {
           setSelectedCategory(payload);
           handleOpenUpdateCategoryDialog();
         },
+        disabled: permissions.cannot('update', 'AccountCategories'),
+        tooltipTitle: 'Not sufficient permissions',
       },
       {
         key: 'delete',
@@ -54,6 +59,8 @@ const ClientCategories = ({ data }: Props) => {
           setSelectedCategory(payload);
           handleOpenRemoveCategoryDialog();
         },
+        disabled: permissions.cannot('delete', 'AccountCategories'),
+        tooltipTitle: 'Not sufficient permissions',
       },
     ];
 
