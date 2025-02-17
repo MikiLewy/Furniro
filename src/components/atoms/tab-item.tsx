@@ -12,7 +12,7 @@ interface Props {
 
 const TabItem = ({ title, href, isActive }: Props) => {
   return (
-    <Link href={href}>
+    <Link href={href} prefetch>
       <li
         className={cn(
           'text-sm text-muted-foreground py-3',

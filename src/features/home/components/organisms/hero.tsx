@@ -12,7 +12,9 @@ const Hero = () => {
           Discover Our New Collection
         </h1>
         <Button asChild variant="secondary" size="lg">
-          <Link href="/collections/all">Shop now</Link>
+          <Link prefetch href="/collections/all">
+            Shop now
+          </Link>
         </Button>
       </div>
     </header>
