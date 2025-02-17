@@ -120,7 +120,7 @@ const ProductCard = ({
             />
           ))}
         </div>
-        <h5 className="text-lg font-semibold cursor-pointer">{title}</h5>
+        <h4 className="text-lg font-semibold cursor-pointer">{title}</h4>
         <p className="text-base font-medium text-gray-400">
           {formatPrice({ amount: price })}
         </p>

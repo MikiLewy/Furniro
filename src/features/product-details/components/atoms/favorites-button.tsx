@@ -13,6 +13,7 @@ interface Props {
 const FavoritesButton = ({ disabled, onClick, isFavorite }: Props) => {
   return (
     <button
+      aria-label="Add to wishlist"
       disabled={disabled}
       onClick={onClick}
       className="p-3 rounded-full border border-border flex items-center justify-center hover:bg-border transition-colors duration-300">
