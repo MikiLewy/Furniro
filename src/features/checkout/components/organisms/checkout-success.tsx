@@ -24,7 +24,9 @@ const CheckoutSuccess = () => {
         <p className="text-lg mt-4 text-center">Thank you for your purchase.</p>
       </div>
       <Button className="mt-4" onClick={clearCart} asChild size="lg">
-        <Link href="/">Continue Shopping</Link>
+        <Link prefetch href="/">
+          Continue Shopping
+        </Link>
       </Button>
     </div>
   );

@@ -53,7 +53,9 @@ const WishlistItemCard = ({
             )}
             draggable="false"
           />
-          <button className="absolute top-1 right-1 p-2 z-50">
+          <button
+            aria-label="Remove from wishlist"
+            className="absolute top-1 right-1 p-2 z-50">
             <X
               className="text-secondary-darker"
               onClick={e => {

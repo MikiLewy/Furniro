@@ -37,11 +37,11 @@ const ServerNavbar = async () => {
           <CartSheet />
           <div className="flex">
             {user ? (
-              <Link href="/orders">
+              <Link href="/orders" prefetch aria-label="Orders">
                 <UserAvatar name={userName || ''} image={user?.image || ''} />
               </Link>
             ) : (
-              <Link href="/login">
+              <Link href="/login" prefetch aria-label="Login">
                 <User className="w-5 h-5 cursor-pointer" />
               </Link>
             )}

@@ -32,7 +32,7 @@ const CartSheet = () => {
   return (
     <Sheet open={isCartSheetOpen} onOpenChange={setIsCartSheetOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" aria-label="Cart">
           <Cart />
         </Button>
       </SheetTrigger>

@@ -12,6 +12,7 @@ interface Props {
 const HeartButton = ({ onClick, isAddedToWishlist }: Props) => {
   return (
     <button
+      aria-label="Add to wishlist"
       className="absolute top-4 right-4 z-10"
       onClick={e => {
         e.stopPropagation();

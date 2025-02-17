@@ -8,7 +8,7 @@ export const sendVerificationEmail = async (
   email: string,
   verificationToken: string,
 ) => {
-  const verifyEmailLink = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-email?token=${verificationToken}`;
+  const verifyEmailLink = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/verify-email?token=${verificationToken}`;
 
   const { data, error } = await resend.emails.send({
     from: 'Acme <onboarding@resend.dev>',

@@ -17,6 +17,7 @@ import { UserRole } from './types/user-role';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
+  trustHost: true,
   session: {
     strategy: 'jwt',
   },
