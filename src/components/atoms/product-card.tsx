@@ -85,8 +85,8 @@ const ProductCard = ({
             fill
             className={cn(
               transparentFirst
-                ? 'opacity-0  group-hover:opacity-100 transition duration-300'
-                : 'group-hover:hidden',
+                ? 'opacity-0  lg:group-hover:opacity-100 transition duration-300'
+                : 'lg:group-hover:hidden',
               'block absolute h-full w-full object-cover object-bottom ',
             )}
             draggable="false"
@@ -97,8 +97,8 @@ const ProductCard = ({
             fill
             className={cn(
               transparentFirst
-                ? 'group-hover:hidden'
-                : 'opacity-0 group-hover:opacity-100 transition duration-300',
+                ? 'lg:group-hover:hidden'
+                : 'opacity-0 lg:group-hover:opacity-100 transition duration-300',
               ' absolute h-full w-full object-contain object-center ',
             )}
             draggable="false"
