@@ -1,5 +1,6 @@
 'use client';
 
+import { useQueryState } from 'nuqs';
 import { useCallback, useEffect, useState } from 'react';
 
 import {
@@ -21,6 +22,8 @@ const ProductImages = ({ images }: Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
+  const [variantId] = useQueryState('variantId');
+
   useEffect(() => {
     if (!api) {
       return;
@@ -40,6 +43,13 @@ const ProductImages = ({ images }: Props) => {
     },
     [api],
   );
+
+  useEffect(() => {
+    if (api) {
+      setCurrent(0);
+      api.scrollTo(0);
+    }
+  }, [variantId, api]);
 
   return (
     <div className="flex-1 w-full">
