@@ -1,25 +1,30 @@
-# Furniro Store - Next.js Project
+# Furniro Store
 
 ## Project Description
 
-This project is an online platform representing a furniture store, built using the Next.js framework.
+This is a full-stack eCommerce application built with Next.js, designed based on a real online furniture store [noo.ma](https://noo.ma/) to provide a seamless shopping experience. It includes both frontend and backend functionalities to handle products, authentication, payments, and order management.
 
-The project draws inspiration from the functionality and design of a real online furniture store [noo.ma](https://noo.ma/). The project draws inspiration from the functionality and design of a real online furniture store. My goal was to recreate of this website.
-
-## Technologies
+## Main Technologies
 
 - **Next.js**
-- **Typescript**
+- **TypeScript**
 - **Tailwind CSS**
-- **Jest**
+- **Vitest**
+- **Stripe**
+- **Drizzle ORM**
+- **Neon PostgreSQL**
 
 ## Features
 
-1. **Catalog Browsing**: Users can browse different furniture categories.
-2. **Shopping Cart**: Adding products to the cart and completing purchases.
-3. **User Authentication**: Registration, login, account management.
+1. **Authentication**: User registration, login, and session management.
+2. **Product Management**: Dynamic product listings, categories, and search.
+3. **Cart & Checkout**: Add to cart, remove items, and complete the checkout process.
+4. **Payments**: Secure payment processing via Stripe.
+5. **Order Management**: Order history and order details.
+6. **Wishlist**: Add and remove products from the wishlist.
+7. **Admin Section**: Manage products, categories, and variants. Accessible only to users with an admin role.
 
-## Running the Project Locally
+## Running the project locally
 
 1. Clone the repository: `git clone https://github.com/username/repository-name.git`
 2. Navigate to the project directory: `cd repository-name`
