@@ -2,11 +2,11 @@
 
 import { createSafeActionClient } from 'next-safe-action';
 
-import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 import { sendForgotPasswordEmail } from '../emails/forgot-password';
 import { resetPasswordSchema } from '../validation-schemas/reset-password-schema';
 
 import { generateResetPasswordToken } from './tokens/generate-reset-password-token';
+import { getUserFromDbByEmail } from './user/get-user-from-db-by-email';
 
 const actionClient = createSafeActionClient();
 

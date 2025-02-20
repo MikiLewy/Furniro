@@ -13,9 +13,11 @@ import { db } from '@/db';
 import { accounts, users } from './db/schema';
 import { getUserFromDbByEmail } from './features/auth/server/actions/user/get-user-from-db-by-email';
 import { signInSchema } from './features/auth/server/validation-schemas/sign-in-schema';
+import { UserRole } from './types/user-role';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: DrizzleAdapter(db),
+  trustHost: true,
   session: {
     strategy: 'jwt',
   },
@@ -46,6 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.lastName = token.lastName as string;
         session.user.isOAuth = token.isOAuth as boolean;
         session.user.image = token.image as string;
+        session.user.role = token.role as UserRole;
         session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
         session.user.email = token.email as string;
       }
@@ -70,6 +73,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       token.firstName = existingUser.firstName;
       token.lastName = existingUser.lastName;
       token.image = existingUser.image;
+      token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.twoFactorEnabled;
 
       return token;

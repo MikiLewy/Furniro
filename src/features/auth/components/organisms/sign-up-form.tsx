@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { LoadingButton } from '@/components/atoms/loading-button';
 import { PasswordInput } from '@/components/atoms/password-input';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -49,7 +49,7 @@ const SignUpForm = () => {
     form.reset(defaultValues);
   };
 
-  const { execute } = useSignUp(onSuccessSignUp, setError);
+  const { execute, status } = useSignUp(onSuccessSignUp, setError);
 
   const onSubmit = (values: FormValues) => {
     setError(null);
@@ -130,9 +130,12 @@ const SignUpForm = () => {
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit" className="mt-2">
+          <LoadingButton
+            loading={status === 'executing'}
+            type="submit"
+            className="mt-2">
             Sign up
-          </Button>
+          </LoadingButton>
         </form>
         <SignUpWithGoogleButton />
         <AuthActionsLinksContainer links={actionsLinks} />

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -32,6 +32,8 @@ const CartItem = ({
   quantity,
   productId,
 }: Props) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   const addToCart = useCartStore(state => state.addToCart);
   const removeFromCart = useCartStore(state => state.removeFromCart);
 
@@ -63,8 +65,21 @@ const CartItem = ({
   return (
     <div className="bg-white rounded-2xl p-2">
       <div className="flex gap-4">
-        <div className="border rounded-xl p-1 sm:p-2 flex items-center justify-center">
-          <Image src={thumbnail} alt={productName} width={80} height={50} />
+        <div className="relative border rounded-xl p-1 sm:p-2 flex items-center justify-center overflow-hidden">
+          <Image
+            src={thumbnail}
+            alt={productName}
+            width={80}
+            height={50}
+            onLoadingComplete={() => {
+              setIsImageLoaded(true);
+            }}
+            style={{ opacity: isImageLoaded ? 1 : 0 }}
+          />
+          <div
+            style={{ opacity: isImageLoaded ? 0 : 1 }}
+            className="absolute inset-0 bg-neutral-100 h-full w-full transition-opacity duration-200 rounded-lg"
+          />
         </div>
         <div className="flex flex-col flex-1 gap-4">
           <div className="flex justify-between items-center">

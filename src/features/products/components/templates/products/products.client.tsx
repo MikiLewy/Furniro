@@ -20,7 +20,7 @@ const ClientProducts = ({ categoryId }: Props) => {
 
   const [sortController, setSortController] = useSortController({
     sortBy: 'name',
-    sortOrder: SortOrder.DESC,
+    sortOrder: SortOrder.ASC,
   });
 
   const observer = useRef<IntersectionObserver>();

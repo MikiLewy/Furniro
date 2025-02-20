@@ -1,8 +1,8 @@
 'use client';
 
 import { Heart, LogOut, Settings, Truck } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'nextjs-toploader/app';
 import { Fragment } from 'react';
 
 import {

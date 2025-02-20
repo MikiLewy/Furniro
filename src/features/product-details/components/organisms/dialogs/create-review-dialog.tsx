@@ -67,61 +67,63 @@ const CreateReviewDialog = ({ open, onClose }: DialogActions) => {
       }
       isSubmitButtonLoading={status === 'executing'}
       onSubmit={form.handleSubmit(onSubmit)}>
-      <FormProvider {...form}>
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Great product"
-                  disabled={status === 'executing'}
-                  {...field}
+      <div className="flex flex-col gap-2">
+        <FormProvider {...form}>
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Great product"
+                    disabled={status === 'executing'}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="I love this product"
+                    disabled={status === 'executing'}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="rating"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Rating</FormLabel>
+                <FormDescription>How do you rate this product?</FormDescription>
+                <FormControl>
+                  <Input type="hidden" placeholder="Star Rating" {...field} />
+                </FormControl>
+                <Ratings
+                  rating={field.value}
+                  ratingScale={RATING_SCALE}
+                  onClick={value => field.onChange(value)}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="I love this product"
-                  disabled={status === 'executing'}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="rating"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Rating</FormLabel>
-              <FormDescription>How do you rate this product?</FormDescription>
-              <FormControl>
-                <Input type="hidden" placeholder="Star Rating" {...field} />
-              </FormControl>
-              <Ratings
-                rating={field.value}
-                ratingScale={RATING_SCALE}
-                onClick={value => field.onChange(value)}
-              />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </FormProvider>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </FormProvider>
+      </div>
     </Dialog>
   );
 };

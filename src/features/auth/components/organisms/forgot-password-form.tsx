@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { LoadingButton } from '@/components/atoms/loading-button';
 import { SubmittedFormMessage } from '@/components/atoms/submitted-form-message/submitted-form-message';
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -39,7 +39,7 @@ const ForgotPasswordForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { execute } = useResetPassword(setSuccess, setError);
+  const { execute, status } = useResetPassword(setSuccess, setError);
 
   const onSubmit = (values: FormValues) => {
     setSuccess(null);
@@ -84,7 +84,9 @@ const ForgotPasswordForm = () => {
           {error ? (
             <SubmittedFormMessage message={error} variant="error" />
           ) : null}
-          <Button type="submit">Recover</Button>
+          <LoadingButton loading={status === 'executing'} type="submit">
+            Recover
+          </LoadingButton>
         </form>
         <AuthActionsLinksContainer links={actionsLinks} />
       </Form>

@@ -32,7 +32,7 @@ export const createProductVariant = action
           })
           .returning();
 
-        const product = await db.query.products.findFirst({
+        await db.query.products.findFirst({
           where: eq(products.id, productId || 0),
         });
 

@@ -24,7 +24,9 @@ const NoProductsFound = () => {
         </p>
       </div>
       <Button className="mt-4" asChild size="lg">
-        <Link href="/collections/all">Continue Shopping</Link>
+        <Link prefetch href="/collections/all">
+          Continue Shopping
+        </Link>
       </Button>
     </div>
   );

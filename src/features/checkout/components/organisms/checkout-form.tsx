@@ -6,7 +6,7 @@ import {
   useElements,
   AddressElement,
 } from '@stripe/react-stripe-js';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import { FormEvent, useState } from 'react';
 
 import { LoadingButton } from '@/components/atoms/loading-button';
@@ -79,7 +79,7 @@ export default function CheckoutForm() {
           elements,
           clientSecret: data.success.clientSecret || '',
           confirmParams: {
-            return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout/success`,
+            return_url: `${process.env.NEXT_PUBLIC_WEBSITE_URL}/checkout/success`,
             receipt_email: data.success.email || '',
           },
           redirect: 'if_required',

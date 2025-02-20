@@ -11,6 +11,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { useDialog } from '@/hooks/use-dialog';
+import { cn } from '@/lib/utils';
+import { Can } from '@/permissions/can';
 
 import { ProductVariantsWithImagesAndTags } from '../../api/types/product-variant';
 import CreateProductVariantDialog from '../organisms/dialogs/product-variants/create-product-variant-dialog';
@@ -41,41 +43,73 @@ const ProductVariantTableCell = ({ variants, productId }: Props) => {
     <>
       <div className="flex flex-wrap items-center gap-2">
         {variants?.map((variant, index) => (
-          <div key={index} className="">
+          <div key={index}>
+            <Can I="createVariant" a="AccountProducts" passThrough>
+              {allowed => (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span
+                        className={cn(
+                          allowed
+                            ? 'cursor-pointer pointer-events-auto'
+                            : 'cursor-not-allowed',
+                        )}>
+                        <VariantCircle
+                          onClick={
+                            allowed
+                              ? () => {
+                                  setSelectedVariant(variant);
+                                  handleOpenUpdateProductVariantDialog();
+                                }
+                              : undefined
+                          }
+                          color={variant.color}
+                          name={variant.name}
+                        />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>
+                        {allowed
+                          ? 'Edit variant'
+                          : 'Not sufficient permissions'}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+            </Can>
+          </div>
+        ))}
+        <Can I="createVariant" a="AccountProducts" passThrough>
+          {allowed => (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <VariantCircle
-                    onClick={() => {
-                      setSelectedVariant(variant);
-                      handleOpenUpdateProductVariantDialog();
-                    }}
-                    color={variant.color}
-                    name={variant.name}
-                  />
+                  <span>
+                    <PlusCircle
+                      className={cn(
+                        allowed
+                          ? 'cursor-pointer pointer-events-auto text-primary'
+                          : 'cursor-not-allowed pointer-events-none text-secondary-darker',
+                        'w-4 h-4 cursor-pointer',
+                      )}
+                      onClick={handleOpenCreateProductVariantDialog}
+                    />
+                  </span>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Edit variant</p>
+                  <p>
+                    {allowed
+                      ? 'Create a new product variant'
+                      : 'Not sufficient permissions'}
+                  </p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-          </div>
-        ))}
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span>
-                <PlusCircle
-                  className="w-4 h-4 cursor-pointer"
-                  onClick={handleOpenCreateProductVariantDialog}
-                />
-              </span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Create a new product variant</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+          )}
+        </Can>
       </div>
       <CreateProductVariantDialog
         open={isOpenCreateProductVariantDialog}

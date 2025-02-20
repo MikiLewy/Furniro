@@ -10,7 +10,7 @@ import Pinterest from '../../icons/pinterest';
 
 const Footer = async () => {
   return (
-    <footer className="max-w-[1680px] mx-auto py-10 mb-4 mt-auto w-full bg-primary/95 px-4 md:px-6 lg:px-8 rounded-2xl grid grid-cols-1 lg:grid-cols-2">
+    <footer className="max-w-[1680px] mx-auto py-10 mt-auto w-full mb-4 bg-primary/95 px-4 md:px-6 lg:px-8 rounded-2xl grid grid-cols-1 lg:grid-cols-2">
       <div className="flex flex-col gap-2">
         <h5 className="text-xl text-secondary font-medium mb-1">Hotline</h5>
         <div className="flex items-center gap-1">

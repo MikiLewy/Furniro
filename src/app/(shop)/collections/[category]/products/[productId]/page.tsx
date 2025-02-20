@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { SearchParams } from 'nuqs/server';
 
@@ -12,6 +13,25 @@ import { getWishlistItem } from '@/features/wishlist/api/lib/wishlist';
 interface Props {
   params: Promise<{ productId: string }>;
   searchParams: Promise<SearchParams>;
+}
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  const productId = +(await params).productId;
+
+  const { variantId } = await loadProductSearchParams(searchParams);
+
+  const productVariant = await getProductWithVariants({
+    productId,
+    variantId,
+  });
+
+  return {
+    title: productVariant?.product?.name,
+    description: productVariant?.product?.description,
+  };
 }
 
 const ProductDetailsPage = async ({ params, searchParams }: Props) => {

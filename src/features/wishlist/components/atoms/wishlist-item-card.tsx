@@ -2,7 +2,7 @@
 
 import { X } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import toast from 'react-hot-toast';
 
 import ImageCard from '@/components/atoms/image-card';
@@ -53,7 +53,9 @@ const WishlistItemCard = ({
             )}
             draggable="false"
           />
-          <button className="absolute top-1 right-1 p-2 z-50">
+          <button
+            aria-label="Remove from wishlist"
+            className="absolute top-1 right-1 p-2 z-50">
             <X
               className="text-secondary-darker"
               onClick={e => {

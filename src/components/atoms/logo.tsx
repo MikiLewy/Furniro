@@ -4,6 +4,7 @@ const Logo = () => {
   return (
     <Link
       href="/"
+      prefetch
       className="text-2xl font-bold text-primary relative z-30 self-start">
       Furniro
     </Link>

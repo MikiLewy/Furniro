@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -32,7 +32,7 @@ const CartSheet = () => {
   return (
     <Sheet open={isCartSheetOpen} onOpenChange={setIsCartSheetOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" aria-label="Cart">
           <Cart />
         </Button>
       </SheetTrigger>

@@ -1,8 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'nextjs-toploader/app';
 
 import { CategoryType } from '@/features/account/categories/api/types/category';
 import { useAddProductToWishlist } from '@/features/wishlist/hooks/action/use-add-product-to-wishlist';
@@ -85,8 +85,8 @@ const ProductCard = ({
             fill
             className={cn(
               transparentFirst
-                ? 'opacity-0  group-hover:opacity-100 transition duration-300'
-                : 'group-hover:hidden',
+                ? 'opacity-0  lg:group-hover:opacity-100 transition duration-300'
+                : 'lg:group-hover:hidden',
               'block absolute h-full w-full object-cover object-bottom ',
             )}
             draggable="false"
@@ -97,8 +97,8 @@ const ProductCard = ({
             fill
             className={cn(
               transparentFirst
-                ? 'group-hover:hidden'
-                : 'opacity-0 group-hover:opacity-100 transition duration-300',
+                ? 'lg:group-hover:hidden'
+                : 'opacity-0 lg:group-hover:opacity-100 transition duration-300',
               ' absolute h-full w-full object-contain object-center ',
             )}
             draggable="false"
@@ -120,7 +120,7 @@ const ProductCard = ({
             />
           ))}
         </div>
-        <h5 className="text-lg font-semibold cursor-pointer">{title}</h5>
+        <h4 className="text-lg font-semibold cursor-pointer">{title}</h4>
         <p className="text-base font-medium text-gray-400">
           {formatPrice({ amount: price })}
         </p>

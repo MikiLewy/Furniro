@@ -87,7 +87,7 @@ const ViewOrderDetailsDialog = ({
           </TableBody>
         </Table>
       </Card>
-      <div className="ml-auto text-sm text-secondary-darker font-medium">
+      <div className="w-full text-right text-sm text-secondary-darker font-medium mt-2">
         <p>Total: {formatPrice({ amount: orderTotal })}</p>
       </div>
     </Dialog>

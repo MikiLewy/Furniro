@@ -44,6 +44,7 @@ export const getProductsTableColumns = (
     {
       accessorKey: 'productVariants',
       header: 'Variants',
+      enableHiding: false,
       cell: ({ row }) => {
         const variants = row.getValue(
           'productVariants',

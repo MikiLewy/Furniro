@@ -1,9 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
-import { Heart, User } from 'lucide-react';
+import { Heart, ShoppingBag } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import NavbarItem from '@/components/atoms/navbar-item';
@@ -17,8 +16,6 @@ interface Props {
 
 const ClientNavbar = ({ categories }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const session = useSession();
 
   const pathname = usePathname();
 
@@ -36,6 +33,7 @@ const ClientNavbar = ({ categories }: Props) => {
         initial="hide"
         animate={isOpen ? 'show' : 'hide'}
         onClick={handleToggle}
+        aria-label="Toggle navigation"
         className="flex flex-col space-y-1 relative z-10">
         <motion.span
           variants={{
@@ -110,6 +108,12 @@ const ClientNavbar = ({ categories }: Props) => {
                     },
                   }}
                   className="flex flex-col gap-1">
+                  <NavbarItem
+                    href={`/collections/all`}
+                    title="All products"
+                    RouteIcon={ShoppingBag}
+                    isActive={pathname.includes(`/collections/all`)}
+                  />
                   <div className="flex flex-col gap-1">
                     {categories?.map(({ id, name, type }) => {
                       const RouteIcon = categoriesTypes[type].icon;
@@ -126,12 +130,6 @@ const ClientNavbar = ({ categories }: Props) => {
                     })}
                   </div>
                   <Separator className="my-2" />
-                  <NavbarItem
-                    href={session?.data?.user ? `/orders` : '/login'}
-                    title="Account"
-                    RouteIcon={User}
-                    isActive={pathname.includes(`/orders`)}
-                  />
                   <NavbarItem
                     href={`/wishlist`}
                     title="Wishlist"
