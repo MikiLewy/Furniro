@@ -11,7 +11,7 @@ export const sendVerificationEmail = async (
   const verifyEmailLink = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/verify-email?token=${verificationToken}`;
 
   const { data, error } = await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
+    from: `Acme <noreply@${process.env.DOMAIN}>`,
     to: email,
     subject: 'Verify your email',
     html: `<p>Click <a href="${verifyEmailLink}">here</a> to verify your email.</p>`,
