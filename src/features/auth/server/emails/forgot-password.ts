@@ -11,7 +11,7 @@ export const sendForgotPasswordEmail = async (
   const verifyEmailLink = `${process.env.NEXT_PUBLIC_WEBSITE_URL}/set-password?token=${forgotPasswordToken}`;
 
   const { data, error } = await resend.emails.send({
-    from: 'Acme <onboarding@resend.dev>',
+    from: `Acme <noreply@${process.env.DOMAIN}>`,
     to: email,
     subject: 'Reset your password',
     html: `<p>Click <a href="${verifyEmailLink}">here</a> to reset your password.</p>`,
